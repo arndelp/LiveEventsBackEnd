@@ -49,7 +49,7 @@ class ConcertController extends AbstractController
     }
 
     
-    //Recherche des détails pour une seule personne
+    //Recherche des détails pour un seul concert
     // <\d+ = requirement entier positif  
     #[Route('/{id<\d+>}', name: 'concert.detail')]
         
@@ -86,7 +86,7 @@ class ConcertController extends AbstractController
         if($form->isSubmitted()  && $form->isValid()) { 
 
         // Si oui, 
-            // on va ajouter l'objet personne dans la base de données
+            // on va ajouter l'objet  dans la base de données
             $manager = $doctrine->getManager();
             $manager ->persist($concert);
             //transaction
@@ -99,7 +99,7 @@ class ConcertController extends AbstractController
                 $message = " a été mis à jour avec succès";
             }
             $this->addFlash(type: 'success', message: $concert->getName(). $message);
-            // Rediriger vers la liste des personnes
+            // Rediriger vers la liste des concerts
             return $this->redirectToRoute('concert.list.alls');
 
             // Si non,
@@ -115,7 +115,7 @@ class ConcertController extends AbstractController
     public function deleteConcert(Concert $concert, EntityManagerInterface $em)     // on doit initialiser "$personne=null"  sinon on a une erreur avec le param concerter
     {        
         // Si la personne existe => le supprimer et retourner un flashMessage de succès                                                                                                 //ManagerRegistry nécessaire pour le remove
-        // Récupérer la personne
+        // Récupérer le concert
         if ($concert) {
             
             $em->remove($concert);   //ajoute la fonction de suppression dans la transaction

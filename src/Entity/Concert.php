@@ -31,26 +31,26 @@ class Concert
     #[Groups(['concert'])]  
     private ?string $name = null;
     
-    #[ORM\Column(type: Types::TEXT, nullable: true)]    
+    #[ORM\Column(type: Types::TEXT)]    
     #[Groups(['concert'])]
     private ?string $details = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)] 
+    #[ORM\Column(type: Types::TEXT)] 
     #[Groups(['concert'])]   
     private ?string $details2 = null;
 
     #[ORM\ManyToOne(inversedBy: 'concerts')]
-    #[ORM\JoinColumn(nullable: false)]    
+    #[ORM\JoinColumn(nullable: true)]    
     #[Groups(['concert'])]
     private ?Location $location = null;
 
     #[ORM\ManyToOne(inversedBy: 'concerts')]
-    #[ORM\JoinColumn(nullable: false)]   
+    #[ORM\JoinColumn(nullable: true)]   
     #[Groups(['concert'])] 
     private ?Day $day = null;
 
     #[ORM\ManyToOne(inversedBy: 'concerts')]
-    #[ORM\JoinColumn(nullable: false)]    
+    #[ORM\JoinColumn(nullable: true)]    
     #[Groups(['concert'])]
     private ?Schedule $schedule = null;
 

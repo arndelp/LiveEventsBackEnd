@@ -10,6 +10,6 @@
 
 
           
-    {{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}  {#avec l'attribut novalidatr, la validation se fait coté serveur et non coté client#}
+    {{ form(form, {'attr': {'novalidate': 'novalidate'}}, name='concert')  }}  {#avec l'attribut novalidatr, la validation se fait coté serveur et non coté client#}
 
 {% endblock %} 

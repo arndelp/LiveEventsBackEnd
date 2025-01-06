@@ -8,7 +8,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class UserFixtures extends Fixture implements FixtureGroupInterface
+class UserFixtures extends Fixture implements FixtureGroupInterface     //on implémente le fixtureGroupInterface pour pouvoir charger uniquement  CES fixtures (voir GET Group en dessous)
 {
     //injection du service qui permet de hasher le password
     public function __construct(
@@ -19,13 +19,13 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
     public function load(ObjectManager $manager): void
     {
         $admin1 = new User();
-        $admin1->setUsername('admin1');
-        $admin1->setPassword($this->hasher->hashPassword($admin1,'admin'));      //hashage du password admin
+        $admin1->setEmail('arndelp@yahoo.fr');
+        $admin1->setPassword($this->hasher->hashPassword($admin1,'123456'));      //hashage du password admin
         $admin1->setRoles(['ROLE_ADMIN']);
 
         $admin2 = new User();
-        $admin2->setUsername('admin2');
-        $admin2->setPassword($this->hasher->hashPassword($admin2,'admin'));
+        $admin2->setEmail('arndelp595@yahoo.fr');
+        $admin2->setPassword($this->hasher->hashPassword($admin2,'123456'));
         $admin2->setRoles(['ROLE_ADMIN']);
 
         $manager->persist($admin1);
@@ -34,7 +34,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
 
         for ($i=1; $i<=5;$i++){
             $user = new User();
-            $user ->setUsername("user$i");
+            $user ->setEmail("user$i@gmail.com");
             $user->setPassword($this->hasher->hashPassword($user,"user"));  //pas besoin d'ajouter de Role pour user, il est ajouté par défaut.
             $manager->persist($user);
         }

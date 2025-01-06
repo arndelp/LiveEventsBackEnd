@@ -48,6 +48,7 @@ class ConcertType extends AbstractType
              ]) 
              
             ->add('details')
+                
             ->add('details2')
             ->add('Envoyer', SubmitType::class)
         ;

@@ -1,0 +1,8 @@
+.PHONY: tests
+tests:
+	php bin/console d:d:d --force --if-exists --env=test      // supprimer la base de données si elle existe
+	php bin/console d:d:c --env=test                          // Créer la base de donnée
+	php bin/console d:m:m --no-interaction --env=test         // Migrer les migrations
+	php bin/console d:f:l --np-interaction --env=test         // Charger les fixtures
+	php bin/phpunit --testdox tests/Unit/                     // Faire les tests unitaires
+	php bin/phpunit --testdox tests/Functional/               // Faire les test fonctionnels

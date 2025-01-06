@@ -7,6 +7,7 @@
 {# affichage de toutes les personnes de la base de données #}
     <div class="row">
         {% for concert in concerts %}
+       
         <div class="card" style="width: 18rem;">
             <div class="card-body">                
                 <img src="{{ asset('uploads/concerts/' ~ concert.imageId) }}">
@@ -27,9 +28,12 @@
                         </form>   
                     </div>            
                 {#Pour la méthode DELETE , on doit simuler cette méthode car elle n'est pas reconnu par le navigateuir#}
+                
                     <div class='row  mt-4 '>
                         <form action="{{ path('concert.delete',{id: concert.id}) }}" method="post">
+                         
                             <input type="hidden" name="_method" value="DELETE">
+                            
                             <button type="sutmit" class="btn btn-danger btn-sm ">Supprimer</button>
                         </form>
                     </div> 
