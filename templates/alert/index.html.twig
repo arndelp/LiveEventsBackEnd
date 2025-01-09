@@ -1,0 +1,17 @@
+{% extends 'twig_heritage/template.html.twig'  %}
+
+{% block title %}
+   Editer une alerte
+{% endblock %}
+
+
+{% block body %}
+
+
+<div >
+   {{ form(form, {'attr': {'novalidate': 'novalidate'}}, name='alert')  }}  {#avec l'attribut novalidatr, la validation se fait coté serveur et non coté client#}
+
+
+    
+</div>
+{% endblock %}

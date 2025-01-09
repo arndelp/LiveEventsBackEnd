@@ -67,7 +67,7 @@ class ConcertController extends AbstractController
     } 
     //ajout/édition d'un évènement
     #[Route('/edit/{id?0}', name: 'concert.edit', methods: ['GET', 'POST'])] // {id?0}: Si l'id n'est pas stipulé, le formulaire sera vide pour ajouter une nouvel évènement
-    public function editConcert(Concert $concert = null, ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger): Response    //$personne=null pour avoir une personne vide par défaut en cas de mauvais id
+    public function editConcert(Concert $concert = null, ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger): Response    //$concert=null pour avoir une personne vide par défaut en cas de mauvais id
     {
         $new = false;    // initialisation de $new pour les messages futur
         // si le concert n'existe pas

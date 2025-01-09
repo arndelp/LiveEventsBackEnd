@@ -81,6 +81,7 @@
                                     
                                 </div>
                             {% endif %}
+                            
                              <!-- Sous section CRUD Table Concert  -->
                             {% if is_granted('ROLE_ADMIN') %}
                              <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsConcert" aria-expanded="false" aria-controls="collapseLayouts">
@@ -89,13 +90,12 @@
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             {%  endif  %} 
+
                             <div class="collapse" id="collapseLayoutsConcert" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                 {# ci-dessous:  lien href="{{ path('tab.users')}} où tab.users est le nom de la route dans le controller tabController #}
                                     <a class="nav-link" href="{{ path('concert.edit') }}">Ajouter</a>
-                                     <a class="nav-link" href="{{ path('concert.list.alls') }}">Modifier</a>
-                                    
-                                   
+                                    <a class="nav-link" href="{{ path('concert.list.alls') }}">Modifier</a>                                 
                                 </nav>
                                 
                             </div>
