@@ -13,29 +13,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MarkerController extends AbstractController
 {
-    private DocumentManager $dm;
-    private LoggerInterface $logger;
+  
 
-    public function __construct(DocumentManager $dm, LoggerInterface $logger)
+
+#[Route('/marker/create', name: 'marker_create', methods: ['GET'])]
+public function browse(DocumentManager $dm)
     {
-        $this->dm = $dm;
-        $this->logger = $logger;
-    }
-
-
-#[Route('/marker/browse', name: 'marker_browse', methods: ['GET'])]
-public function browse(Request $request): Response
-    {
-        $markerRepository = $this->dm->getRepository(Marker::class);
-        $queryBuilder = $restaurantRepository->createQueryBuilder();
-        $restaurants = $queryBuilder
-                ->field('key')->equals('Bar 1')
-                ->field('lat')->equals(48.6480495744828)
-                ->field('lng')->equals(1.8157557433476355)
-                ->field('image')->equals("../assets/bars.png")
-                ->field('width')->equals("30 em")
-                ->field('height')->equals("30 em")
-                ->execute();
-        return $this->render('marker/browse.html.twig', ['markers' => $markers]);
+        $marker = new Marker();
+        $marker->setKey("Bar");
+        $marker->setLat(48.6480495744828);
+        $marker->setLng(1.8157557433476355);
+        $marker->setTitle("Bar du château");
+        $marker->setImage("../assets/bars.png");
+        $marker->setWidth("30 em");
+        $marker->setHeight("30 em");
+    
+        $dm->persist($marker);
+        $dm->flush();
+    
+        return new Response('Created marker id ' . $marker->getId());
     }
 }

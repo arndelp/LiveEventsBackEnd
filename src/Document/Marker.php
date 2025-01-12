@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Document;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+use Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Validation\Article;
 
 
 #[ODM\Document(collection: 'markers')]
@@ -23,10 +24,10 @@ class Marker
     public string $key;
 
     #[ODM\FIeld]
-    public Decimal128 $lat;
+    public float $lat;
 
     #[ODM\Field]
-    public Decimal128 $lng;
+    public float $lng;
 
     #[ODM\Field]
     public string $title;
@@ -51,31 +52,31 @@ class Marker
         return $this->key;
     }
 
-    public function setKey(string $key): Article
+    public function setKey(string $key) 
     {
         $this->key = $key;
 
         return $this;
     }
 
-    public function getLat(): Decimal128
+    public function getLat(): float
     {
         return $this->lat;
     }
 
-    public function setLat(string $lat): Article
+    public function setLat(float $lat)
     {
         $this->lat = $lat;
 
         return $this;
     }
 
-    public function getLng(): Decimal128
+    public function getLng(): float
     {
         return $this->lng;
     }
 
-    public function setLng(string $lng): Article
+    public function setLng(float $lng)
     {
         $this->lng = $lng;
 
@@ -87,7 +88,7 @@ class Marker
         return $this->title;
     }
 
-    public function setTitle(string $title): Article
+    public function setTitle(string $title)
     {
         $this->title = $title;
 
@@ -99,7 +100,7 @@ class Marker
         return $this->image;
     }
 
-    public function setImage(string $image): Article
+    public function setImage(string $image)
     {
         $this->image = $image;
 
@@ -111,7 +112,7 @@ class Marker
         return $this->width;
     }
 
-    public function setWidth(string $width): Article
+    public function setWidth(string $width)
     {
         $this->width = $width;
 
@@ -123,7 +124,7 @@ class Marker
         return $this->height;
     }
 
-    public function setHeight(string $height): Article
+    public function setHeight(string $height)
     {
         $this->height = $height;
 
