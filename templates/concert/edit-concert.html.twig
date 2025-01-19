@@ -1,0 +1,15 @@
+{% extends 'twig_heritage/template.html.twig'  %}
+
+{% block title %}
+   Editer un évènement
+{% endblock %}
+
+{% block body %}
+
+    <h1>Editer un évènement</h1>
+
+
+          
+    {{ form(form, {'attr': {'novalidate': 'novalidate'}}, name='concert')  }}  {#avec l'attribut novalidatr, la validation se fait coté serveur et non coté client#}
+
+{% endblock %} 

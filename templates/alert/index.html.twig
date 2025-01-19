@@ -1,0 +1,41 @@
+{% extends 'twig_heritage/template.html.twig'  %}
+
+{% block title %}
+<<<<<<< HEAD
+   Editer les alertes
+=======
+   Editer une alerte
+>>>>>>> 0244e8754f6088963c0e5f40ee6803e1c3f52763
+{% endblock %}
+
+
+{% block body %}
+
+
+<div >
+<<<<<<< HEAD
+   {{ form(form, {'attr': {'novalidate': 'novalidate'}}, name='alert', )  }}  {#avec l'attribut novalidatr, la validation se fait coté serveur et non coté client#}
+
+    <div class='row'>
+      <form action="{{ path('alert.delete',{id:1}) }}" method="post">
+         
+            <input type="hidden" name="_method" value="DELETE">
+            
+            <button type="sutmit" class="btn btn-danger btn-sm ">Désactiver les alertes</button>
+      </form>
+   </div> 
+         
+            
+              
+               
+              
+         
+      
+=======
+   {{ form(form, {'attr': {'novalidate': 'novalidate'}}, name='alert')  }}  {#avec l'attribut novalidatr, la validation se fait coté serveur et non coté client#}
+
+
+>>>>>>> 0244e8754f6088963c0e5f40ee6803e1c3f52763
+    
+</div>
+{% endblock %}

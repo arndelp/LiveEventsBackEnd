@@ -1,0 +1,17 @@
+{% extends 'twig_heritage/template.html.twig' %}
+{% block title %}
+    Data Markers
+{% endblock %}
+{% block body %}
+    <h1>Data Markers</h1>
+        {% for marker in markers %}
+            <p>
+                <b>Nom: </b>{{ marker.key }}<br>
+                <b>Latitude:</b> {{ marker.lat }}<br>
+                <b>Longitude:</b> {{ marker.lng }}<br>
+                <b>Path img:</b> {{marker.image}}<br>
+                <b>Largeur icone:</b> {{marker.width}}<br>
+                <b>Hauteur icone:</b> {{marker.height}}<br>
+            </p>
+        {% endfor %}
+{% endblock %}
