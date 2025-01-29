@@ -2,11 +2,10 @@
 declare(strict_types=1);
 namespace App\Controller;
 
-use App\Document\Marker;
-use App\Document\Coordinate;
+
+use App\Document\Bar;
 use Psr\Log\LoggerInterface;
-use App\Form\Type\MarkerType;
-use Doctrine\ODM\MongoDB\Id\IdGenerator;
+use App\Form\Type\BarType;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,49 +13,44 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-
-
-
-
-
-
-
-
 //préfixe de route
-#[Route('/marker')]
+#[Route('/bar')]
 
-class MarkerController extends AbstractController
+class BarController extends AbstractController
 {
-    #[Route('/alls', name: 'marker.list.alls')]
+    #[Route('/alls', name: 'bar.list.alls')]
     public function indexAlls(DocumentManager $dm): Response
     {
-        $repository = $dm -> getRepository(Marker::class);
+        $repository = $dm -> getRepository(Bar::class);
         // définition de base de la méthode findBy(): function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)      $limit et $ $offset permettent de faire une pagination
-        $markers = $repository->findAll([]);
+        $bars = $repository->findAll([]);
        
        
 
-        return $this->render('marker/index.html.twig', [
-            'markers' => $markers, 
+        return $this->render('bar/index.html.twig', [
+            'bars' => $bars, 
            
         ]);
     }
 
-    #[Route('/edit/{id?0}', name: 'marker.edit', methods: ['GET', 'POST'])]
-    public function editMarker(Marker $marker = null, DocumentManager $dm, Request $request, SluggerInterface $slugger): Response
+
+
+
+    #[Route('/edit/{id?0}', name: 'bar.edit', methods: ['GET', 'POST'])]
+    public function editBar(Bar $bar = null, DocumentManager $dm, Request $request, SluggerInterface $slugger): Response
     {
         // initialisation de $new pour les messages futur
         $new = false;  
 
         // si le marker n'existe pas
-        if (!$marker) {
+        if (!$bar) {
         $new = true;
         
-        $marker = new Marker();   // si $new=true, création d'un nouvelle objet
-                   
+        $bar = new Bar();   // si $new=true, création d'un nouvelle objet
+
         } 
         
-        $form = $this->createForm(MarkerType::class, $marker);
+        $form = $this->createForm(BarType::class, $bar);
 
         $form->handleRequest($request);   //méthode handleRequest() permet de récupérer toute les info contenu dans l'objet $request
             
@@ -66,8 +60,7 @@ class MarkerController extends AbstractController
         // Si oui, 
             // on va ajouter l'objet  dans la base de données
             
-            $dm ->persist($marker);
-            
+            $dm ->persist($bar);
             //transaction
             $dm->flush();
             // Afficher un message de succès
@@ -78,29 +71,29 @@ class MarkerController extends AbstractController
                 $message = " a été mis à jour avec succès";
             }
             $this->addFlash(type: 'success', message: "le POI". $message);
-            // Rediriger vers la liste des markers
-            return $this->redirectToRoute('marker.list.alls');
+            // Rediriger vers la liste des concerts
+            return $this->redirectToRoute('bar.list.alls');
 
             // Si non,
         } else {
             //On affiche le formulaire            
 
 
-        return $this->render('marker/edit.html.twig', [
+        return $this->render('bar/edit.html.twig', [
             'form' => $form->createView()
         ]);
         }
     }
 
 
-    #[Route('/delete/{id}', name: 'marker.delete', methods:['GET'])]
-    public function deleteMarker(Marker $marker, DocumentManager $dm)     // on doit initialiser "$personne=null"  sinon on a une erreur avec le param concerter
+    #[Route('/delete/{id}', name: 'bar.delete', methods:['GET'])]
+    public function deleteMarker(Bar $bar, DocumentManager $dm)     // on doit initialiser "$personne=null"  sinon on a une erreur avec le param concerter
     {        
         // Si la personne existe => le supprimer et retourner un flashMessage de succès                                                                                                 //ManagerRegistry nécessaire pour le remove
         // Récupérer le concert
-        if ($marker) {
+        if ($bar) {
             
-            $dm->remove($marker);   //ajoute la fonction de suppression dans la transaction
+            $dm->remove($bar);   //ajoute la fonction de suppression dans la transaction
             $dm->flush();   //exécution de la transaction
             $this->addFlash(type: 'success', message: "Le POI a été supprimé avec succès");
 
@@ -109,7 +102,47 @@ class MarkerController extends AbstractController
             $this->addFlash(type: 'error', message: "POI innexistant");
 
         }
-        return $this->redirectToRoute('marker.list.alls');
+        return $this->redirectToRoute('bar.list.alls');
     }
 
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// #[Route('/marker/create', name: 'marker_create', methods: ['GET'])]
+// public function browse(DocumentManager $dm)
+//     {
+//         $marker = new Marker();
+//         $marker->setKey("Bar");
+//         $marker->setLat(48.6480495744828);
+//         $marker->setLng(1.8157557433476355);
+//         $marker->setTitle("Bar du château");
+//         $marker->setImage("../assets/bars.png");
+//         $marker->setWidth("30 em");
+//         $marker->setHeight("30 em");
+    
+//         $dm->persist($marker);
+//         $dm->flush();
+    
+//         return new Response('Created marker id ' . $marker->getId());
+//     }

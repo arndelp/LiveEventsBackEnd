@@ -13,16 +13,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Alert
 {
     #[ORM\Id]
-<<<<<<< HEAD
     #[ORM\Column]
     #[Groups(['alert'])]
     private ?int $id = 1;
-=======
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    #[Groups(['alert'])]
-    private ?int $id = null;
->>>>>>> 0244e8754f6088963c0e5f40ee6803e1c3f52763
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['alert'])]
@@ -36,15 +29,12 @@ class Alert
     {
         return $this->id;
     }
-<<<<<<< HEAD
     public function setId(?int $Id): static
     {
         $this->id = 1;
 
         return $this;
     }
-=======
->>>>>>> 0244e8754f6088963c0e5f40ee6803e1c3f52763
 
     public function getMessage1(): ?string
     {

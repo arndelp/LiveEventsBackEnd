@@ -66,11 +66,7 @@ class ConcertController extends AbstractController
                 return $this->render('concert/detail.html.twig', ['concert' => $concert]);
     } 
     //ajout/édition d'un évènement
-<<<<<<< HEAD
-    #[Route('/edit/{id=1}', name: 'concert.edit', methods: ['GET', 'POST'])] // {id?0}: Si l'id n'est pas stipulé, le formulaire sera vide pour ajouter une nouvel évènement
-=======
-    #[Route('/edit/{id?0}', name: 'concert.edit', methods: ['GET', 'POST'])] // {id?0}: Si l'id n'est pas stipulé, le formulaire sera vide pour ajouter une nouvel évènement
->>>>>>> 0244e8754f6088963c0e5f40ee6803e1c3f52763
+    #[Route('/edit/{id?1}', name: 'concert.edit', methods: ['GET', 'POST'])] // {id?0}: Si l'id n'est pas stipulé, le formulaire sera vide pour ajouter une nouvel évènement
     public function editConcert(Concert $concert = null, ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger): Response    //$concert=null pour avoir une personne vide par défaut en cas de mauvais id
     {
         $new = false;    // initialisation de $new pour les messages futur

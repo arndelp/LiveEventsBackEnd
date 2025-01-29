@@ -12,9 +12,6 @@ return [
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
     Vich\UploaderBundle\VichUploaderBundle::class => ['all' => true],
     SymfonyCasts\Bundle\VerifyEmail\SymfonyCastsVerifyEmailBundle::class => ['all' => true],
-<<<<<<< HEAD
     ApiPlatform\Symfony\Bundle\ApiPlatformBundle::class => ['all' => true],
-=======
->>>>>>> 0244e8754f6088963c0e5f40ee6803e1c3f52763
     Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle::class => ['all' => true],
 ];

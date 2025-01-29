@@ -15,11 +15,7 @@
         "doctrine/dbal": "^3",
         "doctrine/doctrine-bundle": "^2.13",
         "doctrine/doctrine-migrations-bundle": "^3.3",
-<<<<<<< HEAD
         "doctrine/mongodb-odm-bundle": "^5.1",
-=======
-        "doctrine/mongodb-odm-bundle": "*",
->>>>>>> 0244e8754f6088963c0e5f40ee6803e1c3f52763
         "doctrine/orm": "^3.3",
         "fzaninotto/faker": "^1.5",
         "nelmio/cors-bundle": "^2.5",

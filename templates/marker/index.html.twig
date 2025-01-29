@@ -1,0 +1,58 @@
+{% extends 'twig_heritage/template.html.twig' %}
+
+{% block title %}Liste des POI{% endblock %}
+
+{% block body %}    
+{# affichage de toutes les personnes de la base de données #}
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Latitude</th>                    
+                    {# <th scope="col">Information</th>
+                    <th scope="col">Latitude</th>
+                    <th scope="col">Longitude</th>
+                    <th scope="col">Icône</th>
+                    <th scope="col">Largeur</th>
+                    <th scope="col">Hauteur</th> #}
+                </tr>
+            </thead>
+
+            {% for marker in markers %}
+
+            <tbody>
+                    <tr>  
+                        <th scope="row">{{ marker.id }}</th>                 
+                       
+                     
+                        {#<td>{{ marker.info }}</td>
+                        <td>{{ dataMarker.lat }}</td>
+                        <td>{{ dataMarker.lng }}</td>
+                        <td><img src= {{ asset('uploads/markers/' ~ marker.image) }} height= 25em></td>
+                        <td>{{ dataMarker.width }}</td>
+                        <td>{{ dataMarker.height }}</td>  #} 
+                        <td>
+                            <div class='col'>
+                                <form action="{{ path('marker.edit', {id: marker.id}) }}">
+                                    <button type="submit"  class="btn btn-secondary btn-sm" class="card-link">Modifier</button>
+                                </form>   
+                            </div>    
+                        </td>   
+                        <td>
+                            <div class='col'>
+                                <form action="{{ path('marker.delete', {id: marker.id}) }}">
+                                    <button type="submit"  class="btn btn-danger btn-sm" class="card-link">Supprimer</button>
+                                </form>   
+                            </div>    
+                        </td>                                              
+                    </tr>
+            </tbody>
+            
+            {% endfor %}
+
+        </table>
+
+    </div>
+{% endblock %}
+

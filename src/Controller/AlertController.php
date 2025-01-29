@@ -4,10 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Alert;
 use App\Form\AlertType;
-<<<<<<< HEAD
 use Doctrine\ORM\EntityManagerInterface;
-=======
->>>>>>> 0244e8754f6088963c0e5f40ee6803e1c3f52763
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,11 +21,7 @@ class AlertController extends AbstractController
 {
     
     
-<<<<<<< HEAD
     #[Route('/edit/{id?1}', name: 'alert.edit', methods: ['GET', 'POST'])] 
-=======
-        #[Route('/edit/{id?1}', name: 'alert.edit', methods: ['GET', 'POST'])] 
->>>>>>> 0244e8754f6088963c0e5f40ee6803e1c3f52763
     public function editAlert(Alert $alert = null, ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger): Response    //$alert=null pour avoir une personne vide par défaut en cas de mauvais id
     {
         $new = false;    // initialisation de $new pour les messages futur
@@ -62,11 +55,7 @@ class AlertController extends AbstractController
             }
             $this->addFlash(type: 'success', message: "l'alerte". $message);
             // Rediriger vers la liste des concerts
-<<<<<<< HEAD
             return $this->redirectToRoute('concert.list.alls');
-=======
-            return $this->redirectToRoute('alert.edit');
->>>>>>> 0244e8754f6088963c0e5f40ee6803e1c3f52763
 
             // Si non,
         } else {
@@ -76,7 +65,6 @@ class AlertController extends AbstractController
             ]);
         }
     }
-<<<<<<< HEAD
 
 
 
@@ -98,8 +86,6 @@ class AlertController extends AbstractController
         }
         return $this->redirectToRoute('concert.list.alls');
     }
-=======
->>>>>>> 0244e8754f6088963c0e5f40ee6803e1c3f52763
 }
         
       

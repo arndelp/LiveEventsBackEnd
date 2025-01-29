@@ -1,14 +1,16 @@
 api_platform:
+    formats:
+        json: ['application/json']
+        jsonld: ['application/ld+json']
+        
+        
+        
+        
+        
     title: Hello API Platform
     version: 1.0.0
     defaults:
         stateless: true
         cache_headers:
             vary: ['Content-Type', 'Authorization', 'Origin']
-<<<<<<< HEAD
-=======
-    formats:
-        jsonld: ['application/ld+json']        
-        json: ['application/json']
-       
->>>>>>> 0244e8754f6088963c0e5f40ee6803e1c3f52763
+    

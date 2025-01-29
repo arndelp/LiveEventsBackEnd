@@ -1,0 +1,63 @@
+{# héritage du template de base #}
+{% extends 'twig_heritage/template.html.twig' %}
+
+{% block title %}Liste des POI{% endblock %}
+
+{% block body %}    
+{# affichage de toutes les personnes de la base de données #}
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Ouverture</th>
+                    <th scope="col">Fermeture</th>
+                    <th scope="col">Information</th>
+                    <th scope="col">Latitude</th>
+                    <th scope="col">Longitude</th>
+                    <th scope="col">Icône</th>
+                    <th scope="col">Largeur</th>
+                    <th scope="col">Hauteur</th>
+                </tr>
+            </thead>
+
+            {% for bar in bars %}
+
+            <tbody>
+                    <tr>  
+                        <th scope="row">{{ bar.key }}</th>                  
+                        <td>{{ bar.opentime }}</td>
+                        <td>{{ bar.closetime }}</td>
+                        <td>{{ bar.info }}</td>
+                        <td>{{ bar.lat }}</td>
+                        <td>{{ bar.lng }}</td>
+                        <td><img src= {{ asset('uploads/markers/' ~ bar.image) }} height= 25em></td>
+                        <td>{{ bar.width }}</td>
+                        <td>{{ bar.height }}</td>   
+                        <td>
+                            <div class='col'>
+                                <form action="{{ path('bar.edit', {id: bar.id}) }}">
+                                    <button type="submit"  class="btn btn-secondary btn-sm" class="card-link">Modifier</button>
+                                </form>   
+                            </div>    
+                        </td>  
+                        <td>
+                            <div class='col'>
+                                <form action="{{ path('bar.delete', {id: bar.id}) }}">
+                                    <button type="submit"  class="btn btn-danger btn-sm" class="card-link">Supprimer</button>
+                                </form>   
+                            </div>    
+                        </td>                                              
+                    </tr>
+            </tbody>
+            
+            {% endfor %}
+
+        </table>
+
+    </div>
+{% endblock %}
+
+
+
+

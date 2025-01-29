@@ -1,143 +1,103 @@
 <?php
 
-declare(strict_types=1);
+
 
 namespace App\Document;
 
+
+use MongoDB\Collection;
+use App\Document\Position;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
-<<<<<<< HEAD
-
-=======
->>>>>>> 0244e8754f6088963c0e5f40ee6803e1c3f52763
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
-use Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Validation\Article;
+use Doctrine\ODM\MongoDB\Mapping\Annotations\EmbedOne;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ODM\MongoDB\Mapping\Annotations\ReferenceOne;
+use Doctrine\ODM\MongoDB\Mapping\Annotations\EmbeddedDocument;
+
+
+
 
 
 #[ODM\Document(collection: 'markers')]
 #[ApiResource]
 #[GetCollection(extraProperties: ['doctrineMongodb' => ['execute_options' => ['allowDiskUse' => true]]])]
-<<<<<<< HEAD
-
-=======
->>>>>>> 0244e8754f6088963c0e5f40ee6803e1c3f52763
 class Marker
 {
     #[ODM\Id(strategy: 'INCREMENT')]
-    public ?int $id = null;
+    public string $id;
 
-    #[ODM\Field]
-    public string $key;
+    #[ODM\Field(nullable: true)]
+    public string $name;
 
-    #[ODM\FIeld]
-    public float $lat;
+    #[ODM\Field(nullable: true)]
+    public int $zIndex;
 
-    #[ODM\Field]
-    public float $lng;
+    #[ODM\Field(nullable: true)]
+    public string $type;
 
-    #[ODM\Field]
-    public string $title;
+    #[EmbedOne(targetDocument: Position::class)]
+    #[Assert\Type(type: Position::class)]
+    #[Assert\Valid]
+    private ?Position $position = null;
 
-    #[ODM\Field]
-    public string $image;
+    public function getPosition(): ?Position
+    {
+        return $this->position;
+    }
 
-    #[ODM\Field]
-    public string $width;
+    public function setPosition(?Position $position): void
+    {
+        $this->position = $position;
+    }
+   
 
-    #[ODM\Field]
-    public string $height;
-
-
-    public function getId(): int
+    public function getId(): string
     {
         return $this->id;
     }
 
-    public function getKey(): string
+    public function setId(): string
     {
-        return $this->key;
-    }
-
-    public function setKey(string $key) 
-    {
-        $this->key = $key;
+        $this->id = $id;
 
         return $this;
     }
 
-    public function getLat(): float
+    public function getType(): string
     {
-        return $this->lat;
+        return $this->type;
     }
 
-    public function setLat(float $lat)
+    public function setType(string $type) 
     {
-        $this->lat = $lat;
+        $this->type = $type;
 
         return $this;
+    } 
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 
-    public function getLng(): float
+    public function setName(string $name) 
     {
-        return $this->lng;
-    }
-
-    public function setLng(float $lng)
-    {
-        $this->lng = $lng;
+        $this->name = $name;
 
         return $this;
+    } 
+
+    public function getZIndex(): int
+    {
+        return $this->zIndex;
     }
 
-    public function getTitle(): string
+    public function setZIndex(int $zIndex) 
     {
-        return $this->title;
-    }
-
-    public function setTitle(string $title)
-    {
-        $this->title = $title;
+        $this->zIndex = $zIndex;
 
         return $this;
-    }
-
-    public function getImage(): string
-    {
-        return $this->image;
-    }
-
-    public function setImage(string $image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    public function getWidth(): string
-    {
-        return $this->width;
-    }
-
-    public function setWidth(string $width)
-    {
-        $this->width = $width;
-
-        return $this;
-    }
-
-    public function getHeight(): string
-    {
-        return $this->height;
-    }
-
-    public function setHeight(string $height)
-    {
-        $this->height = $height;
-
-        return $this;
-    }
-
-
+    } 
+   
 }

@@ -1,8 +1,16 @@
-vich_uploader:
+vich_uploader:   
     db_driver: orm
-
     mappings:
         concerts:
             uri_prefix: /uploads/concerts
             upload_destination: '%kernel.project_dir%/public/uploads/concerts'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+             
+        markers:
+            uri_prefix: /uploads/markers
+            upload_destination: '%kernel.project_dir%/public/uploads/markers'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            db_driver: mongodb
+
+        
+        

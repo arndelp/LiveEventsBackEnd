@@ -13,16 +13,10 @@ class AlertType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-<<<<<<< HEAD
             
             ->add('Message1')
             ->add('Message2')
             ->add('Activer', SubmitType::class)
-=======
-            ->add('Message1')
-            ->add('Message2')
-            ->add('Envoyer', SubmitType::class)
->>>>>>> 0244e8754f6088963c0e5f40ee6803e1c3f52763
         ;
     }
 

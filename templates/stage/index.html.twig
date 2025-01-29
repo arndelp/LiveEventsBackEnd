@@ -1,0 +1,59 @@
+{# héritage du template de base #}
+{% extends 'twig_heritage/template.html.twig' %}
+
+{% block title %}Liste des POI{% endblock %}
+
+{% block body %}    
+{# affichage de toutes les personnes de la base de données #}
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Information</th>
+                    <th scope="col">Latitude</th>
+                    <th scope="col">Longitude</th>
+                    <th scope="col">Icône</th>
+                    <th scope="col">Largeur</th>
+                    <th scope="col">Hauteur</th>
+                </tr>
+            </thead>
+
+            {% for stage in stages %}
+
+            <tbody>
+                    <tr>  
+                        <th scope="row">{{ stage.key }}</th>            
+                        <td>{{ stage.info }}</td>
+                        <td>{{ stage.lat }}</td>
+                        <td>{{ stage.lng }}</td>
+                        <td><img src= {{ asset('uploads/markers/' ~ stage.image) }} height= 25em></td>
+                        <td>{{ stage.width }}</td>
+                        <td>{{ stage.height }}</td>   
+                        <td>
+                            <div class='col'>
+                                <form action="{{ path('stage.edit', {id: stage.id}) }}">
+                                    <button type="submit"  class="btn btn-secondary btn-sm" class="card-link">Modifier</button>
+                                </form>   
+                            </div>    
+                        </td>  
+                        <td>
+                            <div class='col'>
+                                <form action="{{ path('stage.delete', {id: stage.id}) }}">
+                                    <button type="submit"  class="btn btn-danger btn-sm" class="card-link">Supprimer</button>
+                                </form>   
+                            </div>    
+                        </td>                                              
+                    </tr>
+            </tbody>
+            
+            {% endfor %}
+
+        </table>
+
+    </div>
+{% endblock %}
+
+
+
+
