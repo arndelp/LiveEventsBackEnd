@@ -13,17 +13,19 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Doctrine\ODM\MongoDB\Mapping\Annotations\EmbedOne;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ODM\MongoDB\Mapping\Annotations\ReferenceOne;
-use Doctrine\ODM\MongoDB\Mapping\Annotations\EmbeddedDocument;
+use Symfony\Component\HttpKernel\Attribute\Cache;
 
 
 
 
 
-#[ODM\Document(collection: 'markers')]
+
+#[ODM\Document]
 #[ApiResource]
-#[GetCollection(extraProperties: ['doctrineMongodb' => ['execute_options' => ['allowDiskUse' => true]]])]
 class Marker
 {
+    
+
     #[ODM\Id(strategy: 'INCREMENT')]
     public string $id;
 
@@ -33,14 +35,18 @@ class Marker
     #[ODM\Field(nullable: true)]
     public int $zIndex;
 
+    
     #[ODM\Field(nullable: true)]
     public string $type;
 
-    #[EmbedOne(targetDocument: Position::class)]
-    #[Assert\Type(type: Position::class)]
+    
+    #[EmbedOne(targetDocument:Position::class)]
+    #[Assert\Type(type:Position::class)]
     #[Assert\Valid]
-    private ?Position $position = null;
+    private ?Position $position;
 
+    
+    
     public function getPosition(): ?Position
     {
         return $this->position;
@@ -95,7 +101,8 @@ class Marker
 
     public function setZIndex(int $zIndex) 
     {
-        $this->zIndex = $zIndex;
+        
+        $this->zIndex=$zIndex;
 
         return $this;
     } 

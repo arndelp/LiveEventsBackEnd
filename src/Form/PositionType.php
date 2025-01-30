@@ -10,12 +10,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PositionType extends AbstractType
 {
-        public function buildForm(FormBuilderInterface $builder, array $options): void
+        public function buildForm(FormBuilderInterface $builder, array $options):void
         {
             $builder
-            ->add('lat')
-            ->add('lng')
-            ;
+                ->add('lat', null, [
+                    'label' => 'Latitude'
+                ])
+                ->add('lng', null, [
+                    'label' => 'Longitude'
+                ])
+                ;
         }
     
         public function configureOptions(OptionsResolver $resolver): void

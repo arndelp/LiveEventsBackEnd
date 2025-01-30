@@ -3,7 +3,6 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Document\Marker;
-use App\Document\Coordinate;
 use Psr\Log\LoggerInterface;
 use App\Form\Type\MarkerType;
 use Doctrine\ODM\MongoDB\Id\IdGenerator;
@@ -53,7 +52,7 @@ class MarkerController extends AbstractController
         $new = true;
         
         $marker = new Marker();   // si $new=true, création d'un nouvelle objet
-                   
+                 
         } 
         
         $form = $this->createForm(MarkerType::class, $marker);
