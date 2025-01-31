@@ -42,8 +42,10 @@ class MarkerController extends AbstractController
     }
 
     #[Route('/edit/{id?0}', name: 'marker.edit', methods: ['GET', 'POST'])]
+    
     public function editMarker(Marker $marker = null, DocumentManager $dm, Request $request, SluggerInterface $slugger): Response
     {
+        var_dump($marker);
         // initialisation de $new pour les messages futur
         $new = false;  
 
@@ -52,7 +54,7 @@ class MarkerController extends AbstractController
         $new = true;
         
         $marker = new Marker();   // si $new=true, création d'un nouvelle objet
-                 
+        
         } 
         
         $form = $this->createForm(MarkerType::class, $marker);
@@ -78,9 +80,11 @@ class MarkerController extends AbstractController
             }
             $this->addFlash(type: 'success', message: "le POI". $message);
             // Rediriger vers la liste des markers
-            return $this->redirectToRoute('marker.list.alls');
-
-            // Si non,
+            return //var_dump($marker);
+            
+            $this->redirectToRoute('marker.list.alls');
+            
+            //Si non,
         } else {
             //On affiche le formulaire            
 

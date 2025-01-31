@@ -19,8 +19,8 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations\EmbeddedDocument;
 
 
 
-#[ApiResource(normalizationContext: ['groups' => ['marker']])]
-#[ODM\Document(db:"LiveEvents_backend", collection:"Marker")]
+#[ApiResource]
+#[ODM\Document]
 class Marker
 {
     
