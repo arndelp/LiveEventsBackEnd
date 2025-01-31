@@ -9,19 +9,18 @@ use MongoDB\Collection;
 use App\Document\Position;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
+use Symfony\Component\HttpKernel\Attribute\Cache;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Doctrine\ODM\MongoDB\Mapping\Annotations\EmbedOne;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ODM\MongoDB\Mapping\Annotations\ReferenceOne;
-use Symfony\Component\HttpKernel\Attribute\Cache;
+use Doctrine\ODM\MongoDB\Mapping\Annotations\EmbeddedDocument;
 
 
 
 
-
-
-#[ODM\Document]
-#[ApiResource]
+#[ApiResource(normalizationContext: ['groups' => ['marker']])]
+#[ODM\Document(db:"LiveEvents_backend", collection:"Marker")]
 class Marker
 {
     
@@ -41,7 +40,6 @@ class Marker
 
     
     #[EmbedOne(targetDocument:Position::class)]
-    #[Assert\Type(type:Position::class)]
     #[Assert\Valid]
     private ?Position $position;
 
@@ -108,3 +106,8 @@ class Marker
     } 
    
 }
+
+
+   
+
+    
