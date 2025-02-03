@@ -45,7 +45,7 @@ class MarkerController extends AbstractController
     
     public function editMarker(Marker $marker = null, DocumentManager $dm, Request $request, SluggerInterface $slugger): Response
     {
-        var_dump($marker);
+        //var_dump($marker);
         // initialisation de $new pour les messages futur
         $new = false;  
 
@@ -80,7 +80,7 @@ class MarkerController extends AbstractController
             }
             $this->addFlash(type: 'success', message: "le POI". $message);
             // Rediriger vers la liste des markers
-            return //var_dump($marker);
+            return  
             
             $this->redirectToRoute('marker.list.alls');
             

@@ -24,30 +24,30 @@ class Position
     #[Assert\NotBlank]
     #[ODM\Field(nullable: true)]
     public float $lng;
-
+  
    
 
-    public function getLat(): float
-    {
-        return $this->lat;
-    }
+    // public function getLat(): float
+    // {
+    //     return $this->lat;
+    // }
 
-    public function setLat(): float
-    {
-        $this->lat = $lat;
+    // public function setLat(float $lat)
+    // {
+    //     $this->lat = $lat;
 
-        return $this;
-    }
+    //     return $this;
+    // }
     
-    public function getLng(): float
-    {
-        return $this->lng;
-    }
+    // public function getLng(): float
+    // {
+    //     return $this->lng;
+    // }
 
-    public function setLng(): float
-    {
-        $this->lng = $lng;
+    // public function setLng(float $lng)
+    // {
+    //     $this->lng = $lng;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }
