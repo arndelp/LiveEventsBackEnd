@@ -2,7 +2,7 @@
 
 namespace App\Form\Type;
 
-use App\Document\Bar;
+use App\Document\Shop;
 use App\Form\PositionType;
 use Symfony\Component\Form\AbstractType;
 use Doctrine\ODM\MongoDB\Types\FloatType;
@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
-class BarType extends AbstractType
+class ShopType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options):void
     {
@@ -50,7 +50,7 @@ class BarType extends AbstractType
     public function configureOptions(OptionsResolver $resolver):void
     {
         $resolver->setDefaults([
-            'data_class' => Bar::class, 
+            'data_class' => Shop::class, 
             
             
             

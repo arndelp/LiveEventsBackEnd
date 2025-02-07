@@ -2,10 +2,9 @@
 declare(strict_types=1);
 namespace App\Controller;
 
-use App\Document\Marker;
+use App\Document\Door;
+use App\Form\Type\DoorType;
 use Psr\Log\LoggerInterface;
-use App\Form\Type\MarkerType;
-use Doctrine\ODM\MongoDB\Id\IdGenerator;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,42 +21,42 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 //préfixe de route
-#[Route('/marker')]
+#[Route('/door')]
 
-class MarkerController extends AbstractController
+class DoorController extends AbstractController
 {
-    #[Route('/alls', name: 'marker.list.alls')]
+    #[Route('/alls', name: 'door.list.alls')]
     public function indexAlls(DocumentManager $dm): Response
     {
-        $repository = $dm -> getRepository(Marker::class);
+        $repository = $dm -> getRepository(Door::class);
         // définition de base de la méthode findBy(): function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)      $limit et $ $offset permettent de faire une pagination
-        $markers = $repository->findAll([]);
+        $doors = $repository->findAll([]);
        
        
 
-        return $this->render('marker/index.html.twig', [
-            'markers' => $markers, 
+        return $this->render('door/index.html.twig', [
+            'doors' => $doors, 
            
         ]);
     }
 
-    #[Route('/edit/{id?0}', name: 'marker.edit', methods: ['GET', 'POST'])]
+    #[Route('/edit/{id?0}', name: 'door.edit', methods: ['GET', 'POST'])]
     
-    public function editMarker(Marker $marker = null, DocumentManager $dm, Request $request, SluggerInterface $slugger): Response
+    public function editDoor(Door $door = null, DocumentManager $dm, Request $request, SluggerInterface $slugger): Response
     {
         //var_dump($marker);
         // initialisation de $new pour les messages futur
         $new = false;  
 
         // si le marker n'existe pas
-        if (!$marker) {
+        if (!$door) {
         $new = true;
         
-        $marker = new Marker();   // si $new=true, création d'un nouvelle objet
+        $door = new Door();   // si $new=true, création d'un nouvelle objet
         
         } 
         
-        $form = $this->createForm(MarkerType::class, $marker);
+        $form = $this->createForm(DoorType::class, $door);
 
         $form->handleRequest($request);   //méthode handleRequest() permet de récupérer toute les info contenu dans l'objet $request
             
@@ -67,7 +66,7 @@ class MarkerController extends AbstractController
         // Si oui, 
             // on va ajouter l'objet  dans la base de données
             
-            $dm ->persist($marker);
+            $dm ->persist($door);
             
             //transaction
             $dm->flush();
@@ -82,28 +81,28 @@ class MarkerController extends AbstractController
             // Rediriger vers la liste des markers
             return  
             
-            $this->redirectToRoute('marker.list.alls');
+            $this->redirectToRoute('door.list.alls');
             
             //Si non,
         } else {
             //On affiche le formulaire            
 
 
-        return $this->render('marker/edit.html.twig', [
+        return $this->render('door/edit.html.twig', [
             'form' => $form->createView()
         ]);
         }
     }
 
 
-    #[Route('/delete/{id}', name: 'marker.delete', methods:['GET'])]
-    public function deleteMarker(Marker $marker, DocumentManager $dm)     // on doit initialiser "$personne=null"  sinon on a une erreur avec le param concerter
+    #[Route('/delete/{id}', name: 'door.delete', methods:['GET'])]
+    public function deleteDoor(Door $door, DocumentManager $dm)     // on doit initialiser "$personne=null"  sinon on a une erreur avec le param concerter
     {        
         // Si la personne existe => le supprimer et retourner un flashMessage de succès                                                                                                 //ManagerRegistry nécessaire pour le remove
         // Récupérer le concert
-        if ($marker) {
+        if ($door) {
             
-            $dm->remove($marker);   //ajoute la fonction de suppression dans la transaction
+            $dm->remove($door);   //ajoute la fonction de suppression dans la transaction
             $dm->flush();   //exécution de la transaction
             $this->addFlash(type: 'success', message: "Le POI a été supprimé avec succès");
 
@@ -112,7 +111,7 @@ class MarkerController extends AbstractController
             $this->addFlash(type: 'error', message: "POI innexistant");
 
         }
-        return $this->redirectToRoute('marker.list.alls');
+        return $this->redirectToRoute('door.list.alls');
     }
 
 }

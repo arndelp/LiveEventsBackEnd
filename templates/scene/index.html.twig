@@ -1,7 +1,6 @@
-{# héritage du template de base #}
 {% extends 'twig_heritage/template.html.twig' %}
 
-{% block title %}Liste des POI{% endblock %}
+{% block title %}Liste des POI Scènes{% endblock %}
 
 {% block body %}    
 {# affichage de toutes les personnes de la base de données #}
@@ -9,37 +8,40 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Information</th>
+                    <th scope="col">Nom</th>                            
                     <th scope="col">Latitude</th>
                     <th scope="col">Longitude</th>
-                    <th scope="col">Icône</th>
+                    <th scope="col">Icone</th>
                     <th scope="col">Largeur</th>
                     <th scope="col">Hauteur</th>
+                    <th scope="col">Information</th>
                 </tr>
             </thead>
 
-            {% for stage in stages %}
+            {% for scene in scenes %}
 
             <tbody>
                     <tr>  
-                        <th scope="row">{{ stage.key }}</th>            
-                        <td>{{ stage.info }}</td>
-                        <td>{{ stage.lat }}</td>
-                        <td>{{ stage.lng }}</td>
-                        <td><img src= {{ asset('uploads/markers/' ~ stage.image) }} height= 25em></td>
-                        <td>{{ stage.width }}</td>
-                        <td>{{ stage.height }}</td>   
+                        <th scope="row">{{ scene.name }}</th>                 
+                        <td>{{ scene.position.lat }}</td>
+                        <td>{{ scene.position.lng }}</td>
+                        <td>
+                            <div>
+                                <img src= "{{ asset('uploads/markers/' ~ scene.iconId) }}" height= 25em></td>
+                            </div>
+                        <td>{{ scene.width }}</td>
+                        <td>{{ scene.height }}</td> 
+                        <td>{{ scene.info }}</td> 
                         <td>
                             <div class='col'>
-                                <form action="{{ path('stage.edit', {id: stage.id}) }}">
+                                <form action="{{ path('scene.edit', {id: scene.id}) }}">
                                     <button type="submit"  class="btn btn-secondary btn-sm" class="card-link">Modifier</button>
                                 </form>   
                             </div>    
-                        </td>  
+                        </td>   
                         <td>
                             <div class='col'>
-                                <form action="{{ path('stage.delete', {id: stage.id}) }}">
+                                <form action="{{ path('scene.delete', {id: scene.id}) }}">
                                     <button type="submit"  class="btn btn-danger btn-sm" class="card-link">Supprimer</button>
                                 </form>   
                             </div>    
@@ -53,7 +55,4 @@
 
     </div>
 {% endblock %}
-
-
-
 

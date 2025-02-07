@@ -5,8 +5,8 @@ namespace App\Document;
 
 
 use ODM\Field;
-use Documents\Marker;
 use ApiPlatform\Metadata\ApiResource;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ODM\MongoDB\Mapping\Annotations\EmbeddedDocument;
 
@@ -27,27 +27,23 @@ class Position
   
    
 
-    // public function getLat(): float
-    // {
-    //     return $this->lat;
-    // }
+    public function getLat(): float
+    {
+        return $this->lat;
+    }
 
-    // public function setLat(float $lat)
-    // {
-    //     $this->lat = $lat;
-
-    //     return $this;
-    // }
+    public function setLat(float $lat): void
+    {
+        $this->lat = $lat;
+    }
     
-    // public function getLng(): float
-    // {
-    //     return $this->lng;
-    // }
+    public function getLng(): float
+    {
+        return $this->lng;
+    }
 
-    // public function setLng(float $lng)
-    // {
-    //     $this->lng = $lng;
-
-    //     return $this;
-    // }
+    public function setLng(float $lng): void
+    {
+        $this->lng = $lng;
+    }
 }

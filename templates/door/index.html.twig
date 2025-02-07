@@ -1,6 +1,6 @@
 {% extends 'twig_heritage/template.html.twig' %}
 
-{% block title %}Liste des POI Bar/Restauration{% endblock %}
+{% block title %}Liste des POI door/Restauration{% endblock %}
 
 {% block body %}    
 {# affichage de toutes les personnes de la base de données #}
@@ -14,34 +14,34 @@
                     <th scope="col">Icone</th>
                     <th scope="col">Largeur</th>
                     <th scope="col">Hauteur</th>
-                    <th scope="col">Information</th>
+                    
                 </tr>
             </thead>
 
-            {% for bar in bars %}
+            {% for door in doors %}
 
             <tbody>
                     <tr>  
-                        <th scope="row">{{ bar.name }}</th>                 
-                        <td>{{ bar.position.lat }}</td>
-                        <td>{{ bar.position.lng }}</td>
+                        <th scope="row">{{ door.name }}</th>                 
+                        <td>{{ door.position.lat }}</td>
+                        <td>{{ door.position.lng }}</td>
                         <td>
                             <div>
-                                <img src= "{{ asset('uploads/markers/' ~ bar.iconId) }}" height= 25em></td>
+                                <img src= "{{ asset('uploads/markers/' ~ door.iconId) }}" height= 25em></td>
                             </div>
-                        <td>{{ bar.width }}</td>
-                        <td>{{ bar.height }}</td> 
-                        <td>{{ bar.info }}</td> 
+                        <td>{{ door.width }}</td>
+                        <td>{{ door.height }}</td> 
+                       
                         <td>
                             <div class='col'>
-                                <form action="{{ path('bar.edit', {id: bar.id}) }}">
+                                <form action="{{ path('door.edit', {id: door.id}) }}">
                                     <button type="submit"  class="btn btn-secondary btn-sm" class="card-link">Modifier</button>
                                 </form>   
                             </div>    
                         </td>   
                         <td>
                             <div class='col'>
-                                <form action="{{ path('bar.delete', {id: bar.id}) }}">
+                                <form action="{{ path('door.delete', {id: door.id}) }}">
                                     <button type="submit"  class="btn btn-danger btn-sm" class="card-link">Supprimer</button>
                                 </form>   
                             </div>    

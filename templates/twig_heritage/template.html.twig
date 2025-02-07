@@ -32,8 +32,20 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item " href="{{ path('concert.edit') }}">Ajouter un concert</a>
                         <a class="dropdown-item " href="{{ path('concert.list.alls') }}">Modifier un concert</a>
-                        <a class="dropdown-item " href="{{ path('marker.edit') }}">Ajouter un POI</a>
-                        <a class="dropdown-item " href="{{ path('marker.list.alls') }}">Modifier un POI</a>
+                        <a class="dropdown-item " href="{{ path('scene.edit') }}">Ajouter un POI Scène</a>
+                        <a class="dropdown-item " href="{{ path('scene.list.alls') }}">Modifier un POI Scène</a>
+                        <a class="dropdown-item " href="{{ path('bar.edit') }}">Ajouter un POI Bar/Restauration</a>
+                        <a class="dropdown-item " href="{{ path('bar.list.alls') }}">Modifier un POI Bar/Restauration</a>
+                        <a class="dropdown-item " href="{{ path('park.edit') }}">Ajouter un POI Parking</a>
+                        <a class="dropdown-item " href="{{ path('park.list.alls') }}">Modifier un POI Parking</a>
+                        <a class="dropdown-item " href="{{ path('camp.edit') }}">Ajouter un POI Camping</a>
+                        <a class="dropdown-item " href="{{ path('camp.list.alls') }}">Modifier un POI Camping</a>
+                        <a class="dropdown-item " href="{{ path('door.edit') }}">Ajouter un POI Accès</a>
+                        <a class="dropdown-item " href="{{ path('door.list.alls') }}">Modifier un POI Accès</a>
+                        <a class="dropdown-item " href="{{ path('shop.edit') }}">Ajouter un POI Shop</a>
+                        <a class="dropdown-item " href="{{ path('shop.list.alls') }}">Modifier un POI Shop</a>
+                        <a class="dropdown-item " href="{{ path('wc.edit') }}">Ajouter un POI WC</a>
+                        <a class="dropdown-item " href="{{ path('wc.list.alls') }}">Modifier un POI WC</a>
                         <a class="dropdown-item" href="{{ path('alert.edit') }}">Alertes</a>
                             
                     </ul>
@@ -96,16 +108,94 @@
                             </div>
 
                              <!-- Sous section CRUD Table Marker  --> 
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsScene" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                POI Scène
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>                          
+                            <div class="collapse" id="collapseLayoutsScene" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                {# ci-dessous:  lien href="{{ path('tab.users')}} où tab.users est le nom de la route dans le controller tabController #}
+                                    <a class="nav-link" href="{{ path('scene.edit') }}">Ajouter</a>
+                                    <a class="nav-link" href="{{ path('scene.list.alls') }}">Modifier</a>                                 
+                                </nav>                                
+                            </div>
+
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsBar" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                POI 
+                                POI Bar/Restauration
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>                          
                             <div class="collapse" id="collapseLayoutsBar" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                 {# ci-dessous:  lien href="{{ path('tab.users')}} où tab.users est le nom de la route dans le controller tabController #}
-                                    <a class="nav-link" href="{{ path('marker.edit') }}">Ajouter</a>
-                                    <a class="nav-link" href="{{ path('marker.list.alls') }}">Modifier</a>                                 
+                                    <a class="nav-link" href="{{ path('bar.edit') }}">Ajouter</a>
+                                    <a class="nav-link" href="{{ path('bar.list.alls') }}">Modifier</a>                                 
+                                </nav>                                
+                            </div>
+
+                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsPark" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                POI Parking
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>                          
+                            <div class="collapse" id="collapseLayoutsPark" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                {# ci-dessous:  lien href="{{ path('tab.users')}} où tab.users est le nom de la route dans le controller tabController #}
+                                    <a class="nav-link" href="{{ path('park.edit') }}">Ajouter</a>
+                                    <a class="nav-link" href="{{ path('park.list.alls') }}">Modifier</a>                                 
+                                </nav>                                
+                            </div>
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsCamp" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                POI Camping
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>                          
+                            <div class="collapse" id="collapseLayoutsCamp" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                {# ci-dessous:  lien href="{{ path('tab.users')}} où tab.users est le nom de la route dans le controller tabController #}
+                                    <a class="nav-link" href="{{ path('camp.edit') }}">Ajouter</a>
+                                    <a class="nav-link" href="{{ path('camp.list.alls') }}">Modifier</a>                                 
+                                </nav>                                
+                            </div>
+
+                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsDoor" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                POI Accès
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>                          
+                            <div class="collapse" id="collapseLayoutsDoor" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                {# ci-dessous:  lien href="{{ path('tab.users')}} où tab.users est le nom de la route dans le controller tabController #}
+                                    <a class="nav-link" href="{{ path('door.edit') }}">Ajouter</a>
+                                    <a class="nav-link" href="{{ path('door.list.alls') }}">Modifier</a>                                 
+                                </nav>                                
+                            </div>
+
+                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsShop" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                POI Boutique
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>                          
+                            <div class="collapse" id="collapseLayoutsShop" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                {# ci-dessous:  lien href="{{ path('tab.users')}} où tab.users est le nom de la route dans le controller tabController #}
+                                    <a class="nav-link" href="{{ path('shop.edit') }}">Ajouter</a>
+                                    <a class="nav-link" href="{{ path('shop.list.alls') }}">Modifier</a>                                 
+                                </nav>                                
+                            </div>
+
+                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsWc" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                POI WC
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>                          
+                            <div class="collapse" id="collapseLayoutsWc" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                {# ci-dessous:  lien href="{{ path('tab.users')}} où tab.users est le nom de la route dans le controller tabController #}
+                                    <a class="nav-link" href="{{ path('wc.edit') }}">Ajouter</a>
+                                    <a class="nav-link" href="{{ path('wc.list.alls') }}">Modifier</a>                                 
                                 </nav>                                
                             </div>
 

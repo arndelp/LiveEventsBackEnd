@@ -1,6 +1,6 @@
 {% extends 'twig_heritage/template.html.twig' %}
 
-{% block title %}Liste des POI{% endblock %}
+{% block title %}Liste des POI shop/Restauration{% endblock %}
 
 {% block body %}    
 {# affichage de toutes les personnes de la base de données #}
@@ -8,41 +8,40 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Type</th>  
-                                    
-                    {# <th scope="col">Information</th>
+                    <th scope="col">Nom</th>                            
                     <th scope="col">Latitude</th>
                     <th scope="col">Longitude</th>
-                    <th scope="col">Icône</th>
+                    <th scope="col">Icone</th>
                     <th scope="col">Largeur</th>
-                    <th scope="col">Hauteur</th> #}
+                    <th scope="col">Hauteur</th>
+                    <th scope="col">Information</th>
                 </tr>
             </thead>
 
-            {% for marker in markers %}
+            {% for shop in shops %}
 
             <tbody>
                     <tr>  
-                        <th scope="row">{{ marker.id }}</th>                 
-                         <td>{{ marker.type }}</td>
-                     
-                        {#<td>{{ marker.info }}</td>
-                        <td>{{ dataMarker.lat }}</td>
-                        <td>{{ dataMarker.lng }}</td>
-                        <td><img src= {{ asset('uploads/markers/' ~ marker.image) }} height= 25em></td>
-                        <td>{{ dataMarker.width }}</td>
-                        <td>{{ dataMarker.height }}</td>  #} 
+                        <th scope="row">{{ shop.name }}</th>                 
+                        <td>{{ shop.position.lat }}</td>
+                        <td>{{ shop.position.lng }}</td>
+                        <td>
+                            <div>
+                                <img src= "{{ asset('uploads/markers/' ~ shop.iconId) }}" height= 25em></td>
+                            </div>
+                        <td>{{ shop.width }}</td>
+                        <td>{{ shop.height }}</td> 
+                        <td>{{ shop.info }}</td> 
                         <td>
                             <div class='col'>
-                                <form action="{{ path('marker.edit', {id: marker.id}) }}">
+                                <form action="{{ path('shop.edit', {id: shop.id}) }}">
                                     <button type="submit"  class="btn btn-secondary btn-sm" class="card-link">Modifier</button>
                                 </form>   
                             </div>    
                         </td>   
                         <td>
                             <div class='col'>
-                                <form action="{{ path('marker.delete', {id: marker.id}) }}">
+                                <form action="{{ path('shop.delete', {id: shop.id}) }}">
                                     <button type="submit"  class="btn btn-danger btn-sm" class="card-link">Supprimer</button>
                                 </form>   
                             </div>    
