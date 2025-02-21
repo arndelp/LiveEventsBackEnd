@@ -1,20 +1,21 @@
 {% extends 'twig_heritage/template.html.twig' %}
 
-{% block title %}Liste des POI shop/Restauration{% endblock %}
+{% block title %}Liste des POI shop{% endblock %}
 
 {% block body %}    
 {# affichage de toutes les personnes de la base de données #}
+<h1>Liste des boutiques</h1>
     <div class="row">
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">Nom</th>                            
-                    <th scope="col">Latitude</th>
-                    <th scope="col">Longitude</th>
-                    <th scope="col">Icone</th>
-                    <th scope="col">Largeur</th>
-                    <th scope="col">Hauteur</th>
-                    <th scope="col">Information</th>
+                    <th scope="col">Latitude (°)</th>
+                    <th scope="col">Longitude (°)</th>
+                    <th scope="col">Icone (png/jpg)</th>
+                    <th scope="col">Largeur (30)</th>
+                    <th scope="col">Hauteur (30)</th>
+                    <th scope="col">Informations</th>
                 </tr>
             </thead>
 
