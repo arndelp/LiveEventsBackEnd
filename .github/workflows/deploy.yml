@@ -16,7 +16,7 @@ jobs:
                 host:  ${{ secrets.SSH_HOST }}
                 username: ${{ secrets.SSH_USER }}
                 password: ${{ secrets.SSH_PWD }}
-                script: 
+                script: |
                     cd ~/home/sushi/
                     git pull origin main --rebase
                    
