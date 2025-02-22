@@ -17,7 +17,7 @@ jobs:
                 username: ${{ secrets.SSH_USER }}
                 password: ${{ secrets.SSH_PWD }}
                 script: |
-                    cd ~/www
+                    cd ~/home/sushi/www
                     git pull origin main --rebase
                     make deploy
                     
