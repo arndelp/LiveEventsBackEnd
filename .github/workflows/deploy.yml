@@ -13,12 +13,12 @@ jobs:
             - name: execute ssh command
               uses: appleboy/ssh-action@v1.2.1
               with:
-                host:  ${{ secrets.SSH_HOST }}
-                username: ${{ secrets.SSH_USER }}
-                password: ${{ secrets.SSH_PWD }}
+                host:  ssh-sushi.alwaysdata.net
+                username: sushi
+                password: Sushi2306%
                 script: |
                     cd ~/www
-                    git pull git@github.com:arndelp/LiveEventsBackEnd.git
+                    git pull origin main --rebase
                     make deploy
                     
 
