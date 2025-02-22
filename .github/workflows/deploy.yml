@@ -18,7 +18,7 @@ jobs:
                 password: ${{ secrets.SSH_PWD }}
                 script: |
                     cd ~/www
-                    git pull 
-                    composer install --optimize-autoloader
+                    git pull origin main --rebase
+                    
                     
 
