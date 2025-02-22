@@ -16,7 +16,6 @@ jobs:
                 host:  ${{ secrets.SSH_HOST }}
                 username: ${{ secrets.SSH_USER }}
                 password: ${{ secrets.SSH_PWD }}
-                fingerprint: SHA256:Rni/3HNw4XulcyvmkVCQTxAbQMYywYAexFeaDoE3ZAo
                 script: |
                     ls
                     
