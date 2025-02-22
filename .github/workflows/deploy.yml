@@ -19,6 +19,6 @@ jobs:
                 script: |
                     cd ~/www
                     git pull origin main --rebase
-                    
+                    make deploy
                     
 
