@@ -16,7 +16,7 @@ jobs:
                 host:  ${{ secrets.SSH_HOST }}
                 username: ${{ secrets.SSH_USER }}
                 password: ${{ secrets.SSH_PWD }}
-                key: 6c:a2:f5:6c:92:01:c5:e3:d6:f7:09:a5:d8:ab:8e:4c
+                fingerprint: SHA256:Rni/3HNw4XulcyvmkVCQTxAbQMYywYAexFeaDoE3ZAo
                 script: |
                     cd www
                     git clone git@github.com:arndelp/LiveEventsBackEnd.git 
