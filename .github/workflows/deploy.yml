@@ -18,7 +18,7 @@ jobs:
                 password: ${{ secrets.SSH_PWD }}
                 fingerprint: qUA9dqfFxy9NFGLz+Eo3UUqlu0w5NrCJ+bXrxuzLG48
                     cd www
-                    git clone https://github.com/arndelp/LiveEventsBackEnd.git
+                    git pull origin main --rebase
                     ls
                     
                    
