@@ -20,5 +20,5 @@ jobs:
                     cd ~/www
                     git pull origin main --rebase
                     composer install --optimize-autoloader
-                    php bin/console cache:clear --env=prod
+                    
 
