@@ -13,9 +13,9 @@ jobs:
             - name: execute ssh command
               uses: appleboy/ssh-action@v1.2.1
               with:
-                host:  ssh-sushi.alwaysdata.net
-                username: sushi
-                password: Sushi2306%
+                host:  ${{ secrets.SSH_HOST }}
+                username: ${{ secrets.SSH_USER }}
+                password: ${{ secrets.SSH_PWD }}
                 script: |
                     cd ~/www
                     git pull origin main --rebase
