@@ -16,8 +16,6 @@ jobs:
                 host:  ${{ secrets.SSH_HOST }}
                 username: ${{ secrets.SSH_USER }}
                 password: ${{ secrets.SSH_PWD }}
-                proxy_fingerprint: 
-                    Rni/3HNw4XulcyvmkVCQTxAbQMYywYAexFeaDoE3ZAo
                 script: |
                     cd www
                     git pull origin main --rebase
