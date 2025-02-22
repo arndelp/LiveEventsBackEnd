@@ -17,8 +17,8 @@ jobs:
                 username: ${{ secrets.SSH_USER }}
                 password: ${{ secrets.SSH_PWD }}
                 script: |
-                    cd ~/
-                    git pull origin main --rebase
+                    ls
+                    
                    
                     
 
