@@ -17,7 +17,7 @@ jobs:
                 username: ${{ secrets.SSH_USER }}
                 password: ${{ secrets.SSH_PWD }}
                 script: |
-                    git pull git@github.com:arndelp/LiveEventsBackEnd.git --rebase
+                    git clone git@github.com:arndelp/LiveEventsBackEnd.git 
                     ls
                     
                    
