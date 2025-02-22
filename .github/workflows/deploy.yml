@@ -16,7 +16,10 @@ jobs:
                 host:  ${{ secrets.SSH_HOST }}
                 username: ${{ secrets.SSH_USER }}
                 password: ${{ secrets.SSH_PWD }}
-                fingerprint: qUA9dqfFxy9NFGLz+Eo3UUqlu0w5NrCJ+bXrxuzLG48
+                fingerprint: 
+                    MD5:17:eb:93:36:c6:74:8e:ff:4e:ab:40:fc:f4:a2:16:67
+                    SHA256:Rni/3HNw4XulcyvmkVCQTxAbQMYywYAexFeaDoE3ZAo
+                script: |
                     cd www
                     git pull origin main --rebase
                     ls
