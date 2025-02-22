@@ -18,7 +18,7 @@ jobs:
                 password: ${{ secrets.SSH_PWD }}
                 script: |
                     cd ~/www
-                    git pull origin main --rebase
+                    git pull origin master --rebase
                     make deploy
                     
 
