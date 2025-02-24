@@ -17,8 +17,8 @@ jobs:
                 username: ${{ secrets.SSH_USER }}
                 key: ${{ secrets.KEY_IONOS }}
                 script: |
-                    git init
-                    git clone git@github.com:arndelp/LiveEventsBackEnd.git
+                    cd LiveEvents
+                    git pull origin main
                     ls
                     
                    
