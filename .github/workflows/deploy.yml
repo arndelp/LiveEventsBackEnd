@@ -18,7 +18,7 @@ jobs:
                 key: ${{ secrets.KEY_IONOS }}
                 script: |
                     ls
-                    git clone --bare git@github.com:arndelp/LiveEventsBackEnd.git
+                    git pull git@github.com:arndelp/LiveEventsBackEnd.git
                     ls
                     
                    
