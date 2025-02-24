@@ -18,8 +18,6 @@ jobs:
                 password: ${{ secrets.SSH_PWD }}
                 key: ${{ secrets.KEY_IONOS }}
                 script: |
-                    cd ~/LiveEvents
-                    git pull origin master --rebase
                     ls
                     
                    
