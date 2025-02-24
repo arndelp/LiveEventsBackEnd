@@ -16,8 +16,10 @@ jobs:
                 host:  ${{ secrets.SSH_HOST }}
                 username: ${{ secrets.SSH_USER }}
                 password: ${{ secrets.SSH_PWD }}
+                key: ${{ secrets.KEY_IONOS }}
                 script: |
-                    git clone git@github.com:arndelp/LiveEventsBackEnd.git
+                    cd ~/LiveEvents
+                    git pull origin master --rebase
                     ls
                     
                    
