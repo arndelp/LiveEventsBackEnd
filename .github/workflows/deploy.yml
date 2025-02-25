@@ -18,7 +18,7 @@ jobs:
                 key: ${{ secrets.KEY_IONOS }}
                 script: |
                     cd ~/LiveEvents
-                    git pull git@github.com:arndelp/LiveEventsBackEnd.git 
+                    git pull origin main --rebase
                     
                     
                    
