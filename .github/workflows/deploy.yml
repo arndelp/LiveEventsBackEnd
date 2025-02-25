@@ -19,6 +19,7 @@ jobs:
                 script: |
                     cd ~/LiveEventsBackEnd
                     git pull origin main --rebase
+                    sudo npm install
                     sudo composer install --optimize-autoloader
                     php bin/console doctrine:database:create --if-not-exist
                     php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migrations
