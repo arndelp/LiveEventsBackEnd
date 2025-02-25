@@ -19,6 +19,7 @@ jobs:
                 script: |
                     cd ~/LiveEventsBackEnd
                     git pull origin main --rebase
+                    make deploy
                     
                     
                    
