@@ -17,6 +17,7 @@ jobs:
                 username: ${{ secrets.SSH_USER }}
                 key: ${{ secrets.KEY_IONOS }}
                 script: |
+                    cd /var/www/LiveEventsBackEnd
                     git pull origin main --rebase
                     composer install --optimize-autoloader
                 #     php bin/console doctrine:database:create --if-not-exist
