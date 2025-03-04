@@ -20,12 +20,12 @@ class UserFixtures extends Fixture implements FixtureGroupInterface     //on imp
     {
         $admin1 = new User();
         $admin1->setEmail('arndelp@yahoo.fr');
-        $admin1->setPassword($this->hasher->hashPassword($admin1,'123456'));      //hashage du password admin
+        $admin1->setPassword($this->hasher->hashPassword($admin1,'Monmotdepasseliveevents2306%'));      //hashage du password admin
         $admin1->setRoles(['ROLE_ADMIN']);
 
         $admin2 = new User();
         $admin2->setEmail('arndelp595@yahoo.fr');
-        $admin2->setPassword($this->hasher->hashPassword($admin2,'123456'));
+        $admin2->setPassword($this->hasher->hashPassword($admin2,'Monmotdepasseliveevents2306%'));
         $admin2->setRoles(['ROLE_ADMIN']);
 
         $manager->persist($admin1);
