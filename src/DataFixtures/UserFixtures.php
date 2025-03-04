@@ -19,12 +19,12 @@ class UserFixtures extends Fixture implements FixtureGroupInterface     //on imp
     public function load(ObjectManager $manager): void
     {
         $admin1 = new User();
-        $admin1->setEmail('arndelp@yahoo.fr');
+        $admin1->setEmail('arndelp80@gmail.com');
         $admin1->setPassword($this->hasher->hashPassword($admin1,'Monmotdepasseliveevents2306%'));      //hashage du password admin
         $admin1->setRoles(['ROLE_ADMIN']);
 
         $admin2 = new User();
-        $admin2->setEmail('arndelp595@yahoo.fr');
+        $admin2->setEmail('arndelp595@gmail.com');
         $admin2->setPassword($this->hasher->hashPassword($admin2,'Monmotdepasseliveevents2306%'));
         $admin2->setRoles(['ROLE_ADMIN']);
 
