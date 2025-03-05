@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Document\Shop;
 use Psr\Log\LoggerInterface;
-use App\Form\Type\ShopType;
+use App\Form\ShopType;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

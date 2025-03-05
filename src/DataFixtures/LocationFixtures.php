@@ -20,7 +20,7 @@ class LocationFixtures extends Fixture
         ];
         for ($i=0; $i<count($data); $i++) {
             $location = new Location(); 
-            $location->setDesignation($data[$i]);
+            $location->setLocation($data[$i]);
             $manager->persist($location);
         }            
         $manager->flush();

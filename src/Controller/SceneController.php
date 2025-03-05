@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Document\Scene;
 use Psr\Log\LoggerInterface;
-use App\Form\Type\SceneType;
+use App\Form\SceneType;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

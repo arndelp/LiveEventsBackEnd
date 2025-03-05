@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Document\Park;
 use Psr\Log\LoggerInterface;
-use App\Form\Type\ParkType;
+use App\Form\ParkType;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

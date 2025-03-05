@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Document\Wc;
 use Psr\Log\LoggerInterface;
-use App\Form\Type\WcType;
+use App\Form\WcType;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

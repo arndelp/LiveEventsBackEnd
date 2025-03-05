@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Document\Camp;
 use Psr\Log\LoggerInterface;
-use App\Form\Type\CampType;
+use App\Form\CampType;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Document\Bar;
 use Psr\Log\LoggerInterface;
-use App\Form\Type\BarType;
+use App\Form\BarType;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

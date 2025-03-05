@@ -3,7 +3,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Document\Door;
-use App\Form\Type\DoorType;
+use App\Form\DoorType;
 use Psr\Log\LoggerInterface;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\HttpFoundation\Request;
