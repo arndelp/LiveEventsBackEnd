@@ -18,7 +18,8 @@ jobs:
                 key: ${{ secrets.KEY_IONOS }}
                 script: |
                     cd /var/www/LiveEventsBackEnd
-                    git pull origin main 
+                    ls
+                    sudo git pull origin main 
                     composer install --optimize-autoloader
                     php bin/console cache:clear --env=prod
                     
