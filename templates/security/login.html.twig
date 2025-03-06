@@ -29,14 +29,25 @@
                 <input type="checkbox" name="_remember_me"> Se souvenir de moi
             </label>
         </div>
-        <div class="row">
-            <button class="btn btn-lg btn-primary col-1 offset-1" type="submit">
+        <div class="row d-none d-lg-block">
+            <button class="btn  btn-primary  col-2 offset-1 " type="submit">
                 Connecter
             </button>
-            <div class="btn btn-lg btn-link col-2 offset-1">
+            <div class="btn btn-lg btn-link col-3 offset-2">
                 <a href="{{ path('app_register') }}">S'enregistrer</a>
             </div>
         </div>
+         <div class="row d-block d-lg-none">
+            <button class="btn  btn-primary " type="submit">
+                Connecter
+            </button>
+            <div class="row d-block d-lg-none mt-4">
+                <a href="{{ path('app_register') }}">S'enregistrer</a>
+            </div>
+        </div>
+
+
+
     </form>
     
 {% endblock %}
