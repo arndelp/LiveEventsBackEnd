@@ -21,8 +21,7 @@ jobs:
                     git pull origin main 
                     composer install --optimize-autoloader
                     php bin/console cache:clear --env=prod
-                    cd /var/www/LiveEventsBackEnd/public
-                    ls
+                    
                     
                     
                    
