@@ -165,7 +165,7 @@ class Camp
     
     public function getFullIconUrl(): ?string
     {
-        return 'http://127.0.0.1:8000/uploads/markers/' . $this->iconId;
+        return 'https://concertslives.store/uploads/markers/' . $this->iconId;
     }
    
 }
