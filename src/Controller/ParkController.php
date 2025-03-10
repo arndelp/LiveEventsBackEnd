@@ -96,7 +96,7 @@ class ParkController extends AbstractController
 
 
     #[Route('/delete/{id}', name: 'park.delete', methods:['GET'])]
-    public function deleteBar(Bar $park, DocumentManager $dm)     // on doit initialiser "$personne=null"  sinon on a une erreur avec le param concerter
+    public function deletePark(Bar $park, DocumentManager $dm)     // on doit initialiser "$personne=null"  sinon on a une erreur avec le param concerter
     {        
         // Si la personne existe => le supprimer et retourner un flashMessage de succès                                                                                                 //ManagerRegistry nécessaire pour le remove
         // Récupérer le concert
