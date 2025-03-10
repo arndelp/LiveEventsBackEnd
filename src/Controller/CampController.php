@@ -96,7 +96,7 @@ class CampController extends AbstractController
 
 
     #[Route('/delete/{id}', name: 'camp.delete', methods:['GET'])]
-    public function deleteBar(Bar $camp, DocumentManager $dm)     // on doit initialiser "$personne=null"  sinon on a une erreur avec le param concerter
+    public function deleteCamp(Camp $camp, DocumentManager $dm)     // on doit initialiser "$personne=null"  sinon on a une erreur avec le param concerter
     {        
         // Si la personne existe => le supprimer et retourner un flashMessage de succès                                                                                                 //ManagerRegistry nécessaire pour le remove
         // Récupérer le concert
