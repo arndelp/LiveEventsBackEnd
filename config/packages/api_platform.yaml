@@ -9,6 +9,3 @@ api_platform:
     cache_headers:
       vary: ['Content-Type', 'Authorization', 'Origin']
 
-when@prod:
-  api_platform:
-    enable_swagger_ui: false
