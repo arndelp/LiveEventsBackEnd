@@ -19,8 +19,6 @@ jobs:
                 script: |
                     cd /var/www/LiveEventsBackEnd
                     git pull origin main 
-                    composer install --optimize-autoloader
-                    npm install
                     php bin/console cache:clear --env=prod
                     
                     
