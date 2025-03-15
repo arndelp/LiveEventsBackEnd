@@ -48,6 +48,9 @@ security:
                # Etre admin pour modifier
         - { path: ^/concert/edit, roles: ROLE_ADMIN } 
         - { path: ^/concert/delete, roles: ROLE_ADMIN }
+        - { path: ^/contact/alls, roles: ROLE_ADMIN }
+        - { path: ^/contact/delete, roles: ROLE_ADMIN }
+
         # - { path: ^/api, roles: ROLE_ADMIN }
 
         
