@@ -27,7 +27,10 @@
                         </td>   
                         <td>
                             <div class='col'>
-                                <form action="{{ path('contact.delete', {id: contact.id}) }}">
+                                <form action="{{ path('contact.delete', {id: contact.id}) }}" method="post">
+
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    
                                     <button type="submit"  class="btn btn-danger btn-sm" class="card-link">Supprimer</button>
                                 </form>   
                             </div>    
