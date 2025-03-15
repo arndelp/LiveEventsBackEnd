@@ -1,0 +1,21 @@
+{% extends 'twig_heritage/template.html.twig'  %}
+
+{% block title %}
+    {{ contact.id }}
+{% endblock %}
+
+{% block body %}
+    <div class="card" style="width: 100%;">
+        <div class="card-body">               
+            
+            <h5 class="card-title">{{ contact.firstname }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ contact.email }} </h6>
+            <p class="card-text">{{ contact.message }}</p>
+                
+
+                 {# Lien vers la liste des concerts #}
+            <a href="{{ path('contact.list.alls') }}" class="card-link">Retour</a>
+               
+        </div>
+    </div>
+{% endblock %}
