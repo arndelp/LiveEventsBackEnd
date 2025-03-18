@@ -30,7 +30,8 @@ class Concert
     #[Assert\NotBlank]   
     #[Groups(['concert'])]  
     private ?string $name = null;
-    
+
+       
     #[ORM\Column(type: Types::TEXT)]    
     #[Groups(['concert'])]
     private ?string $details = null;
@@ -53,6 +54,11 @@ class Concert
     #[ORM\JoinColumn(nullable: true)]    
     #[Groups(['concert'])]
     private ?Schedule $schedule = null;
+
+    #[ORM\ManyToOne(inversedBy: 'concerts')]
+    #[ORM\JoinColumn(nullable: true)]    
+    #[Groups(['concert'])]
+    private ?Style $style = null;
 
     #[ORM\Column(length: 255, nullable: true)]        //les contraintes de l'image se font dans ConcertType    
     #[Groups(['concert'])]
@@ -88,6 +94,20 @@ class Concert
 
         return $this;
     }
+
+    public function getStyle(): ?string
+    {
+        return $this->style;
+    }
+
+    public function setStyle(?string $style): static
+    {
+        $this->style = $style;
+
+        return $this;
+    }
+
+    
   
     public function getDetails(): ?string
     {
