@@ -14,10 +14,10 @@ class PositionType extends AbstractType
         {
             $builder
                 ->add('lat', null, [
-                    'label' => 'Latitude'
+                    'label' => 'Latitude (°)'
                 ])
                 ->add('lng', null, [
-                    'label' => 'Longitude'
+                    'label' => 'Longitude (°)'
                 ])
                 ;
         }

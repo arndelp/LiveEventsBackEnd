@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Validator\Constraints\File;
 
 
 class DoorType extends AbstractType
@@ -29,14 +30,27 @@ class DoorType extends AbstractType
 
                 ->add('photo', FileType::class, [
                     'required' => false,
+                    'label' => 'Icône',
+                    'mapped' => false,
+                    'constraints' => [
+                        new File([
+                            'maxSize' => '100k',
+                            'mimeTypes' => [
+                                'image/jpeg,
+                                image/png',
+                                'image/jpeg'
+                            ],
+                            'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide',
+                        ])
+                    ]
                  ]) 
 
                 ->add('width', null, [
-                    'label' => 'Largeur du POI'
+                    'label' => 'Largeur du POI (par défaut: 40)'
                 ])
 
                 ->add('height', null, [
-                    'label' => 'Hauteur du POI'
+                    'label' => 'Hauteur du POI (par défaut: 40)'
                 ])
 
                 ->add('info', null, [

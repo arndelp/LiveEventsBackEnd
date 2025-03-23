@@ -5,20 +5,28 @@
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
+    <h1 class="h3 mb-3 font-weight-normal">S'enregistrer</h1>
 
     {{ form_errors(registrationForm) }}
 
     {{ form_start(registrationForm) }}
+        {{  form_row(registrationForm.Lastname, {
+            label: 'Nom'
+        }) }}
+        {{  form_row(registrationForm.Firstname, {
+            label: 'Prénom'
+        }) }}
         {{ form_row(registrationForm.email, {
-            label: 'Email'
+            label: 'E-mail'
         }) }}
         {{ form_row(registrationForm.plainPassword, {
             label: 'Mot de passe'
         }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        
+        {{ form_row(registrationForm.recaptcha) }}
+        {{ form_errors(registrationForm.recaptcha) }}   
 
-        <button class="btn  btn-primary d-lg-flex p-2" type="submit">
+        <button class="btn  btn-primary d-lg-flex p-2 mt-2" type="submit">
             S'enregistrer
         </button>
 
