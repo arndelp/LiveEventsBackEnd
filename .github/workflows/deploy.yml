@@ -19,6 +19,7 @@ jobs:
                 script: |
                     cd /var/www/LiveEventsBackEnd
                     git pull origin main 
+                    composer install
                     php bin/console cache:clear --env=prod
                     
                     
