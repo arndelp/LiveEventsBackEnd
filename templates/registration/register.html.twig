@@ -26,9 +26,22 @@
         {{ form_row(registrationForm.recaptcha) }}
         {{ form_errors(registrationForm.recaptcha) }}   
 
-        <button class="btn  btn-primary d-lg-flex p-2 mt-2" type="submit">
-            S'enregistrer
-        </button>
+        <div class="row d-none d-lg-block mt-4">
+            <button class="btn btn-lg  btn-primary  col-2 offset-1" type="submit">
+               S'enregistrer
+            </button>
+            <div class="btn  btn-link col-3 offset-2">
+                <a href="{{ path('app_login') }}">Déjà enregistré</a>
+            </div>
+        </div>
+         <div class="row d-block d-lg-none">
+            <button class="btn  btn-primary " type="submit">
+                S'enregistrer
+            </button>
+            <div class="row d-block d-lg-none mt-4">
+                <a href="{{ path('app_login') }}">Déjà enregistré</a>
+            </div>
+        </div>
 
     {{ form_end(registrationForm) }}
 {% endblock %}
