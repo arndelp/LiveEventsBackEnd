@@ -21,9 +21,9 @@ jobs:
                     git pull origin main 
                     composer install
                     php bin/console cache:clear --env=prod
-                env: 
-                    DB_USER: ${{ secrets.DB_USER}}
-                    DB_PWD: ${{ secrets.DB_PWD }}
+            env: 
+                DB_USER: ${{ secrets.DB_USER }}
+                DB_PWD: ${{ secrets.DB_PWD }}
                     
                     
                     
