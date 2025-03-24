@@ -12,6 +12,9 @@ jobs:
         steps:
             - name: execute ssh command
               uses: appleboy/ssh-action@v1.2.1
+              env: 
+                DB_USER: ${{ secrets.DB_USER }}
+                DB_PWD: ${{ secrets.DB_PWD }}
               with:
                 host:  ${{ secrets.SSH_HOST }}
                 username: ${{ secrets.SSH_USER }}
@@ -21,9 +24,7 @@ jobs:
                     git pull origin main 
                     composer install
                     php bin/console cache:clear --env=prod
-            env: 
-                DB_USER: ${{ secrets.DB_USER }}
-                DB_PWD: ${{ secrets.DB_PWD }}
+            
                     
                     
                     
