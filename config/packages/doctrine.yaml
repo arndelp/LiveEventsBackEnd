@@ -3,8 +3,8 @@ doctrine:
         dbname:               LiveEvents
         host:                 localhost
         port:                 3306
-        user:                 Arnaud
-        password:             Sushi2306%
+        user:                 '%env(DATABASE_USER)%'
+        password:             '%env(DATABASE_PWD)%'
         driver:               pdo_mysql
         server_version:       '10.11.8'
         charset:              utf8
