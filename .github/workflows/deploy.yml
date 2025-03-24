@@ -11,10 +11,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: execute ssh command
-              uses: appleboy/ssh-action@v1.2.1
-              env: 
-                DB_USER: ${{ secrets.DB_USER }}
-                DB_PWD: ${{ secrets.DB_PWD }}
+              uses: appleboy/ssh-action@v1.2.1              
               with:
                 host:  ${{ secrets.SSH_HOST }}
                 username: ${{ secrets.SSH_USER }}
