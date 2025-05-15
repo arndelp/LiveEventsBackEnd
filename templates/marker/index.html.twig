@@ -1,48 +1,46 @@
 {% extends 'twig_heritage/template.html.twig' %}
 
-{% block title %}Liste des POI Bar/Restauration{% endblock %}
+{% block title %}Liste des POI{% endblock %}
 
 {% block body %}    
 {# affichage de toutes les personnes de la base de données #}
-<h1>Liste des parkings</h1>
+    <h1>Liste des POI</h1>
     <div class="row">
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">Nom</th>                            
+                    <th scope="col">Nom</th>   
+                    <th scope="col">Type</th>                    
                     <th scope="col">Latitude (°)</th>
-                    <th scope="col">Longitude (°)</th>
-                    <th scope="col">Icone (png/jpg)</th>
-                    <th scope="col">Largeur (30)</th>
-                    <th scope="col">Hauteur (30)</th>
+                    <th scope="col">Longitude (°)</th>                   
                     <th scope="col">Informations</th>
+                    <th scope="col">Priorité</th>
                 </tr>
             </thead>
 
-            {% for park in parks %}
+            {% for marker in markers %}
 
             <tbody>
                     <tr>  
-                        <th scope="row">{{ park.name }}</th>                 
-                        <td>{{ park.position.lat }}</td>
-                        <td>{{ park.position.lng }}</td>
-                        <td>
-                            <div>
-                                <img src= "{{ asset('uploads/markers/' ~ park.iconId) }}" height= 25em></td>
-                            </div>
-                        <td>{{ park.width }}</td>
-                        <td>{{ park.height }}</td> 
-                        <td>{{ park.info }}</td> 
+                        <th scope="row">{{ marker.name }}</th> 
+                        <td>{{ marker.type }}</td>
+                        <td>{{ marker.latitude }}</td>
+                        <td>{{ marker.longitude }}</td>
+                        <td>{{ marker.details }}</td> 
+                        <td>{{ marker.zIndex }}</td>
                         <td>
                             <div class='col'>
-                                <form action="{{ path('park.edit', {id: park.id}) }}">
+                                <form action="{{ path('marker.edit', {id: marker.id}) }}">
                                     <button type="submit"  class="btn btn-secondary btn-sm" class="card-link">Modifier</button>
                                 </form>   
                             </div>    
                         </td>   
                         <td>
                             <div class='col'>
-                                <form action="{{ path('park.delete', {id: park.id}) }}">
+                                <form action="{{ path('marker.delete', {id: marker.id}) }}" method="post">
+
+                                    <input type="hidden" name="_method" value="DELETE">                            
+
                                     <button type="submit"  class="btn btn-danger btn-sm" class="card-link">Supprimer</button>
                                 </form>   
                             </div>    

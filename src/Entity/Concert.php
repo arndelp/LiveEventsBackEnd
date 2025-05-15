@@ -26,12 +26,15 @@ class Concert
     #[Groups(['concert'])]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: false)]
     #[Assert\NotBlank]   
     #[Groups(['concert'])]  
     private ?string $name = null;
 
-       
+    #[ORM\Column(length: 100, nullable: true)]     
+    #[Groups(['concert'])]  
+    private ?string $style = null;   
+
     #[ORM\Column(type: Types::TEXT)]    
     #[Groups(['concert'])]
     private ?string $details = null;
@@ -40,22 +43,19 @@ class Concert
     #[Groups(['concert'])]   
     private ?string $details2 = null;
 
-    #[ORM\ManyToOne(inversedBy: 'concerts')]
-    #[ORM\JoinColumn(nullable: true)]    
+    #[ORM\Column(length: 30, nullable: true)]      
     #[Groups(['concert'])]
-    private ?Location $location = null;
+    private ?string $location = null;
 
-    #[ORM\ManyToOne(inversedBy: 'concerts')]
-    #[ORM\JoinColumn(nullable: true)]   
+    #[ORM\Column(length: 30, nullable: true)]    
     #[Groups(['concert'])] 
-    private ?Day $day = null;
+    private ?string $day = null;
 
-    #[ORM\ManyToOne(inversedBy: 'concerts')]
-    #[ORM\JoinColumn(nullable: true)]    
+    #[ORM\Column(length: 30, nullable: true)]    
     #[Groups(['concert'])]
-    private ?Schedule $schedule = null;
+    private ?string $schedule = null;
 
-    
+   
     #[ORM\Column(length: 255, nullable: true)]        //les contraintes de l'image se font dans ConcertType    
     #[Groups(['concert'])]
     private ?string $imageId = null;
@@ -65,8 +65,9 @@ class Concert
     #[Groups(['concert'])]
     private ?File $photo =null;
 
+   
 
-
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -91,7 +92,18 @@ class Concert
         return $this;
     }
 
-        
+    public function getStyle(): ?string
+    {
+        return $this->style;
+    }
+
+    public function setStyle(?string $style): static
+    {
+        $this->style = $style;
+
+        return $this;
+    }
+   
   
     public function getDetails(): ?string
     {
@@ -117,36 +129,36 @@ class Concert
         return $this;
     }
 
-    public function getLocation(): ?Location
+    public function getLocation(): ?string
     {
         return $this->location;
     }
 
-    public function setLocation(?Location $location): static
+    public function setLocation(?string $location): static
     {
         $this->location = $location;
 
         return $this;
     }
 
-    public function getDay(): ?Day
+    public function getDay(): ?string
     {
         return $this->day;
     }
 
-    public function setDay(?Day $day): static
+    public function setDay(?string $day): static
     {
         $this->day = $day;
 
         return $this;
     }
 
-    public function getSchedule(): ?Schedule
+    public function getSchedule(): ?string
     {
         return $this->schedule;
     }
 
-    public function setSchedule(?Schedule $schedule): static
+    public function setSchedule(?string $schedule): static
     {
         $this->schedule = $schedule;
 
@@ -179,6 +191,6 @@ class Concert
     #[Groups(['concert'])]
     public function getFullImageUrl(): ?string
     {
-        return 'https://concertslives.store/uploads/concerts/' . $this->imageId;
+        return 'http://127.0.0.1:8000/uploads/' . $this->imageId;
     }
 }
