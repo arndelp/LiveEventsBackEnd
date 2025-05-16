@@ -44,7 +44,7 @@
         "symfonycasts/verify-email-bundle": "^1.17",
         "vich/uploader-bundle": "^2.5",
         "victor-prdh/recaptcha-bundle": "^2.0",
-        "doctrine/doctrine-fixtures-bundle": "^3.6",
+        "doctrine/doctrine-fixtures-bundle": "^3.6"
     },
     "config": {
         "allow-plugins": {
