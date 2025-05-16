@@ -43,7 +43,8 @@
         "symfony/yaml": "7.1.*",
         "symfonycasts/verify-email-bundle": "^1.17",
         "vich/uploader-bundle": "^2.5",
-        "victor-prdh/recaptcha-bundle": "^2.0"
+        "victor-prdh/recaptcha-bundle": "^2.0",
+        "doctrine/doctrine-fixtures-bundle": "^3.6",
     },
     "config": {
         "allow-plugins": {
@@ -94,8 +95,7 @@
             "require": "7.1.*"
         }
     },
-    "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "^3.6",
+    "require-dev": {        
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "7.1.*",
         "symfony/css-selector": "7.1.*",
