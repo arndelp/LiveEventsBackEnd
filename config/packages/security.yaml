@@ -50,6 +50,12 @@ security:
         - { path: ^/concert/delete, roles: ROLE_ADMIN }
         - { path: ^/contact/alls, roles: ROLE_ADMIN }
         - { path: ^/contact/delete, roles: ROLE_ADMIN }
+        - { path: ^/marker/alls, roles: ROLE_ADMIN }
+        - { path: ^/marker/edit, roles: ROLE_ADMIN } 
+        - { path: ^/marker/delete, roles: ROLE_ADMIN }
+        - { path: ^/alert/edit, roles: ROLE_ADMIN }
+        
+       
 
         # - { path: ^/api, roles: ROLE_ADMIN }
 
