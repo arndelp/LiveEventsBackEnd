@@ -191,6 +191,6 @@ class Concert
     #[Groups(['concert'])]
     public function getFullImageUrl(): ?string
     {
-        return 'https://concertslives.store/uploads/' . $this->imageId;
+        return 'https://concertslives.store/uploads/concerts/' . $this->imageId;
     }
 }
