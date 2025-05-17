@@ -31,9 +31,9 @@ class MarkerController extends AbstractController
         // définition de base de la méthode findBy(): function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)      $limit et $ $offset permettent de faire une pagination
         $markers = $repository->findBy([], [], limit: $nbre, offset: ($page - 1)*12);
         // offset: élément à partir duquel on veut avoir les enregistrements
-         //page = 1 & nbre = 10 =>offset= 0
-         //page = 2 & nbre = 10 => offset = 10
-         // page = 3 & nbre = 10 => offset = 20
+         //page = 1 & nbre = 12 =>offset= 0
+         //page = 2 & nbre = 12 => offset = 12
+         // page = 3 & nbre = 12 => offset = 24
 
          //Calcul du nombre de page pour la pagination
         $nbMarker = $repository->count([]);
