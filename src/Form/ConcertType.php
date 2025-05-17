@@ -95,10 +95,12 @@ class ConcertType extends AbstractType
              
             ->add('details', null, [
                 "label" => "Informations",
+                'required' => true,
             ])
                 
             ->add('details2', null, [
                 "label" => "Historique",
+                'required' => true,
             ])
             ->add('Envoyer', SubmitType::class)
 
