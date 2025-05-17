@@ -77,7 +77,20 @@ class ConcertType extends AbstractType
 
                         
             ->add('photo', FileType::class, [               
-                
+                'required' => false,
+                'label' => 'Photo',
+                'mapped' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpeg,
+                            image/png',
+                            'image/jpeg'
+                        ],
+                        'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide',
+                    ])
+                ]
              ]) 
              
             ->add('details', null, [
