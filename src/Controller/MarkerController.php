@@ -70,7 +70,7 @@ class MarkerController extends AbstractController
     public function editMarker(Marker $marker = null, ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger): Response    //$concert=null pour avoir une personne vide par défaut en cas de mauvais id
     {
         $new = false;    // initialisation de $new pour les messages futur
-        // si le concert n'existe pas
+        // si le marker n'existe pas
         if (!$marker) {
         $new = true;
         $marker = new Marker();   // si $new=true, création d'un nouvelle objet
