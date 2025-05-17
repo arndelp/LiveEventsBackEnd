@@ -24,12 +24,13 @@ class ConcertType extends AbstractType
         $builder
             ->add('name', null, [
                 'label' => "Nom",
+                'required' => true,
             ])
             
             ->add('style', ChoiceType::class, [
                 'expanded' => false,
                 'multiple' => false,
-                'required' => false,
+                'required' => true,
                 'label'=> 'style',
                 'choices' => ["Électro"=>"Électro",
                             "Pop"=>"Pop",
@@ -41,7 +42,7 @@ class ConcertType extends AbstractType
             ->add('location', ChoiceType::class, [
                 'expanded' => false,
                 'multiple' => false,
-                'required' => false,
+                'required' => true,
                 'label'=> 'location',
                 'choices' => ["Scène CHÂTEAU"=>"Scène CHÂTEAU",
                             "Scène GWERNIG"=>"Scène GWERNIG",
@@ -53,7 +54,7 @@ class ConcertType extends AbstractType
             ->add('day', ChoiceType::class, [
                 'expanded' => false,
                 'multiple' => false,
-                'required' => false,
+                'required' => true,
                 'label' => "Date",
                 'choices' => ["09/07/2027"=>"09/07/2027",
                             "10/07/2027"=>"10/07/2027",
@@ -63,7 +64,7 @@ class ConcertType extends AbstractType
             ->add('schedule', ChoiceType::class, [
                 'expanded' => false,
                 'multiple' => false,
-                'required' => false,
+                'required' => true,
                 'label' => "Horaire",
                 'choices' => ["17:00 - 18:00"=> "17:00 - 18:00",
                             "18:00 - 19:00"=>"18:00 - 19:00",
