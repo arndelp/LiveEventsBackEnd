@@ -29,7 +29,7 @@ class MarkerController extends AbstractController
     {
         $repository = $doctrine -> getRepository(persistentObject: Marker::class);
         // définition de base de la méthode findBy(): function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)      $limit et $ $offset permettent de faire une pagination
-        $markers = $repository->findBy(array(), array('type'=>'ASC'), limit: $nbre, offset: ($page - 1)*10);
+        $markers = $repository->findBy(array(), array('type'=>'ASC', 'name'=>'ASC'), limit: $nbre, offset: ($page - 1)*10);
         // offset: élément à partir duquel on veut avoir les enregistrements
          //page = 1 & nbre = 12 =>offset= 0
          //page = 2 & nbre = 12 => offset = 12
