@@ -24,12 +24,12 @@ class ConcertController extends AbstractController
      //Recherche avec la méthode findBy() 
      //{page?1} = par défaut page 1
      //{nbre?12}= 12 éléments maxi par page par défault
-    #[Route('/alls/{page?1}/{nbre?40}', name: 'concert.list.alls')]
+    #[Route('/alls/{page?1}/{nbre?10}', name: 'concert.list.alls')]
     public function indexAlls(ManagerRegistry $doctrine, $page, $nbre): Response
     {
         $repository = $doctrine -> getRepository(persistentObject: Concert::class);
         // définition de base de la méthode findBy(): function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)      $limit et $ $offset permettent de faire une pagination
-        $concerts = $repository->findBy([], [], limit: $nbre, offset: ($page - 1)*40);
+        $concerts = $repository->findBy(array(),array('day'=>'ASC','schedule'=>'ASC'), limit: $nbre, offset: ($page - 1)*10);
         // offset: élément à partir duquel on veut avoir les enregistrements
          //page = 1 & nbre = 10 =>offset= 0
          //page = 2 & nbre = 10 => offset = 10

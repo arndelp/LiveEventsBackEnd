@@ -6,7 +6,7 @@
 {% block body %}    
 {# affichage de toutes les personnes de la base de données #}
     <div class="row">
-        {% for concert in concerts|sort((a,b) => a.schedule <=> b.schedule)|sort((a,b) => a.day <=> b.day)%}
+        {% for concert in concerts %}
        
             <div class="card" style="width: 18rem;">
                 <div class="card-body">                
@@ -51,19 +51,19 @@
                 {# Si première page on a pas de bouton Précédnet #}
                     {% if page != 1 %}
                     <li class="page-item">
-                        <a class="page-link" href="{{ path('concert.list.alls', {page: page-1, nbre: nbre}) }}">Précédent</a>
+                        <a class="page-link" href="{{ path('marker.list.alls', {page: page-1, nbre: nbre}) }}">Précédent</a>
                     </li>
                     {% endif %}
                     {# Pour i entre 1 et nombre de page on affiche les i #}
                     {% for i in range(1, nbrePage) %}
                     <li class="page-item">
-                        <a class="page-link" href="{{ path('concert.list.alls', {page: i, nbre: nbre}) }}">{{ i }}</a>
+                        <a class="page-link" href="{{ path('marker.list.alls', {page: i, nbre: nbre}) }}">{{ i }}</a>
                     </li>  
                     {% endfor %}   
                     {#Lorsque on est sur la dernière page on affiche pas le bouton suivant#}              
                     {% if page != nbrePage %}
                     <li class="page-item">
-                        <a class="page-link" href="{{ path('concert.list.alls', {page: page+1, nbre: nbre}) }}">Suivant</a>
+                        <a class="page-link" href="{{ path('marker.list.alls', {page: page+1, nbre: nbre}) }}">Suivant</a>
                     </li>
                     {% endif %}
                 </ul>
