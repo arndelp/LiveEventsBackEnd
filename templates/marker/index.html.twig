@@ -18,35 +18,35 @@
                 </tr>
             </thead>
 
-            {% for marker in markers %}
+            {% for marker in markers|sort((a,b) => a.type <=> b.type ) %}
 
-            <tbody>
-                    <tr>  
-                        <th scope="row">{{ marker.name }}</th> 
-                        <td>{{ marker.type }}</td>
-                        <td>{{ marker.latitude }}</td>
-                        <td>{{ marker.longitude }}</td>
-                        <td>{{ marker.details }}</td> 
-                        <td>{{ marker.zIndex }}</td>
-                        <td>
-                            <div class='col'>
-                                <form action="{{ path('marker.edit', {id: marker.id}) }}">
-                                    <button type="submit"  class="btn btn-secondary btn-sm" class="card-link">Modifier</button>
-                                </form>   
-                            </div>    
-                        </td>   
-                        <td>
-                            <div class='col'>
-                                <form action="{{ path('marker.delete', {id: marker.id}) }}" method="post">
+                <tbody>
+                        <tr>  
+                            <th scope="row">{{ marker.name }}</th> 
+                            <td>{{ marker.type }}</td>
+                            <td>{{ marker.latitude }}</td>
+                            <td>{{ marker.longitude }}</td>
+                            <td>{{ marker.details }}</td> 
+                            <td>{{ marker.zIndex }}</td>
+                            <td>
+                                <div class='col'>
+                                    <form action="{{ path('marker.edit', {id: marker.id}) }}">
+                                        <button type="submit"  class="btn btn-secondary btn-sm" class="card-link">Modifier</button>
+                                    </form>   
+                                </div>    
+                            </td>   
+                            <td>
+                                <div class='col'>
+                                    <form action="{{ path('marker.delete', {id: marker.id}) }}" method="post">
 
-                                    <input type="hidden" name="_method" value="DELETE">                            
+                                        <input type="hidden" name="_method" value="DELETE">                            
 
-                                    <button type="submit"  class="btn btn-danger btn-sm" class="card-link">Supprimer</button>
-                                </form>   
-                            </div>    
-                        </td>                                              
-                    </tr>
-            </tbody>
+                                        <button type="submit"  class="btn btn-danger btn-sm" class="card-link">Supprimer</button>
+                                    </form>   
+                                </div>    
+                            </td>                                              
+                        </tr>
+                </tbody>
             
             {% endfor %}
 
