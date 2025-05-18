@@ -24,12 +24,12 @@ class MarkerController extends AbstractController
      //Recherche avec la méthode findBy() 
      //{page?1} = par défaut page 1
      //{nbre?12}= 12 éléments maxi par page par défault
-    #[Route('/alls/{page?1}/{nbre?12}', name: 'marker.list.alls')]
+    #[Route('/alls/{page?1}/{nbre?40}', name: 'marker.list.alls')]
     public function indexAlls(ManagerRegistry $doctrine, $page, $nbre): Response
     {
         $repository = $doctrine -> getRepository(persistentObject: Marker::class);
         // définition de base de la méthode findBy(): function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)      $limit et $ $offset permettent de faire une pagination
-        $markers = $repository->findBy([], [], limit: $nbre, offset: ($page - 1)*12);
+        $markers = $repository->findBy([], [], limit: $nbre, offset: ($page - 1)*40);
         // offset: élément à partir duquel on veut avoir les enregistrements
          //page = 1 & nbre = 12 =>offset= 0
          //page = 2 & nbre = 12 => offset = 12
