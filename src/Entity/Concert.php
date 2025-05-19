@@ -178,7 +178,7 @@ class Concert
         return $this;
     }
 //envoi de l'url complète de l'image à l'API
-    #[Groups(['concert'])]
+    
     public function getFullImageUrl(): ?string
     {
         return 'https://concertslives.store/uploads/concerts/' . $this->imageId;
