@@ -1,7 +1,6 @@
 vich_uploader:
    db_driver: orm
-   metadata:
-      type: attribute
+  
    mappings:
       concerts:
          uri_prefix: /uploads/concerts/
