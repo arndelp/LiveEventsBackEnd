@@ -16,53 +16,43 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 #[ORM\Entity(repositoryClass: ConcertRepository::class)]
-#[ApiResource(normalizationContext: ['groups' => ['concert']], paginationItemsPerPage: 50)]
+#[ApiResource( paginationItemsPerPage: 50)]   // Limitation par défault d'API Platform à 30 Items
 #[Vich\Uploadable()]
 class Concert
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]    
-    #[Groups(['concert'])]
+    #[ORM\Column]        
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: false)]
-    #[Assert\NotBlank]   
-    #[Groups(['concert'])]  
+    #[Assert\NotBlank]       
     private ?string $name = null;
 
-    #[ORM\Column(length: 100, nullable: true)]     
-    #[Groups(['concert'])]  
+    #[ORM\Column(length: 100, nullable: true)]        
     private ?string $style = null;   
 
-    #[ORM\Column(type: Types::TEXT)]    
-    #[Groups(['concert'])]
+    #[ORM\Column(type: Types::TEXT)]   
     private ?string $details = null;
 
-    #[ORM\Column(type: Types::TEXT)] 
-    #[Groups(['concert'])]   
+    #[ORM\Column(type: Types::TEXT)]     
     private ?string $details2 = null;
 
-    #[ORM\Column(length: 30, nullable: true)]      
-    #[Groups(['concert'])]
+    #[ORM\Column(length: 30, nullable: true)]        
     private ?string $location = null;
 
-    #[ORM\Column(length: 30, nullable: true)]    
-    #[Groups(['concert'])] 
+    #[ORM\Column(length: 30, nullable: true)]        
     private ?string $day = null;
 
-    #[ORM\Column(length: 30, nullable: true)]    
-    #[Groups(['concert'])]
+    #[ORM\Column(length: 30, nullable: true)]        
     private ?string $schedule = null;
 
    
-    #[ORM\Column(length: 255, nullable: true)]        //les contraintes de l'image se font dans ConcertType    
-    #[Groups(['concert'])]
+    #[ORM\Column(length: 255, nullable: true)]        //les contraintes de l'image se font dans ConcertType     
     private ?string $imageId = null;
 
     #[Vich\UploadableField(mapping: 'concerts', fileNameProperty: 'imageId')]   
-    #[Assert\Image()]    
-    #[Groups(['concert'])]
+    #[Assert\Image()]  
     private ?File $photo =null;
 
    
