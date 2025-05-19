@@ -72,15 +72,12 @@ class ConcertType extends AbstractType
                             "20:00 - 21:00"=>"20:00 - 21:00",
                             "21:00 - 22:00"=>"21:00 - 22:00",
                             "22:00 - 23:00"=>"22:00 - 23:00",
-                            "23:00 - 00:00"=>"23:00 - 00:00"],
-                
+                            "23:00 - 00:00"=>"23:00 - 00:00"],                
             ])
 
                         
             ->add('photo', FileType::class, [               
-                'required' => false,
-                'label' => 'Photo',
-                'mapped' => false,               
+                            
              ]) 
              
             ->add('details', null, [
