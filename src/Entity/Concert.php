@@ -61,7 +61,7 @@ class Concert
     private ?string $imageId = null;
 
     #[Vich\UploadableField(mapping: 'concerts', fileNameProperty: 'imageId')]   
-    #[Assert\Image( )]    
+    #[Assert\Image()]    
     #[Groups(['concert'])]
     private ?File $photo =null;
 
