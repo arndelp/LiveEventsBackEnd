@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 #[ORM\Entity(repositoryClass: ConcertRepository::class)]
-#[ApiResource(normalizationContext: ['groups' => ['concert']])]
+#[ApiResource(normalizationContext: ['groups' => ['concert']], paginationItemsPerPage: 50)]
 #[Vich\Uploadable()]
 class Concert
 {
