@@ -15,38 +15,31 @@ class Marker
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]    
-    #[Groups(['marker'])]
+    #[ORM\Column]
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\NotBlank]
-    #[Groups(['marker'])]
     private ?string $name = null;
 
     #[ORM\Column]
     #[Assert\NotBlank]
-    #[Groups(['marker'])]
     private ?string $latitude = null;
 
     #[ORM\Column]
     #[Assert\NotBlank]
-    #[Groups(['marker'])]
     private ?string $longitude = null;
 
        
     #[ORM\Column]
-    #[Assert\NotBlank] 
-    #[Groups(['marker'])]
+    #[Assert\NotBlank]
     private ?string $type = null;
 
-    #[ORM\Column(type: Types::TEXT)]    
-    #[Groups(['marker'])]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $details = null;
 
     #[ORM\Column]
     #[Assert\NotBlank]
-    #[Groups(['marker'])]
     private ?int $zIndex = null;
    
 
