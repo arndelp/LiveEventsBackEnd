@@ -26,25 +26,31 @@ class Concert
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: false)]
-    #[Assert\NotBlank]       
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")]       
     private ?string $name = null;
 
-    #[ORM\Column(length: 100, nullable: true)]        
+    #[ORM\Column(length: 100, nullable: true)] 
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")]       
     private ?string $style = null;   
 
-    #[ORM\Column(type: Types::TEXT)]   
+    #[ORM\Column(type: Types::TEXT)]  
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")] 
     private ?string $details = null;
 
-    #[ORM\Column(type: Types::TEXT)]     
+    #[ORM\Column(type: Types::TEXT)]    
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")] 
     private ?string $details2 = null;
 
-    #[ORM\Column(length: 30, nullable: true)]        
+    #[ORM\Column(length: 30, nullable: true)]  
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")]      
     private ?string $location = null;
 
-    #[ORM\Column(length: 30, nullable: true)]        
+    #[ORM\Column(length: 30, nullable: true)]  
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")]      
     private ?string $day = null;
 
-    #[ORM\Column(length: 30, nullable: true)]        
+    #[ORM\Column(length: 30, nullable: true)]  
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")]      
     private ?string $schedule = null;
 
    

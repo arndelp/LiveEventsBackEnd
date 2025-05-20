@@ -19,27 +19,31 @@ class Marker
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")]
     #[Assert\NotBlank]
     private ?string $name = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")]
+    #[Assert\Regex(pattern:'/^[0-9_.]+$/i', htmlPattern: '^[0-9_.]+$', message: "La valeur doit être de type 48.6XXXXXXXXXXXX")]   
     private ?string $latitude = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")]
+    #[Assert\Regex(pattern:'/^[0-9_.]+$/i', htmlPattern: '^[0-9_.]+$', message: "La valeur doit être de type 1.8XXXXXXXXXXXX")]   
     private ?string $longitude = null;
 
        
     #[ORM\Column]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")]
     private ?string $type = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")]
     private ?string $details = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")]
     private ?int $zIndex = null;
    
 

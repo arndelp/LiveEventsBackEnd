@@ -17,16 +17,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")]
     #[ORM\Column(length: 180)]
     private ?string $lastname = null;
 
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")]
     #[ORM\Column(length: 180)]
     private ?string $firstname = null;
 
     #[Assert\Email(message: "{{ value }} n'est pas une adresse e-mail valide.",)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")]
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
