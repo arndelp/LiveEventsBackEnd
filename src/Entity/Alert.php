@@ -6,6 +6,7 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\AlertRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AlertRepository::class)]
 #[ApiResource]
@@ -13,16 +14,15 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Alert
 {
     #[ORM\Id]
-    #[ORM\Column]
-    #[Groups(['alert'])]
+    #[ORM\Column]    
     private ?int $id = 1;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['alert'])]
+    #[ORM\Column(length: 255, nullable: true)]    
+    #[Assert\Length(max: 50, maxMessage: '50 caractères au maximum',)] 
     private ?string $Message1 = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['alert'])]
+    #[ORM\Column(length: 255, nullable: true)]    
+    #[Assert\Length(max: 50, maxMessage: '50 caractères au maximum',)] 
     private ?string $Message2 = null;
 
     public function getId(): ?int

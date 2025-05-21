@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MarkerRepository::class)]
-#[ApiResource()]
+#[ApiResource]
 class Marker
 {
     #[ORM\Id]
@@ -25,12 +25,14 @@ class Marker
 
     #[ORM\Column]
     #[Assert\NotBlank(message: "Veuillez remplir ce champ")]
-    #[Assert\Regex(pattern:'/^[0-9_.]+$/i', htmlPattern: '^[0-9_.]+$', message: "La valeur doit être de type 48.6XXXXXXXXXXXX")]   
+    #[Assert\Regex(pattern:'/^[0-9_.]+$/i', htmlPattern: '^[0-9_.]+$', message: "La valeur doit être de type 48.6XXXXXXXXXXXX")] 
+    #[Assert\Length(max: 20, maxMessage: '20 caractères au maximum')]  
     private ?string $latitude = null;
 
     #[ORM\Column]
     #[Assert\NotBlank(message: "Veuillez remplir ce champ")]
-    #[Assert\Regex(pattern:'/^[0-9_.]+$/i', htmlPattern: '^[0-9_.]+$', message: "La valeur doit être de type 1.8XXXXXXXXXXXX")]   
+    #[Assert\Regex(pattern:'/^[0-9_.]+$/i', htmlPattern: '^[0-9_.]+$', message: "La valeur doit être de type 1.8XXXXXXXXXXXX")] 
+    #[Assert\Length(max: 20, maxMessage: '20 caractères au maximum')]  
     private ?string $longitude = null;
 
        
@@ -40,6 +42,7 @@ class Marker
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\NotBlank(message: "Veuillez remplir ce champ")]
+    #[Assert\Length(max: 50, maxMessage: '50 caractères au maximum')]
     private ?string $details = null;
 
     #[ORM\Column]

@@ -26,7 +26,8 @@ class Concert
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: false)]
-    #[Assert\NotBlank(message: "Veuillez remplir ce champ")]       
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")] 
+    #[Assert\Length(max: 50, maxMessage: '50 caractères au maximum')]        
     private ?string $name = null;
 
     #[ORM\Column(length: 100, nullable: true)] 
@@ -35,10 +36,12 @@ class Concert
 
     #[ORM\Column(type: Types::TEXT)]  
     #[Assert\NotBlank(message: "Veuillez remplir ce champ")] 
+    #[Assert\Length(max: 600, maxMessage: '600 caractères au maximum')]  
     private ?string $details = null;
 
     #[ORM\Column(type: Types::TEXT)]    
     #[Assert\NotBlank(message: "Veuillez remplir ce champ")] 
+    #[Assert\Length(max: 600, maxMessage: '600 caractères au maximum')]  
     private ?string $details2 = null;
 
     #[ORM\Column(length: 30, nullable: true)]  

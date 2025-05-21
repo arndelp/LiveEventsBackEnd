@@ -18,15 +18,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[Assert\NotBlank(message: "Veuillez remplir ce champ")]
+    #[Assert\Length(max: 50, maxMessage: '50 caractères au maximum')]  
     #[ORM\Column(length: 180)]
     private ?string $lastname = null;
 
     #[Assert\NotBlank(message: "Veuillez remplir ce champ")]
+    #[Assert\Length(max: 50, maxMessage: '50 caractères au maximum')] 
     #[ORM\Column(length: 180)]
     private ?string $firstname = null;
 
-    #[Assert\Email(message: "{{ value }} n'est pas une adresse e-mail valide.",)]
+    #[Assert\Email(message: "Ce n'est pas une adresse e-mail valide.")]
     #[Assert\NotBlank(message: "Veuillez remplir ce champ")]
+    #[Assert\Length(max: 50, maxMessage: '50 caractères au maximum')] 
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
