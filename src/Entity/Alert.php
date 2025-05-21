@@ -10,7 +10,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AlertRepository::class)]
 #[ApiResource]
-#[ApiResource(normalizationContext: ['groups' => ['alert']])]
 class Alert
 {
     #[ORM\Id]
