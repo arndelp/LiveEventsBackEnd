@@ -3,7 +3,12 @@
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
-
+parameters:
+    contact_receiver_email: '%env(CONTACT_RECEIVER_EMAIL)%'
+    app.path.produit_images: '%kernel.project_dir%/public/uploads/concerts'
+    google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
+    
+    
 
 services:
     # default configuration for services in *this* file
@@ -13,14 +18,137 @@ services:
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
-    App\:
-        resource: '../src/'
-        exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
-            - '../src/Kernel.php'
+    
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    App\Concerts\:
+        resource: '../src/Concerts/'
+        exclude:
+            - '../src/Concerts/Domain/Entity/'   # Pas besoin d'enregistrer les entités
+            - '../src/Concerts/UI/'              # Les contrôleurs sont gérés par routes.yaml
+
+    App\Alert\:
+        resource: '../src/Alert/'
+        exclude:
+            - '../src/Alert/Domain/Entity/'
+            - '../src/Alert/UI/'
+
+    App\Markers\:
+        resource: '../src/Markers/'
+        exclude:
+            - '../src/Markers/Domain/Entity/'   # Pas besoin d'enregistrer les entités
+            - '../src/Markers/UI/'              # Les contrôleurs sont gérés par routes.yaml
+
+    App\Users\:
+        resource: '../src/Users/'
+        exclude:
+            - '../src/Users/Domain/Entity/'   # Pas besoin d'enregistrer les entités
+            - '../src/Users/UI/'              # Les contrôleurs sont gérés par routes.yaml
+
+    App\Contact\:
+        resource: '../src/Contact/'
+        exclude:
+            - '../src/Contact/Domain/Entity/'
+            - '../src/Contact/UI/'
 
     
+
+    App\Users\Infrastructure\Repository\EmailDuplicationChecker:
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+
+    App\Contact\Infrastructure\Service\SymfonyMailerService:
+        arguments:            
+            $receiverEmail: '%contact_receiver_email%'
+
+    App\Contact\Application\UseCase\SendContactMessage:
+        arguments:
+            $toEmail: '%contact_receiver_email%'   
+            $setContactMessage: '@App\Contact\Application\UseCase\SetContactMessage'
+
+    App\Users\Infrastructure\Security\LoginAuthenticator:
+        arguments:
+            $urlGenerator: '@router.default'
+
+    App\Contact\Application\UseCase\SetContactMessage:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    App\Shared\Infrastructure\Security\GetUser:
+        autowire: true
+        autoconfigure: true
+
+    App\Users\UI\Controller\SecurityController:
+        autowire: true
+        autoconfigure: true
+        public: true
+        tags: ['controller.service_arguments']
+
+    App\Concerts\UI\Controller\ConcertController:
+        autowire: true
+        autoconfigure: true
+        public: true
+        tags: ['controller.service_arguments']
+
+    App\Contact\UI\Controller\ContactMessageController:
+        autowire: true
+        autoconfigure: true
+        public: true
+        tags: ['controller.service_arguments']
+
+    App\Alert\UI\Controller\:
+        resource: '../src/Alert/UI/Controller/'
+        public: true
+        tags: ['controller.service_arguments']
+        autowire: true
+        autoconfigure: true
+
+    App\Contact\UI\Controller\ContactController:
+        autowire: true
+        autoconfigure: true
+        public: true
+        tags: ['controller.service_arguments']
+
+    App\Markers\UI\Controller\:
+        resource: '../src/Markers/UI/Controller/'
+        public: true
+        autowire: true
+        autoconfigure: true
+        tags: ['controller.service_arguments']
+    
+
+    # Liaison entre les interfaces de repository et les DoctrineRepository
+    App\Concerts\Domain\Repository\ConcertRepositoryInterface: 
+        alias: App\Concerts\Infrastructure\Repository\DoctrineConcertRepository
+
+    App\Alert\Domain\Repository\AlertRepositoryInterface: 
+        alias: App\Alert\Infrastructure\Repository\DoctrineAlertRepository
+
+    App\Markers\Domain\Repository\MarkerRepositoryInterface: 
+        alias: App\Markers\Infrastructure\Repository\DoctrineMarkerRepository
+
+    App\Users\Domain\Repository\UserRepositoryInterface: 
+        alias: App\Users\Infrastructure\Repository\DoctrineUserRepository
+
+    App\Users\Domain\Repository\EmailDuplicationCheckerInterface:
+        alias: App\Users\Infrastructure\Repository\EmailDuplicationChecker
+
+    App\Shared\Domain\Security\GetUserInterface:
+        alias: App\Shared\Infrastructure\Security\GetUser
+
+    App\Contact\Domain\Repository\ContactRepositoryInterface:
+        alias: App\Contact\Infrastructure\Repository\DoctrineContactRepository
+
+    App\Contact\Domain\Service\MailerServiceInterface:
+        alias: App\Contact\Infrastructure\Service\SymfonyMailerService
+
+    
+
+ 
+
+
+   
+        
+
+    
+  

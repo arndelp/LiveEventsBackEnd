@@ -1,0 +1,24 @@
+contact.list.alls:
+  path: /contact/alls/{page}/{nbre}
+  controller: App\Contact\UI\Controller\ContactController::indexAlls
+  defaults:
+      page: 1
+      nbre: 10
+  methods: [GET]
+
+contact.detail:
+  path: /contact/{id}
+  controller: App\Contact\UI\Controller\ContactController::detail
+  requirements:
+    id: '\d+'    #entier positif
+  methods: [GET]
+
+contact.delete:
+  path: /contact/delete/{id}
+  controller: App\Contact\UI\Controller\ContactController::deleteContact
+  methods: [GET, DELETE]
+
+contact.api.submit:
+  path: /api/contacts   #route d'envoie des données de react
+  controller: App\Contact\UI\Controller\ContactController::receiveMessage
+  methods: [POST]

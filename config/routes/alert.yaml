@@ -1,0 +1,11 @@
+alert.edit:
+  path: /alert/edit/{id}
+  controller:  App\Alert\UI\Controller\AlertController::editAlert
+  defaults:
+    id: 1
+  methods: [GET, POST]
+
+alert.delete:
+  path: /alert/delete/{id}
+  controller: App\Alert\UI\Controller\AlertController::delete
+  methods: [DELETE]

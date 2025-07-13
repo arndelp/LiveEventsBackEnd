@@ -1,0 +1,26 @@
+marker.list.alls:
+  path: /marker/alls/{page}/{nbre}
+  controller: App\Markers\UI\Controller\MarkerController::indexAlls
+  defaults:
+      page: 1
+      nbre: 10
+  methods: [GET]
+
+marker.detail:
+  path: /marker/{id}
+  controller: App\Markers\UI\Controller\MarkerController::detail
+  requirements:
+    id: '\d+'
+  methods: [GET]
+
+marker.edit:
+  path: /marker/edit/{id}
+  controller: App\Markers\UI\Controller\MarkerController::saveMarker
+  defaults:
+    id: 0
+  methods: [GET, POST]
+
+marker.delete:
+  path: /marker/delete/{id}
+  controller: App\Markers\UI\Controller\MarkerController::delete
+  methods: [DELETE]

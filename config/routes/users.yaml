@@ -1,0 +1,15 @@
+app_register:
+  path: /register
+  controller: App\Users\UI\Controller\RegistrationController::registerUser
+ 
+app_verify_email:
+  path: /verify/email
+  controller: App\Users\UI\Controller\RegistrationController::verifyUserEmail
+
+app_login:
+  path: /
+  controller: App\Users\UI\Controller\SecurityController::login
+
+app_logout:
+  path: /logout
+  controller: App\Users\UI\Controller\SecurityController::logout

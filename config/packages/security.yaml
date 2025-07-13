@@ -2,72 +2,80 @@ security:
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        # used to reload user from session & other features (e.g. switch_user)
+        # Reload user from session and other features (e.g. switch_user)
         app_user_provider:
             entity:
-                class: App\Entity\User
+                class: App\Users\Domain\Entity\User
                 property: email
-        # used to reload user from session & other features (e.g. switch_user)
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        # Définit un authentificateur pour toutes les requêtes à la route "custom_create_contact"
+       
+
         main:
+            # Enabling lazy loading for the firewall (might improve performance)
             lazy: true
             provider: app_user_provider
-            custom_authenticator: App\Security\LoginAuthenticator
+
+            # Custom authenticator to handle login
+            pattern: ^/
+            custom_authenticator: App\Users\Infrastructure\Security\LoginAuthenticator
+
+            # Logout configuration
             logout:
                 path: app_logout
                 target: app_login
-                # where to redirect after logout
+                # Uncomment and set another route if you want to redirect to a different page after logout.
                 # target: app_any_route
 
             remember_me:
                 secret: '%kernel.secret%'
-                lifetime: 604800
+                lifetime: 604800  # Duration of 1 week (in seconds)
                 path: /
-                # by default, the feature is enabled by checking a checkbox in the
-                # login form, uncomment the following line to always enable it.
-                # always_remember_me: true
 
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#the-firewall
+            
+            
 
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
+        api:
+            # Sécurise toutes les routes commençant par /api
+            pattern: ^/api/  # Ceci doit être un tableau
+            custom_authenticator: 
+                App\Users\Infrastructure\Security\LoginAuthenticator # Si tu as un authentificateur spécifique pour les API
+            stateless: true  # Evite les sessions pour les API
+           
+            # ou un autre mécanisme si nécessaire
 
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
+    # Access control configuration
     access_control:
-    # Tout les utilisateurs ont le droit sur la page login / Attention ordre important
-        - { path: ^/login, roles: PUBLIC_ACCESS }   
+        # Public access to login and registration pages (first match rule applies)
+        - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/register, roles: PUBLIC_ACCESS }
-        - { path: ^/concert/alls, roles: ROLE_USER }   # Etre connecter pour voir les concerts
-               # Etre admin pour modifier
-        - { path: ^/concert/edit, roles: ROLE_ADMIN } 
+
+        # Require user to be authenticated (ROLE_USER) for the concerts pages
+        - { path: ^/concert/alls, roles: ROLE_USER }
+        - { path: ^/concert/, roles: ROLE_USER }
+
+        # Require admin role for editing, deleting, and other sensitive pages
+        - { path: ^/concert/edit, roles: ROLE_ADMIN }
         - { path: ^/concert/delete, roles: ROLE_ADMIN }
-        - { path: ^/contact/alls, roles: ROLE_ADMIN }
-        - { path: ^/contact/delete, roles: ROLE_ADMIN }
-        - { path: ^/marker/alls, roles: ROLE_ADMIN }
-        - { path: ^/marker/edit, roles: ROLE_ADMIN } 
-        - { path: ^/marker/delete, roles: ROLE_ADMIN }
-        - { path: ^/alert/edit, roles: ROLE_ADMIN }
-        
-       
+        - { path: ^/contact, roles: ROLE_ADMIN }
+        - { path: ^/alert/, roles: ROLE_ADMIN }
+        - { path: ^/marker/, roles: ROLE_ADMIN }
 
+        # Uncomment this for API access control (if needed)
         # - { path: ^/api, roles: ROLE_ADMIN }
-
-        
 
 when@test:
     security:
         password_hashers:
-            # By default, password hashers are resource intensive and take time. This is
-            # important to generate secure password hashes. In tests however, secure hashes
-            # are not important, waste resources and increase test times. The following
-            # reduces the work factor to the lowest possible values.
+            # Reduce the cost factor for tests to make hashing faster
             Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
                 algorithm: auto
                 cost: 4 # Lowest possible value for bcrypt

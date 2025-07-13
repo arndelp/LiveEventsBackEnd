@@ -1,0 +1,32 @@
+concert.list.alls:
+  path: /concert/alls/{page}/{nbre}
+  controller: App\Concerts\UI\Controller\ConcertController::indexAlls
+  defaults:
+      page: 1
+      nbre: 10
+  methods: [GET]
+
+concert.detail:
+  path: /concert/{id}
+  controller: App\Concerts\UI\Controller\ConcertController::detail
+  requirements:
+    id: '\d+'    #entier positif
+  methods: [GET]
+
+concert.edit:
+  path: /concert/edit/{id}
+  controller: App\Concerts\UI\Controller\ConcertController::saveConcert
+  defaults:
+    id: 0
+  methods: [GET, POST]
+
+concert.delete:
+  path: /concert/delete/{id}
+  controller: App\Concerts\UI\Controller\ConcertController::delete
+  methods: [DELETE]
+
+event_index:
+  path: /events
+  controller: App\Concerts\UI\Controller\EventController::listConcerts
+  methods: [GET]
+

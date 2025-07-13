@@ -2,6 +2,15 @@ twig:
     file_name_pattern: '*.twig'
     form_themes: ['bootstrap_5_layout.html.twig']
 
+    # Pour architecture en couche, ajout d'un namespace Twig 'Concert', qui pointe vers les vues du module
+    default_path: '%kernel.project_dir%/templates'
+    paths:
+        '%kernel.project_dir%/src/Concerts/UI/Templates': 'Concert'
+        '%kernel.project_dir%/src/Alert/UI/Templates': 'Alert'
+        '%kernel.project_dir%/src/Markers/UI/Templates': 'Marker'
+        '%kernel.project_dir%/src/Users/UI/Templates': 'User'
+        '%kernel.project_dir%/src/Contact/UI/Templates': 'Contact'
+        
 when@test:
     twig:
         strict_variables: true
