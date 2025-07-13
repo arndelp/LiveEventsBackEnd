@@ -29,7 +29,7 @@ class ConcertController extends AbstractController
     {
         $repository = $doctrine -> getRepository(persistentObject: Concert::class);
         // définition de base de la méthode findBy(): function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)      $limit et $ $offset permettent de faire une pagination
-        $concerts = $repository->findBy([], [], limit: $nbre, offset: ($page - 1)*10);
+        $concerts = $repository->findBy(array(),array('day'=>'ASC','schedule'=>'ASC'), limit: $nbre, offset: ($page - 1)*10);
         // offset: élément à partir duquel on veut avoir les enregistrements
          //page = 1 & nbre = 10 =>offset= 0
          //page = 2 & nbre = 10 => offset = 10
@@ -66,7 +66,7 @@ class ConcertController extends AbstractController
                 return $this->render('concert/detail.html.twig', ['concert' => $concert]);
     } 
     //ajout/édition d'un évènement
-    #[Route('/edit/{id?1}', name: 'concert.edit', methods: ['GET', 'POST'])] // {id?0}: Si l'id n'est pas stipulé, le formulaire sera vide pour ajouter une nouvel évènement
+    #[Route('/edit/{id?0}', name: 'concert.edit', methods: ['GET', 'POST'])] // {id?0}: Si l'id n'est pas stipulé, le formulaire sera vide pour ajouter une nouvel évènement
     public function editConcert(Concert $concert = null, ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger): Response    //$concert=null pour avoir une personne vide par défaut en cas de mauvais id
     {
         $new = false;    // initialisation de $new pour les messages futur

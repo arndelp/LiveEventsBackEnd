@@ -16,55 +16,57 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 #[ORM\Entity(repositoryClass: ConcertRepository::class)]
-#[ApiResource(normalizationContext: ['groups' => ['concert']])]
+#[ApiResource( paginationItemsPerPage: 50)]   // Limitation par défault d'API Platform à 30 Items
 #[Vich\Uploadable()]
 class Concert
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]    
-    #[Groups(['concert'])]
+    #[ORM\Column]        
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\NotBlank]   
-    #[Groups(['concert'])]  
+    #[ORM\Column(length: 255, nullable: false)]
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")] 
+    #[Assert\Length(max: 50, maxMessage: '50 caractères au maximum')]        
     private ?string $name = null;
-    
-    #[ORM\Column(type: Types::TEXT)]    
-    #[Groups(['concert'])]
+
+    #[ORM\Column(length: 100, nullable: true)] 
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")]       
+    private ?string $style = null;   
+
+    #[ORM\Column(type: Types::TEXT)]  
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")] 
+    #[Assert\Length(max: 600, maxMessage: '600 caractères au maximum')]  
     private ?string $details = null;
 
-    #[ORM\Column(type: Types::TEXT)] 
-    #[Groups(['concert'])]   
+    #[ORM\Column(type: Types::TEXT)]    
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")] 
+    #[Assert\Length(max: 600, maxMessage: '600 caractères au maximum')]  
     private ?string $details2 = null;
 
-    #[ORM\ManyToOne(inversedBy: 'concerts')]
-    #[ORM\JoinColumn(nullable: true)]    
-    #[Groups(['concert'])]
-    private ?Location $location = null;
+    #[ORM\Column(length: 30, nullable: true)]  
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")]      
+    private ?string $location = null;
 
-    #[ORM\ManyToOne(inversedBy: 'concerts')]
-    #[ORM\JoinColumn(nullable: true)]   
-    #[Groups(['concert'])] 
-    private ?Day $day = null;
+    #[ORM\Column(length: 30, nullable: true)]  
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")]      
+    private ?string $day = null;
 
-    #[ORM\ManyToOne(inversedBy: 'concerts')]
-    #[ORM\JoinColumn(nullable: true)]    
-    #[Groups(['concert'])]
-    private ?Schedule $schedule = null;
+    #[ORM\Column(length: 30, nullable: true)]  
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")]      
+    private ?string $schedule = null;
 
-    #[ORM\Column(length: 255, nullable: true)]        //les contraintes de l'image se font dans ConcertType    
-    #[Groups(['concert'])]
+   
+    #[ORM\Column(length: 255, nullable: true)]        //les contraintes de l'image se font dans ConcertType     
     private ?string $imageId = null;
 
     #[Vich\UploadableField(mapping: 'concerts', fileNameProperty: 'imageId')]   
-    #[Assert\Image( )]    
-    #[Groups(['concert'])]
+    #[Assert\Image()]  
     private ?File $photo =null;
 
+   
 
-
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -88,6 +90,19 @@ class Concert
 
         return $this;
     }
+
+    public function getStyle(): ?string
+    {
+        return $this->style;
+    }
+
+    public function setStyle(?string $style): static
+    {
+        $this->style = $style;
+
+        return $this;
+    }
+   
   
     public function getDetails(): ?string
     {
@@ -113,36 +128,36 @@ class Concert
         return $this;
     }
 
-    public function getLocation(): ?Location
+    public function getLocation(): ?string
     {
         return $this->location;
     }
 
-    public function setLocation(?Location $location): static
+    public function setLocation(?string $location): static
     {
         $this->location = $location;
 
         return $this;
     }
 
-    public function getDay(): ?Day
+    public function getDay(): ?string
     {
         return $this->day;
     }
 
-    public function setDay(?Day $day): static
+    public function setDay(?string $day): static
     {
         $this->day = $day;
 
         return $this;
     }
 
-    public function getSchedule(): ?Schedule
+    public function getSchedule(): ?string
     {
         return $this->schedule;
     }
 
-    public function setSchedule(?Schedule $schedule): static
+    public function setSchedule(?string $schedule): static
     {
         $this->schedule = $schedule;
 
@@ -172,7 +187,7 @@ class Concert
         return $this;
     }
 //envoi de l'url complète de l'image à l'API
-    #[Groups(['concert'])]
+    
     public function getFullImageUrl(): ?string
     {
         return 'https://concertslives.store/uploads/concerts/' . $this->imageId;

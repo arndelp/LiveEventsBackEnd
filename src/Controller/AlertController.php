@@ -25,14 +25,14 @@ class AlertController extends AbstractController
     public function editAlert(Alert $alert = null, ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger): Response    //$alert=null pour avoir une personne vide par défaut en cas de mauvais id
     {
         $new = false;    // initialisation de $new pour les messages futur
-        // si le concert n'existe pas
+        // si l'alerte n'existe pas
         if (!$alert) {
         $new = true;
         $alert = new Alert();   // si $new=true, création d'un nouvelle objet
 
         }
 
-        //$concert est l'image du formulaire 
+       
         $form = $this->createForm(AlertType::class, $alert);
         
         $form->handleRequest($request);   //méthode handleRequest() permet de récupérer toute les info contenu dans l'objet $request

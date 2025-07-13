@@ -8,30 +8,24 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
-#[ApiResource(normalizationContext: ['groups' => ['contact']])]
 #[ApiResource]
 class Contact
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    #[Groups(['contact'])]
+    #[ORM\Column]    
     private ?int $id = null;
 
-    #[ORM\Column(length: 100, nullable: true, type: Types::TEXT)]
-    #[Groups(['contact'])]
+    #[ORM\Column(length: 100, nullable: true, type: Types::TEXT)]    
     private ?string $lastname = null;
 
-    #[ORM\Column(length: 100, nullable: true, type: Types::TEXT)]
-    #[Groups(['contact'])]
+    #[ORM\Column(length: 100, nullable: true, type: Types::TEXT)]    
     private ?string $firstname = null;
 
-    #[ORM\Column(length: 255, type: Types::TEXT)]
-    #[Groups(['contact'])]
+    #[ORM\Column(length: 255, type: Types::TEXT)]    
     private ?string $email = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['contact'])]
+    #[ORM\Column(type: Types::TEXT)]    
     private ?string $message = null;
 
     public function getId(): ?int
