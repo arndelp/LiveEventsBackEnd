@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "986bc7521dd935c9cd2e1376079d3d62",
+    "content-hash": "022a6b4d3a6720117b0c6e32bda5aeec",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -1111,6 +1111,55 @@
                 "source": "https://github.com/api-platform/validator/tree/v4.1.8"
             },
             "time": "2025-04-18T08:39:51+00:00"
+        },
+        {
+            "name": "becklyn/ordered-form-bundle",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Becklyn/OrderedFormBundle.git",
+                "reference": "5a068240bf4fb56a82fc48d1eb146e985138eb70"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Becklyn/OrderedFormBundle/zipball/5a068240bf4fb56a82fc48d1eb146e985138eb70",
+                "reference": "5a068240bf4fb56a82fc48d1eb146e985138eb70",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4",
+                "symfony/config": "^5.4.3 || ^6.0.3 || ^7.0",
+                "symfony/dependency-injection": "^5.4.3 || ^6.0.3 || ^7.0",
+                "symfony/form": "^5.4.3 || ^6.0.3 || ^7.0",
+                "symfony/http-kernel": "^5.4.4 || ^6.0.4 || ^7.0"
+            },
+            "require-dev": {
+                "roave/security-advisories": "dev-master",
+                "symfony/phpunit-bridge": "^5.4.3 || ^6.0.3 || ^7.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Becklyn\\OrderedFormBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Becklyn Studios",
+                    "homepage": "http://becklyn.com/"
+                }
+            ],
+            "description": "This bundle adds functionality for ordering form elements",
+            "homepage": "https://github.com/Becklyn/OrderedFormBundle",
+            "support": {
+                "issues": "https://github.com/Becklyn/OrderedFormBundle/issues",
+                "source": "https://github.com/Becklyn/OrderedFormBundle/tree/1.4.0"
+            },
+            "time": "2024-01-17T12:49:33+00:00"
         },
         {
             "name": "doctrine/cache",
