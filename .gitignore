@@ -28,5 +28,5 @@ yarn-error.log
 /public/uploads
 /config/secrets/prod
 /.env
-
+/migrations
 UserFixtures.php
