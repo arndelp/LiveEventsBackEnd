@@ -12,18 +12,7 @@
         }
     </style>
 
-    {# Formulaire de sélection du jour #}
-    <form method="get" action="{{ path('event_index') }}">
-        <select name="concert_day">
-            <option value="">Sélectionnez un jour</option>
-            {% for day in availableDays %}
-                <option value="{{ day }}" {% if day == selectedDay %}selected{% endif %}>{{ day }}</option>
-            {% else %}
-                <option disabled>Aucun jour disponible</option>
-            {% endfor %}
-        </select>
-        <button type="submit">Filtrer</button>
-    </form>
+  
 
     {# Affichage des concerts #}
     <div class="row">
