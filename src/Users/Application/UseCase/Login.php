@@ -2,7 +2,8 @@
 
 namespace App\Users\Application\UseCase;
 
-use App\Security\Application\DTO\LoginResponse;
+
+use App\Users\Application\DTO\LoginResponse;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class Login
