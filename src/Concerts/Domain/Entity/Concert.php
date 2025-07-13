@@ -79,9 +79,7 @@ class Concert
     private ?User $modifiedBy = null;
 
    
-    #[ORM\Column]  
-    #[Groups(['concerts'])]      
-    private ?bool $is_duplicate = false;
+ 
     
     public function getId(): ?int
     {
@@ -95,18 +93,7 @@ class Concert
         return $this;
     }
 
-    public function getIs_duplicate(): ?bool
-    {
-        return $this->is_duplicate;
-    }
-
-    public function setIs_duplicate(bool $is_duplicate): static
-    {
-        $this->is_duplicate = $is_duplicate;
-
-        return $this;
-    }
-
+ 
     public function getName(): ?string
     {
         return $this->name;

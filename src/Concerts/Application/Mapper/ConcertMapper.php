@@ -34,7 +34,7 @@ class ConcertMapper
         $concert->setDay($dto->day);
         $concert->setSchedule($dto->schedule);
         $concert->setPhoto($dto->photo);
-        $concert->setIs_duplicate($dto->is_duplicate ?? false);  //?? false: facultatif
+        
 
         return $concert;
     }
@@ -51,7 +51,7 @@ class ConcertMapper
         $dto->day = $concert->getDay();
         $dto->schedule = $concert->getSchedule();
         $dto->photo = $concert->getPhoto();
-        $dto->is_duplicate = $concert->getIs_duplicate();
+        
 
         return $dto;
     }

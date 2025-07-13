@@ -46,5 +46,5 @@ class ConcertDTO
     #[Assert\Image]
     public ?File $photo = null;
 
-    public ?bool $is_duplicate = false;
+   
 }
