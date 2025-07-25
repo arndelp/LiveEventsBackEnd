@@ -22,7 +22,7 @@
 
        <div class="card"  style="width: 18rem;"  >
             <div class="card-body">                    
-                <img src="{{ asset('uploads/' ~ concert.imageId) }}" style="width:12rem;" >               
+                <img src="{{ asset('uploads/concerts/' ~ concert.imageId) }}" style="width:12rem;" >               
                 <h5 class="card-title"  >{{ concert.name }}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">{{ concert.location }} </h6>
                 <h6 class="card-subtitle mb-2 text-muted">{{ concert.day }} </h6>
@@ -35,6 +35,7 @@
                             <button type="submit"  class="btn btn-info btn-sm" class="card-link">Details</button>
                         </form>
                     </div>
+                    {% if is_granted('ROLE_ADMIN') %}
                     <div class='col'>
                         <form action="{{ path('concert.edit', {id: concert.id}) }}">
                             <button type="submit"  class="btn btn-secondary btn-sm" class="card-link">Modifier</button>
@@ -50,6 +51,7 @@
                             <button type="sutmit" class="btn btn-danger btn-sm ">Supprimer</button>
                         </form>
                     </div> 
+                    {% endif %}
                 </div>
                  
              
