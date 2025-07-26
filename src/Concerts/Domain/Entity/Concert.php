@@ -36,7 +36,7 @@ class Concert
     #[Groups(['concerts'])]
     private ?string $name = null;
 
-          
+    #[ORM\Column(length: 100, nullable: false)]       
     #[Groups(['concerts'])]
     private ?string $style = null;   
 
