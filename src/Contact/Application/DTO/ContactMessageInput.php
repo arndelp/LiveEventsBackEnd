@@ -7,29 +7,31 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class ContactMessageInput
 {
+    
     #[Assert\NotBlank(message: "Le nom est requis.")]
-    #[Groups(['contact'])]
     public ?string $lastname = null;
 
     #[Assert\NotBlank(message: "Le prénom est requis.")]
-    #[Groups(['contact'])]
     public ?string $firstname = null;
 
+    
     #[Assert\NotBlank(message: "L'email est requis.")]
     #[Assert\Email(message: "L'email n'est pas valide.")]
-    #[Groups(['contact'])]
     public ?string $email = null;
 
+  
     #[Assert\NotBlank(message: "Le message ne peut pas être vide.")]
-    #[Groups(['contact'])]
     public ?string $message = null;
 
     public function __construct(
-        ?string $firstname = null,
-        ?string $lastname = null,
-        ?string $email = null,
-        ?string $message = null
+        string $firstname,
+        string $lastname,
+        string $email,
+        string $message
     ) {
+        // les 4 paramètres sont utilisés pour initialiser les propriétés de l'objet. 
+        // Cela permet de créer un objet ContactMessageInput avec les valeurs spéfiées pour chaque champs,
+        //  qui sera ensuite utiliser pour les opération de validation et de traitement dans les cas d'utilisation
         $this->firstname = $firstname;
         $this->lastname = $lastname;
         $this->email = $email;
