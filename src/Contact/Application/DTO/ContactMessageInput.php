@@ -23,4 +23,16 @@ final class ContactMessageInput
     #[Assert\NotBlank(message: "Le message ne peut pas être vide.")]
     #[Groups(['contact'])]
     public ?string $message = null;
+
+    public function __construct(
+        ?string $firstname = null,
+        ?string $lastname = null,
+        ?string $email = null,
+        ?string $message = null
+    ) {
+        $this->firstname = $firstname;
+        $this->lastname = $lastname;
+        $this->email = $email;
+        $this->message = $message;
+    }
 }
