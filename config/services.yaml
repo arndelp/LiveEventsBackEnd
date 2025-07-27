@@ -84,6 +84,13 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
+    App\Users\UI\Controller\RegistrationController:
+        autowire: true
+        autoconfigure: true
+        public: true
+        tags: ['controller.service_arguments']
+
+
     App\Concerts\UI\Controller\ConcertController:
         autowire: true
         autoconfigure: true
