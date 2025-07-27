@@ -2,6 +2,7 @@
 
 namespace App\Contact\Application\UseCase;
 
+use InvalidArgumentException;
 use App\Contact\Domain\Entity\Contact;
 use App\Contact\Application\DTO\ContactMessageInput;
 use App\Contact\Domain\Repository\ContactRepositoryInterface;
@@ -16,7 +17,7 @@ final class SetContactMessage
     {
        
         if (empty($dto->email)) {
-            throw new \InvalidArgumentException('L\'email est requis et ne peut pas être vide.');
+            throw new InvalidArgumentException('L\'email est requis et ne peut pas être vide.');
         }
 
         $contact = new Contact();
