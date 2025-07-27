@@ -1,30 +1,29 @@
-# This file is the entry point to configure your own services.
-# Files in the packages/ subdirectory configure your dependencies.
+# Fichier de configuration de service Symfony
+# Permet de déclarer les services et classes de l'application pour qu'ils puissent être utiliser grâce à l'injection de dépendances.
 
-# Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+# Définition des constantes configurables
 parameters:
-    contact_receiver_email: '%env(CONTACT_RECEIVER_EMAIL)%'
+    contact_receiver_email: '%env(CONTACT_RECEIVER_EMAIL)%'   # pour la réception de mail lors d'une demande de contact
     app.path.produit_images: '%kernel.project_dir%/public/uploads/concerts'
     google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
     
     
 
 services:
-    # default configuration for services in *this* file
+    # Configuration par défaut des services
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        autowire: true      # Symfony va automatiquement injecter les dépendances dans les constructeurs des services.
+        autoconfigure: true # Symfony va automatiquement ajouter les bons tags aux services selon leur rôle (ex: commande, événement...).
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
     
-
+    # Chargement automatique des classes
+        # Cela indique à Symfony de scanner automatiquement les classes dans le dossier donné et de les enregistrer comme services.
+        # On exclut les entités (qui sont des objets Doctrine) et les contrôleurs (déjà gérés par le système de routage routes.yaml).
     App\Concerts\:
         resource: '../src/Concerts/'
         exclude:
-            - '../src/Concerts/Domain/Entity/'   # Pas besoin d'enregistrer les entités
-            - '../src/Concerts/UI/'              # Les contrôleurs sont gérés par routes.yaml
+            - '../src/Concerts/Domain/Entity/'   
+            - '../src/Concerts/UI/'              
 
     App\Alert\:
         resource: '../src/Alert/'
@@ -35,14 +34,14 @@ services:
     App\Markers\:
         resource: '../src/Markers/'
         exclude:
-            - '../src/Markers/Domain/Entity/'   # Pas besoin d'enregistrer les entités
-            - '../src/Markers/UI/'              # Les contrôleurs sont gérés par routes.yaml
+            - '../src/Markers/Domain/Entity/'  
+            - '../src/Markers/UI/'              
 
     App\Users\:
         resource: '../src/Users/'
         exclude:
-            - '../src/Users/Domain/Entity/'   # Pas besoin d'enregistrer les entités
-            - '../src/Users/UI/'              # Les contrôleurs sont gérés par routes.yaml
+            - '../src/Users/Domain/Entity/'   
+            - '../src/Users/UI/'              
 
     App\Contact\:
         resource: '../src/Contact/'
@@ -51,15 +50,17 @@ services:
             - '../src/Contact/UI/'
 
     
-
+# Services manuellement configurés
+    # Certaines classes ont besoin de paramètres spécifiques
+        # injection de l'EntityManager pour la classe EmailDuplicationChecker
     App\Users\Infrastructure\Repository\EmailDuplicationChecker:
         arguments:
             $entityManager: '@doctrine.orm.entity_manager'
-
+        # SymfonyMailerService reçoit l'adresse email à qui envoyer les message de contact
     App\Contact\Infrastructure\Service\SymfonyMailerService:
         arguments:            
             $receiverEmail: '%contact_receiver_email%'
-
+        # \SendContactMessage dépend à la fois d'un email et du useCase SetContactMessage
     App\Contact\Application\UseCase\SendContactMessage:
         arguments:
             $toEmail: '%contact_receiver_email%'   
@@ -78,6 +79,8 @@ services:
         autowire: true
         autoconfigure: true
 
+        # Contrôleurs comme services
+            # Les côntroleurs doivent être publics et tagués pour recevoir automatiquement les arguments des services dont il a besoin.
     App\Users\UI\Controller\SecurityController:
         autowire: true
         autoconfigure: true
@@ -124,7 +127,7 @@ services:
         tags: ['controller.service_arguments']
     
 
-    # Liaison entre les interfaces de repository et les DoctrineRepository
+    # Liaison entre les interfaces de repository et les DoctrineRepository. 
     App\Concerts\Domain\Repository\ConcertRepositoryInterface: 
         alias: App\Concerts\Infrastructure\Repository\DoctrineConcertRepository
 
