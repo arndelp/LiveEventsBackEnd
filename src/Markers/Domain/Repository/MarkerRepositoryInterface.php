@@ -6,7 +6,7 @@ use App\Markers\Domain\Entity\Marker;
 
 interface MarkerRepositoryInterface
 {
-    public function findPaginated(int $page, int $limit): array;
+    public function findByFilters(MarkerFilterDTO $filter, int $page, int $limit): array;
     public function countAll(): int;
     public function findById(int $id): ?Marker;
     public function saveMarker(Marker $marker): void;
