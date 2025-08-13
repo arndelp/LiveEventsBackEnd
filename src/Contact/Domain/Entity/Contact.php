@@ -87,7 +87,7 @@ class Contact
 
     public function setEmail(?string $email): static
     {
-    var_dump('Contact setEmail:', $email);
+    
     $this->email = $email;
 
     return $this;

@@ -1,11 +1,3 @@
-concert.list.alls:
-  path: /concert/alls/{page}/{nbre}
-  controller: App\Concerts\UI\Controller\ConcertController::indexAlls
-  defaults:
-      page: 1
-      nbre: 10
-  methods: [GET]
-
 concert.detail:
   path: /concert/{id}
   controller: App\Concerts\UI\Controller\ConcertController::detail
@@ -30,3 +22,10 @@ event_index:
   controller: App\Concerts\UI\Controller\EventController::listConcerts
   methods: [GET]
 
+concert.list.filtered:
+  path: /concert/filtered/{page}/{nbre}
+  controller: App\Concerts\UI\Controller\ConcertController::indexFiltered
+  defaults:    
+      page: 1
+      nbre: 10
+  methods: [GET]

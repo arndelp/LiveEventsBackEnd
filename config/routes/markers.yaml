@@ -1,11 +1,3 @@
-marker.list.alls:
-  path: /marker/alls/{page}/{nbre}
-  controller: App\Markers\UI\Controller\MarkerController::indexAlls
-  defaults:
-      page: 1
-      nbre: 10
-  methods: [GET]
-
 marker.detail:
   path: /marker/{id}
   controller: App\Markers\UI\Controller\MarkerController::detail
@@ -24,3 +16,12 @@ marker.delete:
   path: /marker/delete/{id}
   controller: App\Markers\UI\Controller\MarkerController::delete
   methods: [DELETE]
+
+marker.list.filtered:
+  path: /marker/filtered/{page}/{nbre}
+  controller: App\Markers\UI\Controller\MarkerController::indexFiltered
+  defaults:    
+      page: 1
+      nbre: 10
+  methods: [GET]
+

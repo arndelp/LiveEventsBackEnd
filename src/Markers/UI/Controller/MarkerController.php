@@ -8,6 +8,7 @@ use App\Markers\Domain\Entity\Marker;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Markers\Application\DTO\MarkerDTO;
 use Symfony\Component\HttpFoundation\Request;
+use App\Markers\Application\UseCase\GetMarker;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Markers\Application\UseCase\SaveMarker;
@@ -17,6 +18,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Markers\Application\UseCase\GetPaginatedMarkers;
 use App\Markers\Domain\Repository\MarkerRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Markers\Application\UseCase\GetFilteredMarkers;
+use App\Markers\Application\DTO\MarkerFilterDTO;
+use App\Markers\UI\Form\MarkerFilterType;
 
 
 
@@ -31,21 +35,44 @@ class MarkerController extends AbstractController
     }
 
 
+    //liste de tout les markers filtrés
 
-    //liste de tout les markers
-    public function indexAlls(GetPaginatedMarkers $getPaginatedMarkers, int $page, int $nbre): Response
-    {
-        $data = $getPaginatedMarkers->execute($page, $nbre);
+    public function indexFiltered(Request $request, GetFilteredMarkers $getFilteredMarkers): Response
+{
+    $page = (int) $request->query->get('page', 1);
+    $limit = (int) $request->query->get('limit', 10);
 
-        return $this->render('@Marker/index.html.twig', [
-            'markers' => $data['markers'],
-            'isPaginated' => true,
-            'nbrePage' => $data['nbrePage'],
-            'page' => $page,
-            'nbre' => $nbre,
-        ]);
+    // Création du formulaire avec méthode GET (pour garder les filtres dans l’URL)
+    $form = $this->createForm(MarkerFilterType::class, null, ['method' => 'GET']);
+    $form->handleRequest($request);
+
+    $type = null;
+    // si le formulaire est soumis et valid
+    if ($form->isSubmitted() && $form->isValid()) {
+        //on récup_re les données du formulaire
+        $data = $form->getData();
+        //on met dans $type la donnée type de $data
+        $type = $data['type'] ?? null;
     }
+   
+    //construire le DTO de filtre avec les données
+    $filter = new MarkerFilterDTO($type);
+    // Appeler le useCase avec le filtre
+    $markers = $getFilteredMarkers->execute($filter, $page, $limit);
 
+    $nbrePage = $markers['nbrePage'] ?? 1; // Si pas défini, on met 1 par défaut
+
+    //Rendu de la vue
+    return $this->render('@Marker/index.html.twig', [
+        'markers' => $markers,
+        'isPaginated' => true,
+        'nbrePage' =>  $nbrePage,
+        'page' => $page,
+        'nbre' => $limit,
+        'filterForm' => $form->createView(),
+        'selectedType' => $type,
+    ]);
+}
     
     //Recherche des détails pour un seul marker         
         //Méthode  avec le param converter (convertisseur de paramètre)
@@ -54,8 +81,8 @@ class MarkerController extends AbstractController
         $marker = $getMarker->execute($id);
 
         if (!$marker) {
-            $this->addFlash('error', "L'évènement n'existe pas");
-            return $this->redirectToRoute('marker.list.alls');
+            $this->addFlash('error', "Le POI n'existe pas");
+            return $this->redirectToRoute('marker.list.filtered');
         }
 
         return $this->render('@Marker/detail.html.twig', ['marker' => $marker]);
@@ -94,9 +121,9 @@ class MarkerController extends AbstractController
             } else {
                 $message = " a été mis à jour avec succès";
             }
-            $this->addFlash(type: 'success', message: "L'évènement". $message);
+            $this->addFlash(type: 'success', message: "Le POI". $message);
             //Redirection vers la liste des markers
-            return $this->redirectToRoute('marker.list.alls');
+            return $this->redirectToRoute('marker.list.filtered');
         } else {
             //Sinon on affiche le formulaire à corriger  (alias pour twig et l'architecture en couche)
             return $this->render('@Marker/edit.html.twig', [
@@ -116,7 +143,7 @@ public function delete(int $id, DeleteMarker $deleteMarker): Response
         $this->addFlash('error', "POI inexistant");
     }
 
-    return $this->redirectToRoute('marker.list.alls');
+    return $this->redirectToRoute('marker.list.filtered');
 }
 
 

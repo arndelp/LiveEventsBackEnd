@@ -79,6 +79,7 @@
   --bs-highlight-bg: #fff3cd;
 }
 
+
 *,
 *::before,
 *::after {
@@ -10897,6 +10898,8 @@ body {
   transition: opacity 0.3s ease-in-out;
 }
 
+
+
 @media (min-width: 992px) {
   #layoutSidenav #layoutSidenav_nav {
     transform: translateX(0);
@@ -10933,6 +10936,7 @@ body {
   padding-left: 225px;
   top: 56px;
 }
+
 
 #layoutError {
   display: flex;

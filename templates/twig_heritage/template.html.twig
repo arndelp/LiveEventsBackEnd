@@ -11,8 +11,11 @@
                 Live Events
             {% endblock %}
         </title>
-        <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />    {# attention:: changer la syntaxe du html #}
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
+        <link href="{{ asset('css/filter.css') }}" rel="stylesheet" />   {# attention:: changer la syntaxe du html #}
+        <link href="{{ asset('css/poi.css') }}" rel="stylesheet" /> 
+        <script src="{{ asset('js/filter.js') }}" defer></script>
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous" defer></script>
     </head>
     
       
@@ -20,7 +23,7 @@
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
              
-            <a class="navbar-brand ps-3" href="{{ path('concert.list.alls') }}"><h1>Live Events</h1></a>
+            <a class="navbar-brand ps-3" href="{{ path('concert.list.filtered') }}"><h1>Live Events</h1></a>
             
             <!-- Sidebar Toggle-->
            <!-- Format mobile    -->
@@ -31,11 +34,14 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bars"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item " href="{{ path('concert.edit') }}">Ajouter un concert</a>
-                        <a class="dropdown-item " href="{{ path('concert.list.alls') }}">Modifier un concert</a>
+                        <a class="dropdown-item " href="{{ path('concert.list.filtered') }}">Modifier un concert</a>
                         <a class="dropdown-item " href="{{ path('marker.edit') }}">Ajouter un POI</a>
-                        <a class="dropdown-item " href="{{ path('marker.list.alls') }}">Modifier un POI</a>
+                        <a class="dropdown-item " href="{{ path('marker.list.filtered') }}">Modifier un POI</a>
+                        <a class="dropdown-item " href="{{ path('sponsor.edit') }}">Ajouter un partenaire</a>
+                        <a class="dropdown-item" href="{{ path('sponsor.list.alls') }}">Modifier un partenaire</a>
                         <a class="dropdown-item" href="{{ path('alert.edit') }}">Alertes</a>
                         <a class="dropdown-item" href="{{ path('contact.list.alls') }}">Message</a>
+                        
                         
                             
                     </ul>
@@ -93,30 +99,41 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                 {# ci-dessous:  lien href="{{ path('tab.users')}} où tab.users est le nom de la route dans le controller tabController #}
                                     <a class="nav-link" href="{{ path('concert.edit') }}">Ajouter</a>
-                                    <a class="nav-link" href="{{ path('concert.list.alls') }}">Modifier</a>                                 
+                                    <a class="nav-link" href="{{ path('concert.list.filtered') }}">Modifier</a>                                 
                                 </nav>                                
                             </div>
 
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsMarker" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Points d'intérêt
+                                Markers
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>                          
                             <div class="collapse" id="collapseLayoutsMarker" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                 {# ci-dessous:  lien href="{{ path('tab.users')}} où tab.users est le nom de la route dans le controller tabController #}
                                     <a class="nav-link" href="{{ path('marker.edit') }}">Ajouter</a>
-                                    <a class="nav-link" href="{{ path('marker.list.alls') }}">Modifier</a>                                 
+                                    <a class="nav-link" href="{{ path('marker.list.filtered') }}">Modifier</a>                                 
+                                </nav>                                
+                            </div>
+   
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsSponsor" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Partenaires
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>  
+                            <div class="collapse" id="collapseLayoutsSponsor" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                {# ci-dessous:  lien href="{{ path('tab.users')}} où tab.users est le nom de la route dans le controller tabController #}
+                                    <a class="nav-link" href="{{ path('sponsor.edit') }}">Ajouter</a>
+                                    <a class="nav-link" href="{{ path('sponsor.list.alls') }}">Modifier</a>                                 
                                 </nav>                                
                             </div>
 
-                             
+                            <a class="nav-link" href="{{ path('alert.edit') }}">Alertes</a>
+
+                            <a class="nav-link" href="{{ path('contact.list.alls') }}">Messages</a>
 
                             
-
-                              <a class="nav-link" href="{{ path('alert.edit') }}">Alertes</a>
-
-                               <a class="nav-link" href="{{ path('contact.list.alls') }}">Messages</a>
 
                             {%  endif  %} 
                             
@@ -158,6 +175,13 @@
                                 {# Message type error #}
                                 {% for message in app.session.flashBag.get('error') %}
                                     <div class="alert alert-danger">      <!-- class bootstrap pour la forme et couleur des messages-->
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+
+                                 {# Message type warning #}
+                                {% for message in app.session.flashBag.get('warning') %}
+                                    <div class="alert alert-warning">      <!-- class bootstrap pour la forme et couleur des messages-->
                                         {{ message }}
                                     </div>
                                 {% endfor %}

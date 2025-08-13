@@ -1,0 +1,26 @@
+sponsor.list.alls:
+  path: /sponsor/alls/{page}/{nbre}
+  controller: App\Sponsors\UI\Controller\SponsorController::indexAlls
+  defaults:
+      page: 1
+      nbre: 10
+  methods: [GET]
+
+sponsor.detail:
+  path: /sponsor/{id}
+  controller: App\Sponsors\UI\Controller\SponsorController::detail
+  requirements:
+    id: '\d+'
+  methods: [GET]
+
+sponsor.edit:
+  path: /sponsor/edit/{id}
+  controller: App\Sponsors\UI\Controller\SponsorController::saveSponsor
+  defaults:
+    id: 0
+  methods: [GET, POST]
+
+sponsor.delete:
+  path: /sponsor/delete/{id}
+  controller: App\Sponsors\UI\Controller\SponsorController::delete
+  methods: [DELETE]

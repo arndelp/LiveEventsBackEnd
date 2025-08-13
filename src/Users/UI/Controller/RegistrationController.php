@@ -63,7 +63,7 @@ class RegistrationController extends AbstractController
             $this->addFlash('success', 'Votre inscription a été réussie !');
 
              // Redirige vers une page de connexion ou vers une autre page de confirmation
-            return $this->redirectToRoute('concert.list.alls'); 
+            return $this->redirectToRoute('concert.list.filtered'); 
         }
 
         return $this->render('@User/register.html.twig', [
@@ -87,6 +87,6 @@ class RegistrationController extends AbstractController
 
         $this->addFlash('success', 'Votre adresse e-mail a été vérifiée.');
 
-        return $this->redirectToRoute('concert.list.alls');
+        return $this->redirectToRoute('concert.list.filtered');
     }
 }

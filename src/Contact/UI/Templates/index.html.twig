@@ -8,15 +8,15 @@
         <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">id</th>                            
-                        <th scope="col">e-mail</th>
+                        <th scope="col" class="tableauPoi">id</th>                            
+                        <th scope="col" class="tableauPoi">e-mail</th>
                         
                     </tr>
                 </thead>
             {% for contact in contacts %}
             <tbody>
                 <tr>
-                    <th scope="row">{{ contact.id }}</th>
+                    <th class="tableauPoi" scope="row">{{ contact.id }}</th>
                     <td>{{ contact.email }}</td>
                     <td>
                         <div class='col'>
@@ -25,7 +25,7 @@
                             </form>   
                             </div>    
                         </td>   
-                        <td>
+                        <td class="tableauPoi">
                             <div class='col'>
                                 <form action="{{ path('contact.delete', {id: contact.id}) }}">
                                     <button type="submit"  class="btn btn-danger btn-sm" class="card-link">Supprimer</button>

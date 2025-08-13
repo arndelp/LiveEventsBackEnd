@@ -5,6 +5,7 @@ api_platform:
             -  '%kernel.project_dir%/src/Alert/Domain/Entity/' 
             -  '%kernel.project_dir%/src/Markers/Domain/Entity/' 
             -  '%kernel.project_dir%/src/Contact/Domain/Entity/'
+            -  '%kernel.project_dir%/src/Sponsors/Domain/Entity/'
         
     #patch_formats:
         #json: ['application/merge-patch+json']
@@ -25,6 +26,7 @@ api_platform:
                 -  ['alert']
                 -  ['markers']
                 -  ['contact']
+                -  ['sponsors']
                 
         denormalization_context:
             groups: 
@@ -32,6 +34,7 @@ api_platform:
                 -  ['alert']
                 -  ['markers']
                 -  ['contact']
+                -  ['sponsors']
     exception_to_status:
         Symfony\Component\Serializer\Exception\ExceptionInterface: 400
         App\Application\Exception\NotFoundException: 404

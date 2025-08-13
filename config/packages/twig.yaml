@@ -10,6 +10,7 @@ twig:
         '%kernel.project_dir%/src/Markers/UI/Templates': 'Marker'
         '%kernel.project_dir%/src/Users/UI/Templates': 'User'
         '%kernel.project_dir%/src/Contact/UI/Templates': 'Contact'
+        '%kernel.project_dir%/src/Sponsors/UI/Templates': 'Sponsor'
         
 when@test:
     twig:

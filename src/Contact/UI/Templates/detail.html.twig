@@ -11,10 +11,14 @@
             <h5 class="card-title">{{ contact.firstname }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{ contact.email }} </h6>
             <p class="card-text">{{ contact.message }}</p>
-                
+            <div class='col'>
+                                <form action="{{ path('contact.delete', {id: contact.id}) }}">
+                                    <button type="submit"  class="btn btn-danger btn-sm" class="card-link">Supprimer</button>
+                                </form>   
+                            </div>      
 
                  {# Lien vers la liste des concerts #}
-            <a href="{{ path('contact.list.alls') }}" class="card-link">Retour</a>
+            <a href="{{ path('contact.list.alls') }}" class="card-link" id="retour" >Retour</a>
                
         </div>
     </div>

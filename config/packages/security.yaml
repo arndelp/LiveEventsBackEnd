@@ -59,7 +59,7 @@ security:
         - { path: ^/register, roles: PUBLIC_ACCESS }
 
         # Require user to be authenticated (ROLE_USER) for the concerts pages
-        - { path: ^/concert/alls, roles: ROLE_USER }
+        - { path: ^/concert/filtered, roles: ROLE_USER }
         - { path: ^/concert/, roles: ROLE_USER }
 
         # Require admin role for editing, deleting, and other sensitive pages
@@ -68,6 +68,7 @@ security:
         - { path: ^/contact, roles: ROLE_ADMIN }
         - { path: ^/alert/, roles: ROLE_ADMIN }
         - { path: ^/marker/, roles: ROLE_ADMIN }
+        - { path: ^/sponsor/, roles: ROLE_ADMIN }
 
         # Uncomment this for API access control (if needed)
         # - { path: ^/api, roles: ROLE_ADMIN }

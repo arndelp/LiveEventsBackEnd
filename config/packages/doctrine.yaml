@@ -53,6 +53,13 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Contact/Domain/Entity'
                 prefix: 'App\Contact\Domain\Entity'
                 alias: Contact
+
+            Sponsor:
+                is_bundle: false
+                type: attribute
+                dir: '%kernel.project_dir%/src/Sponsors/Domain/Entity'
+                prefix: 'App\Sponsors\Domain\Entity'
+                alias: Sponsor
             
          
 

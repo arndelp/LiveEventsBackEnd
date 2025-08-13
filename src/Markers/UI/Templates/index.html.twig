@@ -3,19 +3,42 @@
 {% block title %}Liste des POI{% endblock %}
 
 {% block body %}    
-{# affichage de toutes les personnes de la base de données #}
+
     <h1>Liste des POI</h1>
+    {#Affichage du filtre#}
+
+    <a href="#" id="openBtn" class="filter-toggle" >
+        <p>Filtres +</p>
+    </a>
+    <a href="#" id="closeBtn" class="filter-toggle" style="display: none;">
+        <p>Filtres -</p>
+    </a>
+
+    <div id="filter" style=" margin-bottom: 2em">
+        
+        {% if filterForm is defined %}
+            {{ form_start(filterForm, {'method': 'GET'}) }}
+                {{ form_row(filterForm.type) }}
+                <button type="submit" class="btn btn-primary">Filtrer</button>
+            {{ form_end(filterForm) }}
+        {% endif %}
+        
+    </div>
+
+
+   {#Affichage du tableau des markers après filtrage#}
+
     <div class="row">
-        <table class="table table-striped">
+        <table class="table table-striped ">
             <thead>
                 <tr>
-                    <th scope="col">Nom</th>   
-                    <th scope="col">Type</th>                    
-                    <th scope="col">Latitude (°)</th>
-                    <th scope="col">Longitude (°)</th>                   
-                    <th scope="col">Informations</th>
-                    <th scope="col">Priorité</th>
-                    <th scope="col">Modifié par</th>
+                    <th scope="col"  class="tableauPoi" >Nom</th>   
+                    <th scope="col" class="tableauPoi">Type</th>                    
+                    <th scope="col" class="tableauPoi">Latitude (°)</th>
+                    <th scope="col" class="tableauPoi">Longitude (°)</th>                   
+                    <th scope="col" class="tableauPoi">Informations</th>
+                    <th scope="col" class="tableauPoi">Priorité</th>
+                    <th scope="col" class="tableauPoi">Modifié par</th>
                 </tr>
             </thead>
 
@@ -23,13 +46,13 @@
 
             <tbody>
                     <tr>  
-                        <th scope="row">{{ marker.name }}</th> 
-                        <td>{{ marker.type }}</td>
-                        <td>{{ marker.latitude }}</td>
-                        <td>{{ marker.longitude }}</td>
-                        <td>{{ marker.details }}</td> 
-                        <td>{{ marker.zIndex }}</td>
-                        <td>{{ marker.modifiedBy.firstname}}</td> 
+                        <th scope="row" >{{ marker.name }}</th> 
+                        <td class="tableauPoi">{{ marker.type }}</td>
+                        <td class="tableauPoi">{{ marker.latitude }}</td>
+                        <td class="tableauPoi">{{ marker.longitude }}</td>
+                        <td class="tableauPoi">{{ marker.details }}</td> 
+                        <td class="tableauPoi">{{ marker.zIndex }}</td>
+                        <td class="tableauPoi">{{ marker.modifiedBy.firstname}}</td> 
                         <td>
                             <div class='col'>
                                 <form action="{{ path('marker.edit', {id: marker.id}) }}">
@@ -60,19 +83,19 @@
                         {# Si première page on a pas de bouton Précédnet #}
                             {% if page != 1 %}
                             <li class="page-item">
-                                <a class="page-link" href="{{ path('marker.list.alls', {page: page-1, nbre: nbre}) }}">Précédent</a>
+                                <a class="page-link" href="{{ path('marker.list.filtered', {page: page-1, nbre: nbre}) }}?type={{ selectedType|url_encode }}">Précédent</a>
                             </li>
                             {% endif %}
                             {# Pour i entre 1 et nombre de page on affiche les i #}
                             {% for i in range(1, nbrePage) %}
                             <li class="page-item">
-                                <a class="page-link" href="{{ path('marker.list.alls', {page: i, nbre: nbre}) }}">{{ i }}</a>
+                                <a class="page-link" href="{{ path('marker.list.filtered', {page: i, nbre: nbre}) }}?type={{ selectedType|url_encode }}">{{ i }}</a>
                             </li>  
                             {% endfor %}   
                             {#Lorsque on est sur la dernière page on affiche pas le bouton suivant#}              
                             {% if page != nbrePage %}
                             <li class="page-item">
-                                <a class="page-link" href="{{ path('marker.list.alls', {page: page+1, nbre: nbre}) }}">Suivant</a>
+                                <a class="page-link" href="{{ path('marker.list.filtered', {page: page+1, nbre: nbre}) }}?type={{ selectedType|url_encode }}">Suivant</a>
                             </li>
                             {% endif %}
                         </ul>
@@ -81,6 +104,6 @@
         
         {% endif %}
     </div>
-    
+   
 {% endblock %}
 

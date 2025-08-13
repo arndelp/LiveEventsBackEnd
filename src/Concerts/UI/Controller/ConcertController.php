@@ -2,42 +2,81 @@
 
 namespace App\Concerts\UI\Controller;
 
-
-
-
-
-
 use App\Concerts\UI\Form\ConcertType;
 use App\Concerts\Domain\Entity\Concert;
+use App\Concerts\UI\Form\ConcertFilterType;
 use App\Concerts\Application\DTO\ConcertDTO;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Concerts\Application\UseCase\GetConcert;
 use App\Concerts\Application\UseCase\SaveConcert;
+use App\Concerts\Application\DTO\ConcertFilterDTO;
 use App\Concerts\Application\Mapper\ConcertMapper;
 use App\Concerts\Application\UseCase\DeleteConcert;
+use App\Concerts\Application\UseCase\GetFilteredConcerts;
 use App\Concerts\Application\UseCase\GetPaginatedConcerts;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Concerts\Application\UseCase\GetDistinctFilterValues;
 
 
 
 class ConcertController extends AbstractController
 {
     
+     //liste de tout les concerts filtrés
+    // Injection du useCase pour récupérer les concerts filtrés
+    public function indexFiltered(Request $request, GetFilteredConcerts $getFilteredConcerts, GetDistinctFilterValues $getDistinctFilterValues): Response
+{
+    $page = (int) $request->query->get('page', 1);
+    $limit = (int) $request->query->get('limit', 10);
 
-    public function indexAlls(GetPaginatedConcerts $getPaginatedConcerts, int $page, int $nbre): Response
-    {
-        $data = $getPaginatedConcerts->execute($page, $nbre);
+      // Récupérer les valeurs distinctes pour alimenter les filtres du formulaire
+    $distinctValues = $getDistinctFilterValues->execute();
 
-        return $this->render('@Concert/index.html.twig', [
-            'concerts' => $data['concerts'],
-            'isPaginated' => true,
-            'nbrePage' => $data['nbrePage'],
-            'page' => $page,
-            'nbre' => $nbre,
-        ]);
+    // Création du formulaire en injectant les valeurs dynamiques
+    $form = $this->createForm(ConcertFilterType::class, null,
+        [
+            'method' => 'GET',
+            'days' => $distinctValues['days'],
+            'schedules' =>$distinctValues['schedules'],
+        ]
+    );
+
+    $form->handleRequest($request); 
+
+    $day = null;
+    $schedule = null;
+
+    // si le formulaire est soumis et valid
+    if ($form->isSubmitted() && $form->isValid()) {
+        //on récup_re les données du formulaire
+        $data = $form->getData();
+       
+        $day = $data['day'] ?? null;
+        $schedule = $data['schedule'] ?? null;
     }
+   
+    //construire le DTO de filtre avec les données
+    $filter = new ConcertFilterDTO(['day' => $day,'schedule' => $schedule]);
+    // Appeler le useCase avec le filtre
+    $concerts = $getFilteredConcerts->execute($filter, $page, $limit);
+
+    $nbrePage = $concerts['nbrePage'] ?? 1; // Si pas défini, on met 1 par défaut
+
+    //Rendu de la vue
+    return $this->render('@Concert/index.html.twig', [
+        'concerts' => $concerts,
+        'isPaginated' => true,
+        'nbrePage' =>  $nbrePage,
+        'page' => $page,
+        'nbre' => $limit,
+        'filterForm' => $form->createView(),
+        'selectedDay' => $day,
+        'selectedSchedule' => $schedule,        
+    ]);
+}
+  
 
 
     public function detail(GetConcert $getConcert, int $id): Response
@@ -46,7 +85,7 @@ class ConcertController extends AbstractController
 
         if (!$concert) {
             $this->addFlash('error', "L'évènement n'existe pas");
-            return $this->redirectToRoute('concert.list.alls');
+            return $this->redirectToRoute('concert.list.filtered');
         }
 
         return $this->render('@Concert/detail.html.twig', ['concert' => $concert]);
@@ -75,23 +114,34 @@ class ConcertController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
            //récupération des données et on les transmet au dto
             $dto = $form->getData();
-            //Appel au useCase. On lui passe: le DTO, $new (booleen si c'est une création ou une édition, le nom de l'utilisateur)
-            $saveConcert->execute($dto, $new, $this->getUser());
+            //Appel au useCase. On lui passe: le DTO, $new (booleen si c'est une création ou une édition, le nom de l'utilisateur) + retour du booléen doublon
+            $isDuplicate = $saveConcert->execute($dto, $new, $this->getUser());
+           
+           // dd($isDuplicate);
+             // Message flash warning si doublon détecté
+            if($isDuplicate) {
+                $this->addFlash('warning', 'Attention : la scène est déjà occupée.');
+                }
+            
             //Création du Flash message de création d'un nouveau concert / ou de modification du concert
             if($new) {
                 $message = " a été ajouté avec succès";
+               
             } else {
                 $message = " a été mis à jour avec succès";
+               
             }
             $this->addFlash(type: 'success', message: "L'évènement". $message);
             //Redirection vers la liste des concerts
-            return $this->redirectToRoute('concert.list.alls');
+            return $this->redirectToRoute('concert.list.filtered');
         } else {
             //Sinon on affiche le formulaire à corriger  (alias pour twig et l'architecture en couche)
             return $this->render('@Concert/edit-concert.html.twig', [
                 'form' => $form->createView()
             ]);
         }
+
+
     }
 
     
@@ -108,6 +158,6 @@ class ConcertController extends AbstractController
         $this->addFlash('error', "Evènement inexistant");
     }
 
-    return $this->redirectToRoute('concert.list.alls');
+    return $this->redirectToRoute('concert.list.filtered');
 }
 }

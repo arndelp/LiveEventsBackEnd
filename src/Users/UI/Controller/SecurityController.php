@@ -16,9 +16,8 @@ class SecurityController extends AbstractController
     {
         // Si déjà connecté, redirection
         if ($this->getUser()) {
-            return $this->redirectToRoute('concert.list.alls'); // ou ta route d’accueil
+            return $this->redirectToRoute('concert.list.filtered'); // route d'accueil
         }
-
           // Exécution du Use Case
         $loginResponse = $loginUseCase->execute();
 

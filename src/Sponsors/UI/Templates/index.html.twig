@@ -1,0 +1,81 @@
+{% extends 'twig_heritage/template.html.twig' %}
+
+{% block title %}Liste des partenaires{% endblock %}
+
+{% block body %}    
+{# affichage de toutes les personnes de la base de données #}
+    <h1>Liste des partenaires</h1>
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Nom</th>   
+                    <th scope="col" class="tableauPoi">Lien</th>                          
+                    <th scope="col" class="tableauPoi">Créé par</th>
+                    <th scope="col" class="tableauPoi">Logo</th>
+                </tr>
+            </thead>
+
+            {% for sponsor in sponsors %}
+
+            <tbody>
+                    <tr>  
+                        <th scope="row">{{ sponsor.name }}</th> 
+                        <td class="tableauPoi">{{ sponsor.link }}</td>                
+                        <td class="tableauPoi">{{ sponsor.createdBy.firstname}}</td> 
+                        <td class="tableauPoi"> <img src="{{ asset('uploads/sponsors/' ~ sponsor.logoSponsorId) }}" style="height:1.8em;" > </td>  
+                        <td>
+                            <div class='col'>
+                                <form action="{{ path('sponsor.edit', {id: sponsor.id}) }}">
+                                    <button type="submit"  class="btn btn-secondary btn-sm" class="card-link">Modifier</button>
+                                </form>   
+                            </div>    
+                        </td>   
+                       
+                        <td>
+                            <div class='col'>
+                                <form action="{{ path('sponsor.delete', {id: sponsor.id}) }}" method="post">
+
+                                    <input type="hidden" name="_method" value="DELETE">                            
+
+                                    <button type="submit"  class="btn btn-danger btn-sm" class="card-link">Supprimer</button>
+                                </form>   
+                            </div>    
+                        </td>                                              
+                    </tr>
+            </tbody>
+            
+            {% endfor %}
+
+        </table>
+        {% if isPaginated %}
+                <div class="row mt-3">
+                    <nav aria-label="col Page navigation example">
+                        <ul class="pagination">
+                        {# Si première page on a pas de bouton Précédnet #}
+                            {% if page != 1 %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ path('sponsor.list.alls', {page: page-1, nbre: nbre}) }}">Précédent</a>
+                            </li>
+                            {% endif %}
+                            {# Pour i entre 1 et nombre de page on affiche les i #}
+                            {% for i in range(1, nbrePage) %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ path('sponsor.list.alls', {page: i, nbre: nbre}) }}">{{ i }}</a>
+                            </li>  
+                            {% endfor %}   
+                            {#Lorsque on est sur la dernière page on affiche pas le bouton suivant#}              
+                            {% if page != nbrePage %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ path('sponsor.list.alls', {page: page+1, nbre: nbre}) }}">Suivant</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+        
+        {% endif %}
+    </div>
+    
+{% endblock %}
+
