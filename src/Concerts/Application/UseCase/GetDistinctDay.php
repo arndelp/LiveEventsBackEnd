@@ -3,7 +3,7 @@ namespace App\Concerts\Application\UseCase;
 
 use App\Concerts\Domain\Repository\ConcertRepositoryInterface;
 
-class GetDistinctDays
+class GetDistinctDay
 {
     public function __construct(private ConcertRepositoryInterface $concertRepository) {}
 
