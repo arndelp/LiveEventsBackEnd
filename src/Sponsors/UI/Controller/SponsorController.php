@@ -34,7 +34,7 @@ class SponsorController extends AbstractController
 
 
     //liste de tout les sponsors
-    public function indexAlls(GetPaginatedSponsors $getPaginatedSponsors, ?int $page, ?int $nbre=10): Response
+    public function indexAlls(GetPaginatedSponsors $getPaginatedSponsors, ?int $page=1, ?int $nbre=10): Response
     {
         $data = $getPaginatedSponsors->execute($page, $nbre);
 
