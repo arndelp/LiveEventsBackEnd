@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Markers\Application\DTO;
 
 class MarkerFilterDTO

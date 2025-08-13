@@ -3,6 +3,7 @@
 namespace App\Markers\Domain\Repository;
 
 use App\Markers\Domain\Entity\Marker;
+use App\Markers\Application\DTO\MarkerFilterDTO;
 
 interface MarkerRepositoryInterface
 {
