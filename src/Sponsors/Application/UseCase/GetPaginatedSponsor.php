@@ -6,7 +6,7 @@ use App\Sponsors\Domain\Repository\SponsorRepositoryInterface;
 
 
 
-class GetPaginatedSponsors
+class GetPaginatedSponsor
 {
     private SponsorRepositoryInterface $sponsorRepository;
 
