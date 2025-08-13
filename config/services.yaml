@@ -136,7 +136,7 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
-    App\Sponsors\Application\UseCase\GetPaginatedSponsors:
+    App\Sponsors\Application\UseCase\GetPaginatedSponsor:
         autowire: true
         autoconfigure: true
         public: true  # ou true si besoin
