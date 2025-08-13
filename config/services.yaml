@@ -139,7 +139,7 @@ services:
     App\Sponsors\Application\UseCase\GetPaginatedSponsors:
         autowire: true
         autoconfigure: true
-        public: false  # ou true si besoin
+        public: true  # ou true si besoin
     
 
     # Liaison entre les interfaces de repository et les DoctrineRepository
