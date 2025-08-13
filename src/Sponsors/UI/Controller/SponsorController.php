@@ -34,14 +34,14 @@ class SponsorController extends AbstractController
 
 
     //liste de tout les sponsors
-    public function indexAlls(GetPaginatedSponsors $getPaginatedSponsors, int $page, int $nbre): Response
+    public function indexAlls(GetPaginatedSponsors $getPaginatedSponsors, ?int $page, ?int $nbre=10): Response
     {
         $data = $getPaginatedSponsors->execute($page, $nbre);
 
         return $this->render('@Sponsor/index.html.twig', [
-            'sponsors' => $data['sponsors'],
+            'sponsors' => $data['sponsors'] ?? [],
             'isPaginated' => true,
-            'nbrePage' => $data['nbrePage'],
+            'nbrePage' => $data['nbrePage'] ?? 1,
             'page' => $page,
             'nbre' => $nbre,
         ]);
