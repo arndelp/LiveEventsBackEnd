@@ -55,7 +55,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
         }
 
         // Sinon, rediriger vers une route par défaut
-        return new RedirectResponse($this->urlGenerator->generate('concert.list.alls'));  // Exemple de route
+        return new RedirectResponse($this->urlGenerator->generate('concert.list.filtered'));  // Exemple de route
     }
 
     protected function getLoginUrl(Request $request): string
