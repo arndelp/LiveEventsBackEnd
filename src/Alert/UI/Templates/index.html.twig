@@ -1,31 +1,24 @@
 {% extends 'twig_heritage/template.html.twig'  %}
 
 {% block title %}
-   Editer les alertes
+   Gestion des alertes
 {% endblock %}
 
 
 {% block body %}
 
+   <h1>Gestion des alertes</h1>
+   <div >
+      {{ form(form, {'attr': {'novalidate': 'novalidate'}}, name='alert', )  }}  {#avec l'attribut novalidatr, la validation se fait coté serveur et non coté client#}
 
-<div >
-   {{ form(form, {'attr': {'novalidate': 'novalidate'}}, name='alert', )  }}  {#avec l'attribut novalidatr, la validation se fait coté serveur et non coté client#}
-
-    <div class='row'>
-      <form action="{{ path('alert.delete',{id:1}) }}" method="post">
-         
-            <input type="hidden" name="_method" value="DELETE">
+      <div class='row'>
+         <form action="{{ path('alert.delete',{id:1}) }}" method="post">
             
-            <button type="sutmit" class="btn btn-danger btn-sm ">Désactiver les alertes</button>
-      </form>
-   </div> 
-         
-            
-              
+               <input type="hidden" name="_method" value="DELETE">
                
-              
-         
-      
-    
-</div>
+               <button type="sutmit" class="btn btn-danger btn-sm ">Désactiver les alertes</button>
+         </form>
+      </div>     
+   </div>
+
 {% endblock %}
