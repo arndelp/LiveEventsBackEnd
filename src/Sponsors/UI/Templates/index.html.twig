@@ -23,7 +23,7 @@
                         <th scope="row">{{ sponsor.name }}</th> 
                         <td class="tableauPoi">{{ sponsor.link }}</td>                
                         <td class="tableauPoi">{{ sponsor.createdBy.firstname}}</td> 
-                        <td class="tableauPoi"> <img src="{{ asset('uploads/sponsors/' ~ sponsor.logoSponsorId) }}" style="height:1.8em;" > </td>  
+                        <td class="tableauPoi"><img src="{{ asset('uploads/sponsors/' ~ sponsor.logoSponsorId) }}" style="height:1.8em;" > </td>  
                         <td>
                             <div class='col'>
                                 <form action="{{ path('sponsor.edit', {id: sponsor.id}) }}">
