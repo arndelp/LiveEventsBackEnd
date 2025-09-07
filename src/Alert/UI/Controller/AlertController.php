@@ -75,7 +75,7 @@ class AlertController extends AbstractController
 
 
 
-    public function delete(Alert $alert, DeleteAlert $deleteAlert )    
+    public function delete(?Alert $alert, DeleteAlert $deleteAlert )    
     {        
         // Si l'alerte existe => le supprimer et retourner un flashMessage de succès                                                                                                 //ManagerRegistry nécessaire pour le remove
         // Récupérer le concert

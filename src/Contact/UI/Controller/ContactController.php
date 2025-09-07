@@ -55,7 +55,7 @@ class ContactController extends AbstractController
         if(!$contact){ 
             //message flash
             $this->addFlash(type: 'error', message: "Il n'y a pas de message"); //si le contact n'existe pas on affiche le message d'erreur
-            return $this->redirectToRoute('contact.list.alls');      // Redirige vers la liste des contacts.
+            return $this->redirectToRoute('contact.list.filtered');      // Redirige vers la liste des contacts.
         }
     //si l'id existe
         return $this->render('@Contact/detail.html.twig', ['contact' => $contact]);       // Si le contact existe, on l'affiche dans la vue.
@@ -76,7 +76,7 @@ class ContactController extends AbstractController
             $this->addFlash('error', "Message inexistant");
            
         }
-        return $this->redirectToRoute('contact.list.alls');
+        return $this->redirectToRoute('contact.list.filtered');
     }
 
     // Envoie de mail dès réception d'un message
