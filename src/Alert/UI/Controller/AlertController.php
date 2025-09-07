@@ -62,7 +62,7 @@ class AlertController extends AbstractController
             }
             $this->addFlash(type: 'success', message: "L'alerte". $message);
             // Rediriger vers la liste des concerts
-            return $this->redirectToRoute('concert.list.alls');
+            return $this->redirectToRoute('concert.list.filtered');
 
             // Si non,
         } else {
@@ -88,7 +88,7 @@ class AlertController extends AbstractController
             $this->addFlash('error', message: "Pas d'alerte présente");
             
         }
-        return $this->redirectToRoute('concert.list.alls');
+        return $this->redirectToRoute('concert.list.filtered');
     }
 }
         
