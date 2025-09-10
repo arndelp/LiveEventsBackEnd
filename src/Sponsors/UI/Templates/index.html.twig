@@ -9,7 +9,8 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">Nom</th>   
+                    <th scope="col">Nom</th>  
+                    <th scope="col">Type</th> 
                     <th scope="col" class="tableauPoi">Lien</th>                          
                     <th scope="col" class="tableauPoi">Créé par</th>
                     <th scope="col" class="tableauPoi">Logo</th>
@@ -21,6 +22,7 @@
             <tbody>
                     <tr>  
                         <th scope="row">{{ sponsor.name }}</th> 
+                        <td class="tableauPoi">{{ sponsor.type }}</td>
                         <td class="tableauPoi">{{ sponsor.link }}</td>                
                         <td class="tableauPoi">{{ sponsor.createdBy.firstname}}</td> 
                         <td class="tableauPoi"><img src="{{ asset('uploads/sponsors/' ~ sponsor.logoSponsorId) }}" style="height:1.8em;" > </td>  

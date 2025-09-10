@@ -29,6 +29,7 @@ class SponsorMapper
         $sponsor->setName($dto->name);
         $sponsor->setLink($dto->link);        
         $sponsor->setLogoSponsor($dto->logoSponsor);
+        $sponsor->setType($dto->type);
         
 
         return $sponsor;
@@ -41,6 +42,7 @@ class SponsorMapper
         $dto->name = $sponsor->getName();
         $dto->link = $sponsor->getLink();        
         $dto->logoSponsor = $sponsor->getLogoSponsor();
+        $dto->type = $sponsor->getType();  
         
 
         return $dto;

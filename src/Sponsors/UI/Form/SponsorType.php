@@ -27,7 +27,23 @@ class SponsorType extends AbstractType
                 
              ]) 
              
+            ->add('type', ChoiceType::class, [            
+            'expanded' => false,
+            'multiple' => false,
+            'required' => false,
+            'choices' => ['Spiritueux'=>'spiritueux',
+                        'Vin'=>'vin',
+                        'Bière'=>'bière',
+                        'Soda'=>'soda',
+                        'Sport'=>'sport', 
+                        'Fast-food'=>'fast-food',
+                        'Café'=>'café',
+                        'Banque'=>'banque', 
+                        'Assurance'=>'assurance',
+                        'Autre...'=>'autre'],
             
+            'label' => "Type",
+        ])
             
             ->add('Envoyer', SubmitType::class)            
         ;

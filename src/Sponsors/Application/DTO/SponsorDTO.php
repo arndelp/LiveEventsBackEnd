@@ -26,5 +26,9 @@ class SponsorDTO
     #[Assert\Image]
     public ?File $logoSponsor = null;
 
+    #[Assert\NotBlank(message: "Veuillez remplir ce champ")]
+    #[Assert\Length(max: 25)]
+    public ?string $type = null;
+
 
 }

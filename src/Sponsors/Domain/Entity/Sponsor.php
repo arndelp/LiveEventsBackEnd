@@ -36,14 +36,18 @@ class Sponsor
 
     #[ORM\ManyToOne(inversedBy: 'sponsors')]
     private ?User $createdBy = null;
-
+    
     #[ORM\Column(length: 255, nullable: true)]   
     #[Groups(['sponsors'])]     
-    private ?string $logoSponsorId = null;
+    private ?string $logoSponsorId = null;    
 
     #[Vich\UploadableField(mapping: 'sponsors', fileNameProperty: 'logoSponsorId')]   
     #[Assert\Image()]   
     private ?File $logoSponsor =null;
+
+    #[ORM\Column(length: 30, nullable: true)]   
+    #[Groups(['sponsors'])]     
+    private ?string $type = null;
 
     public function getId(): ?int
     {
@@ -105,6 +109,18 @@ class Sponsor
     public function setLogoSponsorId(?string $logoSponsorId): static
     {
         $this->logoSponsorId = $logoSponsorId;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): static
+    {
+        $this->type = $type;
 
         return $this;
     }
