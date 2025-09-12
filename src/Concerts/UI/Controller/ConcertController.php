@@ -107,13 +107,13 @@ class ConcertController extends AbstractController
         //Création du formulaire avec les données de $dto (contenant le concert ou rien)
         $form = $this->createForm(ConcertType::class, $dto);
          //méthode handleRequest() permet de récupérer toute les info contenu dans l'objet $request (données du formulaire)
+         //et de les transmettre au $dto
         $form->handleRequest($request);
 
       
         //Est-ce que le formulaire est valid et soumis
         if ($form->isSubmitted() && $form->isValid()) {
-           //récupération des données et on les transmet au dto
-            $dto = $form->getData();
+           
             //Appel au useCase. On lui passe: le DTO, $new (booleen si c'est une création ou une édition, le nom de l'utilisateur) + retour du booléen doublon
             $isDuplicate = $saveConcert->execute($dto, $new, $this->getUser());
            
