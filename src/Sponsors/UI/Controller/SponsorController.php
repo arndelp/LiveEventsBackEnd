@@ -33,19 +33,38 @@ class SponsorController extends AbstractController
 
 
 
-    //liste de tout les sponsors
-    public function indexAlls(GetPaginatedSponsors $getPaginatedSponsors, ?int $page=1, ?int $nbre=10): Response
-    {
-        $data = $getPaginatedSponsors->execute($page, $nbre);
+    //liste des sponsors filtrés
 
-        return $this->render('@Sponsor/index.html.twig', [
-            'sponsors' => $data['sponsors'] ?? [],
-            'isPaginated' => true,
-            'nbrePage' => $data['nbrePage'] ?? 1,
-            'page' => $page,
-            'nbre' => $nbre,
-        ]);
-    }
+    public function indexFiltered(Request $request, GetFilteredSponsors $getFilteredSponsors): Response
+{
+    $page = (int) $request->query->get('page', 1);
+    $limit = (int) $request->query->get('nbre', 1);
+
+    // Récupération sécurisée des filtres
+    $sponsorFilter = $request->query->all()['sponsor_filter'] ?? [];
+    $filter = new SponsorFilterDTO([
+        'type' => $sponsorFilter['type'] ?? null
+    ]);
+
+    // Créer le formulaire en liant directement le DTO
+    $form = $this->createForm(SponsorFilteredType::class, $filter, ['method' => 'GET']);
+    $form->handleRequest($request);
+    
+    // Appeler le useCase de filtre
+    $result = $getFilteredSponsors->execute($filter, $page, $limit);
+
+    
+    //Rendu de la vue
+    return $this->render('@Sponsor/index.html.twig', [
+        'sponsors' => $result['sponsors'],
+        'isPaginated' => true,
+        'nbrePage' =>  $result['nbrePage'],
+        'page' => $result['currentPage'],
+        'nbre' => $limit,
+        'filterForm' => $form->createView(),
+        'selectedType' => $filter->type, // pour twig si besoin
+    ]);
+}
 
     
     //Recherche des détails pour un seul sponsor         

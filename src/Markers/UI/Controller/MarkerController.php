@@ -38,45 +38,41 @@ class MarkerController extends AbstractController
     //liste de tout les markers filtrés
 
     public function indexFiltered(Request $request, GetFilteredMarkers $getFilteredMarkers): Response
-{
-    $page = (int) $request->query->get('page', 1);
-    $limit = (int) $request->query->get('limit', 10);
+    {
+        $page = (int) $request->query->get('page', 1);
+        $limit = (int) $request->query->get('limit', 10);
 
-    // Création du formulaire avec méthode GET (pour garder les filtres dans l’URL)
-    $form = $this->createForm(MarkerFilterType::class, null, ['method' => 'GET']);
-    $form->handleRequest($request);
+    // Récupération sécurisée des filtres
+        $markerFilter = $request->query->all()['marker_filter'] ?? [];
+        $filter = new MarkerFilterDTO([
+            'type' => $markerFilter['type'] ?? null
+        ]);
 
-    $type = null;
-    // si le formulaire est soumis et valid
-    if ($form->isSubmitted() && $form->isValid()) {
-        //on récup_re les données du formulaire
-        $data = $form->getData();
-        //on met dans $type la donnée type de $data
-        $type = $data['type'] ?? null;
+        // Créer le formulaire en liant directement le DTO
+        $form = $this->createForm(MarkerFilterType::class, $filter, ['method' => 'GET']);
+        $form->handleRequest($request);
+        
+        // Appeler le useCase de filtre
+        $result = $getFilteredMarkers->execute($filter, $page, $limit);
+
+        
+        //dd($filter);
+        //Rendu de la vue
+        return $this->render('@Marker/index.html.twig', [
+            'markers' => $result['markers'],
+            'isPaginated' => true,
+            'nbrePage' =>  $result['nbrePage'],
+            'page' => $result['currentPage'],
+            'nbre' => $limit,
+            'filterForm' => $form->createView(),
+            'selectedType' => $filter->type, // pour twig si besoin
+        ]);
     }
-   
-    //construire le DTO de filtre avec les données
-    $filter = new MarkerFilterDTO($type);
-    // Appeler le useCase avec le filtre
-    $markers = $getFilteredMarkers->execute($filter, $page, $limit);
 
-    $nbrePage = $markers['nbrePage'] ?? 1; // Si pas défini, on met 1 par défaut
-
-    //Rendu de la vue
-    return $this->render('@Marker/index.html.twig', [
-        'markers' => $markers,
-        'isPaginated' => true,
-        'nbrePage' =>  $nbrePage,
-        'page' => $page,
-        'nbre' => $limit,
-        'filterForm' => $form->createView(),
-        'selectedType' => $type,
-    ]);
-}
     
     //Recherche des détails pour un seul marker         
         //Méthode  avec le param converter (convertisseur de paramètre)
-        public function detail(GetMarker $getMarker, int $id): Response
+    public function detail(GetMarker $getMarker, int $id): Response
     {
         $marker = $getMarker->execute($id);
 

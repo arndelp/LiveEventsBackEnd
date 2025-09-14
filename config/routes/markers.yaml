@@ -18,10 +18,7 @@ marker.delete:
   methods: [DELETE]
 
 marker.list.filtered:
-  path: /marker/filtered/{page}/{nbre}
-  controller: App\Markers\UI\Controller\MarkerController::indexFiltered
-  defaults:    
-      page: 1
-      nbre: 10
+  path: /marker/filtered
+  controller: App\Markers\UI\Controller\MarkerController::indexFiltered  
   methods: [GET]
 

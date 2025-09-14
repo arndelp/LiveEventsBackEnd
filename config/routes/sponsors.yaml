@@ -1,9 +1,6 @@
-sponsor.list.alls:
-  path: /sponsor/alls/{page}/{nbre}
-  controller: App\Sponsors\UI\Controller\SponsorController::indexAlls
-  defaults:
-    page: 1
-    nbre: 10
+sponsor.list.filtered:
+  path: /sponsor/filtered
+  controller: App\Sponsors\UI\Controller\SponsorController::indexFiltered  
   methods: [GET]
 
 sponsor.detail:

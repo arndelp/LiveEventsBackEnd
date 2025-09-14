@@ -23,9 +23,6 @@ event_index:
   methods: [GET]
 
 concert.list.filtered:
-  path: /concert/filtered/{page}/{nbre}
+  path: /concert/filtered
   controller: App\Concerts\UI\Controller\ConcertController::indexFiltered
-  defaults:    
-      page: 1
-      nbre: 10
   methods: [GET]

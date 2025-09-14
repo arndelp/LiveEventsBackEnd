@@ -18,7 +18,8 @@ class MarkerFilterType extends AbstractType
                     'Magasin' => 'shop',
                     'WC' => 'wc',
                     'entrée/sortie' => 'door',
-                    'Parking' => 'parking'
+                    'Parking' => 'parking',
+                    'Camping' => 'camping',
                 ],
                 'expanded' => false,   // affiche les choix en boutons radio
                 'multiple' => false,  // un seul choix possible

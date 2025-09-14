@@ -82,33 +82,38 @@ class DoctrineConcertRepository extends ServiceEntityRepository implements Conce
 
             if ($filter->day) {                        //  Application du filtre si présent
                 $query  ->andWhere('m.day = :day')    // Ajout d'une condition WHERE dans la requête, m:alias de la table,  
-                                                        /*L’utilisation de :day au lieu d’insérer directement la valeur $filter->type dans la requête a deux avantages :
+                        ->setParameter('day', $filter->day);  /*L’utilisation de :day au lieu d’insérer directement la valeur $filter->day dans la requête a deux avantages :
                                                             Sécurité (prévention des injections SQL)
                                                             Performance (Doctrine prépare la requête une fois et peut la réutiliser avec différentes valeurs)*/      
-                        ->setParameter('day', $filter->day);   //2 paramètres: le nom du paramètre , puis la valeur
+                          //2 paramètres: le nom du paramètre , puis la valeur
             }
 
             if ($filter->schedule) {                       
                 $query  ->andWhere('m.schedule = :schedule')                                     
-                                                            
-                        ->setParameter('schedule', $filter->schedule);   //2 paramètres: le nom du paramètre , puis la valeur
+                        ->setParameter('schedule', $filter->schedule);   //2 paramètres: le nom du paramètre , puis la valeur                                    
+                        
             }
 
-            $query  ->orderBy('m.day', 'ASC')          // Application de tri par type(croissant), 
-                    ->setFirstResult(($page - 1) * $limit)   //puis de l'offset (premier élément)
-                    ->setMaxResults($limit);       //, puis limite pour la pagination
+                    // ----------- Comptage total avant pagination -----------
+            $countQb = clone $query;
+            $total = (int) $countQb->select('COUNT(m.id)')
+                                   ->getQuery()
+                                   ->getSingleScalarResult();
 
-            return $query->getQuery()->getResult();      // Exécution de la requête et récupération des résultats
-        }  
+            // ----------- Pagination -----------
+            $query->orderBy('m.day', 'ASC')
+            ->setFirstResult(($page - 1) * $limit)
+            ->setMaxResults($limit);
 
+            $concerts = $query->getQuery()->getResult();
 
-
-
-    public function findPaginated(int $page, int $limit): array
-    {
-        $offset = ($page - 1) * $limit;
-        return $this->findBy([], ['day' => 'ASC', 'schedule' => 'ASC'], $limit, $offset);
-    }
+            return [
+                'concerts'    => $concerts,
+                'total'       => $total,
+                'nbrePage'    => (int) ceil($total / $limit),
+                'currentPage' => $page
+            ];
+                }  
 
     public function countAll(): int
     {

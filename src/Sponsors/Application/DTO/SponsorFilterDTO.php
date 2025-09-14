@@ -1,7 +1,7 @@
 <?php
-namespace App\Markers\Application\DTO;
+namespace App\Sponsors\Application\DTO;
 
-class MarkerFilterDTO
+class SponsorFilterDTO
 {
     public ?string $type = null;
 

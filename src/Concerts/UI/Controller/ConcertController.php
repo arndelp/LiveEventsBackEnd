@@ -27,55 +27,45 @@ class ConcertController extends AbstractController
      //liste de tout les concerts filtrés
     // Injection du useCase pour récupérer les concerts filtrés
     public function indexFiltered(Request $request, GetFilteredConcerts $getFilteredConcerts, GetDistinctFilterValues $getDistinctFilterValues): Response
-{
-    $page = (int) $request->query->get('page', 1);
-    $limit = (int) $request->query->get('limit', 10);
+    {
+        
+        // On récupère la page et la limite dans la query string 
+        $page = (int) $request->query->get('page', 1);
+        $limit = (int) $request->query->get('limit', 10);
 
-      // Récupérer les valeurs distinctes pour alimenter les filtres du formulaire
-    $distinctValues = $getDistinctFilterValues->execute();
+        // Récupération des Valeurs distincts pour les filtres dynamiques
+        $distinctValues = $getDistinctFilterValues->execute();
 
-    // Création du formulaire en injectant les valeurs dynamiques
-    $form = $this->createForm(ConcertFilterType::class, null,
-        [
+        // Créer le DTO vide (sera rempli par le formulaire)
+        $filter = new ConcertFilterDTO();
+
+        //Créer le formulaire et le lier au DTO
+        $form = $this->createForm(ConcertFilterType::class, $filter, [
             'method' => 'GET',
             'days' => $distinctValues['days'],
-            'schedules' =>$distinctValues['schedules'],
-        ]
-    );
+            'schedules' => $distinctValues['schedules'],
+        ]);
 
-    $form->handleRequest($request); 
+        //Remplir le DTO avec les valeurs GET si formulaire soumis
+        $form->handleRequest($request);
 
-    $day = null;
-    $schedule = null;
+        //Appel au useCaseFiltré
+        $result = $getFilteredConcerts->execute($filter, $page, $limit);
 
-    // si le formulaire est soumis et valid
-    if ($form->isSubmitted() && $form->isValid()) {
-        //on récup_re les données du formulaire
-        $data = $form->getData();
-       
-        $day = $data['day'] ?? null;
-        $schedule = $data['schedule'] ?? null;
+
+        //Rendu du template
+        return $this->render('@Concert/index.html.twig', [
+            'concerts'         => $result['concerts'],
+            'isPaginated'      => true,
+            'nbrePage'         => $result['nbrePage'] ?? 1,
+            'page'             => $result['currentPage'] ?? 1,
+            'nbre'             => $limit,
+            'filterForm'       => $form->createView(),
+            'selectedDay'      => $filter->day,       // pour Twig
+            'selectedSchedule' => $filter->schedule,  // pour Twig
+        ]);
+        
     }
-   
-    //construire le DTO de filtre avec les données
-    $filter = new ConcertFilterDTO(['day' => $day,'schedule' => $schedule]);
-    // Appeler le useCase avec le filtre
-    $concerts = $getFilteredConcerts->execute($filter, $page, $limit);
-
-    $nbrePage = $concerts['nbrePage'] ?? 1; // Si pas défini, on met 1 par défaut
-
-    //Rendu de la vue
-    return $this->render('@Concert/index.html.twig', [
-        'concerts' => $concerts,
-        'isPaginated' => true,
-        'nbrePage' =>  $nbrePage,
-        'page' => $page,
-        'nbre' => $limit,
-        'filterForm' => $form->createView(),
-        'selectedDay' => $day,
-        'selectedSchedule' => $schedule,        
-    ]);
-}
   
 
 
@@ -106,19 +96,18 @@ class ConcertController extends AbstractController
 
         //Création du formulaire avec les données de $dto (contenant le concert ou rien)
         $form = $this->createForm(ConcertType::class, $dto);
-         //méthode handleRequest() permet de récupérer toute les info contenu dans l'objet $request (données du formulaire)
-         //et de les transmettre au $dto
-        $form->handleRequest($request);
 
+         //méthode handleRequest() permet de récupérer toute les info contenu dans l'objet $request (données du formulaire)               
+        $form->handleRequest($request);    //->Transmission au $dto
       
         //Est-ce que le formulaire est valid et soumis
         if ($form->isSubmitted() && $form->isValid()) {
            
-            //Appel au useCase. On lui passe: le DTO, $new (booleen si c'est une création ou une édition, le nom de l'utilisateur) + retour du booléen doublon
+            //Appel au useCase. On lui passe: le DTO, $new (booleen si c'est une création ou une édition, le nom de l'utilisateur) 
+            // + retour du booléen doublon
             $isDuplicate = $saveConcert->execute($dto, $new, $this->getUser());
            
-           // dd($isDuplicate);
-             // Message flash warning si doublon détecté
+            // Message flash warning si doublon détecté
             if($isDuplicate) {
                 $this->addFlash('warning', 'Attention : la scène est déjà occupée.');
                 }
@@ -140,8 +129,6 @@ class ConcertController extends AbstractController
                 'form' => $form->createView()
             ]);
         }
-
-
     }
 
     

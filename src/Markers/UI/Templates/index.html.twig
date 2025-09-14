@@ -32,7 +32,7 @@
         <table class="table table-striped ">
             <thead>
                 <tr>
-                    <th scope="col"  class="tableauPoi" >Nom</th>   
+                    <th scope="col"  class="tableauPoi">Nom</th>   
                     <th scope="col" class="tableauPoi">Type</th>                    
                     <th scope="col" class="tableauPoi">Latitude (°)</th>
                     <th scope="col" class="tableauPoi">Longitude (°)</th>                   
@@ -71,38 +71,52 @@
                             </div>    
                         </td>                                              
                     </tr>
-            </tbody>
-            
+            </tbody>            
             {% endfor %}
-
         </table>
-        {% if isPaginated %}
-                <div class="row mt-3">
-                    <nav aria-label="col Page navigation example">
-                        <ul class="pagination">
-                        {# Si première page on a pas de bouton Précédnet #}
-                            {% if page != 1 %}
-                            <li class="page-item">
-                                <a class="page-link" href="{{ path('marker.list.filtered', {page: page-1, nbre: nbre}) }}?type={{ selectedType|url_encode }}">Précédent</a>
-                            </li>
-                            {% endif %}
-                            {# Pour i entre 1 et nombre de page on affiche les i #}
-                            {% for i in range(1, nbrePage) %}
-                            <li class="page-item">
-                                <a class="page-link" href="{{ path('marker.list.filtered', {page: i, nbre: nbre}) }}?type={{ selectedType|url_encode }}">{{ i }}</a>
-                            </li>  
-                            {% endfor %}   
-                            {#Lorsque on est sur la dernière page on affiche pas le bouton suivant#}              
-                            {% if page != nbrePage %}
-                            <li class="page-item">
-                                <a class="page-link" href="{{ path('marker.list.filtered', {page: page+1, nbre: nbre}) }}?type={{ selectedType|url_encode }}">Suivant</a>
-                            </li>
-                            {% endif %}
-                        </ul>
-                    </nav>
-                </div>
-        
-        {% endif %}
+
+        {# Pagination #}
+    {% if isPaginated and nbrePage > 0 %}
+        <div class="row mt-3">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    {# Récupérer les paramètres GET (filtres) de l'URL avec app.request.query, et les transformer en tableau avec la méthode .all #}
+                    {% set markerFilter = app.request.query.all()['marker_filter'] ?? {} %}
+                    
+                    {# Créer un tableau de scalaires pour les liens #}
+                    {% set filterParams = {} %}
+                    {% for key, value in markerFilter %}
+                        {% set filterParams = filterParams | merge({('marker_filter[' ~ key ~ ']'): value}) %}
+                    {% endfor %}
+
+                    {# Bouton Précédent #}
+                    {% if page > 1 %}
+                        {% set prevParams = filterParams | merge({'page': page - 1, 'nbre': nbre}) %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ path('marker.list.filtered', prevParams) }}">Précédent</a>
+                        </li>
+                    {% endif %}
+
+                    {# Pages #}
+                    {% for p in range(1, nbrePage) %}
+                        {% set pageParams = filterParams | merge({'page': p, 'nbre': nbre}) %}
+                        <li class="page-item {{ p == page ? 'active' : '' }}">
+                            <a class="page-link" href="{{ path('marker.list.filtered', pageParams) }}">{{ p }}</a>
+                        </li>
+                    {% endfor %}
+
+                    {# Bouton Suivant #}
+                    {% if page < nbrePage %}
+                        {% set nextParams = filterParams | merge({'page': page + 1, 'nbre': nbre}) %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ path('marker.list.filtered', nextParams) }}">Suivant</a>
+                        </li>
+                    {% endif %}          
+                    
+                </ul>
+            </nav>
+        </div>
+    {% endif %}
     </div>
    
 {% endblock %}

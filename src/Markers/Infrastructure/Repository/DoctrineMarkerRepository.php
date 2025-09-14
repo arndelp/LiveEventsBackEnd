@@ -32,11 +32,25 @@ class DoctrineMarkerRepository extends ServiceEntityRepository implements Marker
                     ->setParameter('type', $filter->type);   //2 paramètres: le nom du paramètre , puis la valeur
         }
 
-        $query  ->orderBy('m.type', 'ASC')          // Application de tri par type(croissant), 
-                ->setFirstResult(($page - 1) * $limit)   //puis de l'offset (premier élément)
-                ->setMaxResults($limit);       //, puis limite pour la pagination
+        // ----------- Comptage total avant pagination -----------
+        $countQb = clone $query;               // on clone $query pour séparer le comptage des marker et la récupération des résultats
+        $total = (int) $countQb ->select('COUNT(m.id)')
+                                ->getQuery()
+                                ->getSingleScalarResult(); 
+        
+        // ----------- Pagination -----------
+        $query  ->orderBy('m.type', 'ASC')
+                ->setFirstResult(($page - 1) * $limit)
+                ->setMaxResults($limit);
 
-        return $query->getQuery()->getResult();      // Exécution de la requête et récupération des résultats
+        $markers = $query->getQuery()->getResult();
+
+        return [
+            'markers'   => $markers,
+            'total'     => $total,
+            'nbrePage'  => (int) ceil($total / $limit),
+            'currentPage' => $page
+        ];
     }  
 
     public function countAll(): int
