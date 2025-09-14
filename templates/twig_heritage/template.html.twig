@@ -38,7 +38,7 @@
                         <a class="dropdown-item " href="{{ path('marker.edit') }}">Ajouter un POI</a>
                         <a class="dropdown-item " href="{{ path('marker.list.filtered') }}">Modifier un POI</a>
                         <a class="dropdown-item " href="{{ path('sponsor.edit') }}">Ajouter un partenaire</a>
-                        <a class="dropdown-item" href="{{ path('sponsor.list.alls') }}">Modifier un partenaire</a>
+                        <a class="dropdown-item" href="{{ path('sponsor.list.filtered') }}">Modifier un partenaire</a>
                         <a class="dropdown-item" href="{{ path('alert.edit') }}">Alertes</a>
                         <a class="dropdown-item" href="{{ path('contact.list.alls') }}">Message</a>
                         
@@ -125,7 +125,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                 {# ci-dessous:  lien href="{{ path('tab.users')}} où tab.users est le nom de la route dans le controller tabController #}
                                     <a class="nav-link" href="{{ path('sponsor.edit') }}">Ajouter</a>
-                                    <a class="nav-link" href="{{ path('sponsor.list.alls') }}">Modifier</a>                                 
+                                    <a class="nav-link" href="{{ path('sponsor.list.filtered') }}">Modifier</a>                                 
                                 </nav>                                
                             </div>
 
