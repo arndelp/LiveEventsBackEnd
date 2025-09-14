@@ -27,7 +27,7 @@
         
     </div>
 
- {#Affichage desn concerts#}
+ {#Affichage des concerts#}
     <div class="row">        
         {% for concert in concerts%}
             <div class="card"  style="width: 18rem;"  >
@@ -72,7 +72,7 @@
         <div class="row mt-3">
             <nav aria-label="Page navigation">
                 <ul class="pagination">             
-
+                    {#récupération des paramètres GET passés dans l'URL et les transformer sous forme de tableau associatif avec la méthode .all()#}
                     {% set queryParams = app.request.query.all() %}
 
                     {# Bouton Précédent #}
