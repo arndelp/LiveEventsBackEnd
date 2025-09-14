@@ -3,6 +3,7 @@
 namespace App\Sponsors\Domain\Repository;
 
 use App\Sponsors\Domain\Entity\Sponsor;
+use App\Sponsors\Application\DTO\SponsorFilterDTO;
 
 interface SponsorRepositoryInterface
 {
