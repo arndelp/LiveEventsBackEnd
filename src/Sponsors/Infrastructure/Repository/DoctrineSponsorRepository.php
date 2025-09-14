@@ -4,6 +4,7 @@ namespace App\Sponsors\Infrastructure\Repository;
 
 use App\Sponsors\Domain\Entity\Sponsor;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Sponsors\Application\DTO\SponsorFilterDTO;
 use App\Sponsors\Domain\Repository\SponsorRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
