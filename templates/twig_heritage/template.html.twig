@@ -34,13 +34,13 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bars"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item " href="{{ path('concert.edit') }}">Ajouter un concert</a>
-                        <a class="dropdown-item " href="{{ path('concert.list.filtered') }}">Modifier un concert</a>
+                        <a class="dropdown-item " href="{{ path('concert.list.filtered') }}">Gérer les concerts</a>
                         <a class="dropdown-item " href="{{ path('marker.edit') }}">Ajouter un POI</a>
-                        <a class="dropdown-item " href="{{ path('marker.list.filtered') }}">Modifier un POI</a>
+                        <a class="dropdown-item " href="{{ path('marker.list.filtered') }}">Gérer les POI</a>
                         <a class="dropdown-item " href="{{ path('sponsor.edit') }}">Ajouter un partenaire</a>
-                        <a class="dropdown-item" href="{{ path('sponsor.list.filtered') }}">Modifier un partenaire</a>
+                        <a class="dropdown-item" href="{{ path('sponsor.list.filtered') }}">Gérer les partenaires</a>
                         <a class="dropdown-item" href="{{ path('alert.edit') }}">Alertes</a>
-                        <a class="dropdown-item" href="{{ path('contact.list.alls') }}">Message</a>
+                        <a class="dropdown-item" href="{{ path('contact.list.alls') }}">Messages</a>
                         
                         
                             
@@ -99,7 +99,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                 {# ci-dessous:  lien href="{{ path('tab.users')}} où tab.users est le nom de la route dans le controller tabController #}
                                     <a class="nav-link" href="{{ path('concert.edit') }}">Ajouter</a>
-                                    <a class="nav-link" href="{{ path('concert.list.filtered') }}">Modifier</a>                                 
+                                    <a class="nav-link" href="{{ path('concert.list.filtered') }}">Gérer</a>                                 
                                 </nav>                                
                             </div>
 
@@ -112,7 +112,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                 {# ci-dessous:  lien href="{{ path('tab.users')}} où tab.users est le nom de la route dans le controller tabController #}
                                     <a class="nav-link" href="{{ path('marker.edit') }}">Ajouter</a>
-                                    <a class="nav-link" href="{{ path('marker.list.filtered') }}">Modifier</a>                                 
+                                    <a class="nav-link" href="{{ path('marker.list.filtered') }}">Gérer</a>                                 
                                 </nav>                                
                             </div>
    
@@ -125,7 +125,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                 {# ci-dessous:  lien href="{{ path('tab.users')}} où tab.users est le nom de la route dans le controller tabController #}
                                     <a class="nav-link" href="{{ path('sponsor.edit') }}">Ajouter</a>
-                                    <a class="nav-link" href="{{ path('sponsor.list.filtered') }}">Modifier</a>                                 
+                                    <a class="nav-link" href="{{ path('sponsor.list.filtered') }}">Gérer</a>                                 
                                 </nav>                                
                             </div>
 
