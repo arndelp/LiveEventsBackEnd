@@ -78,7 +78,7 @@
                     {% if page > 1 %}
                         {% set prevParams = queryParams | merge({'page': page - 1, 'nbre': nbre}) %}
                         <li class="page-item">
-                            <a class="page-link" href="{{ path('concert.list.filtered', prevParams) }}">Précédent</a>
+                            <a class="page-link" href="{{ path('sponsor.list.filtered', prevParams) }}">Précédent</a>
                         </li>
                     {% endif %}
 
@@ -90,7 +90,7 @@
                     {% for p in range(start, end) %}
                         {% set pageParams = queryParams | merge({'page': p, 'nbre': nbre}) %}
                         <li class="page-item {{ p == page ? 'active' : '' }}">
-                            <a class="page-link" href="{{ path('concert.list.filtered', pageParams) }}">{{ p }}</a>
+                            <a class="page-link" href="{{ path('sponsor.list.filtered', pageParams) }}">{{ p }}</a>
                         </li>
                     {% endfor %}
 
@@ -98,7 +98,7 @@
                     {% if page < nbrePage %}
                         {% set nextParams = queryParams | merge({'page': page + 1, 'nbre': nbre}) %}
                         <li class="page-item">
-                            <a class="page-link" href="{{ path('concert.list.filtered', nextParams) }}">Suivant</a>
+                            <a class="page-link" href="{{ path('sponsor.list.filtered', nextParams) }}">Suivant</a>
                         </li>
                     {% endif %}          
                     
