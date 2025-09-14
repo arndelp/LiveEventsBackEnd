@@ -15,7 +15,7 @@ use App\Sponsors\Application\UseCase\SaveSponsor;
 use App\Sponsors\Application\Mapper\SponsorMapper;
 use App\Sponsors\Application\UseCase\DeleteSponsor;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use App\Sponsors\Application\UseCase\GetPaginatedSponsors;
+use App\Sponsors\Application\UseCase\GetFilteredSponsors;
 use App\Sponsors\Domain\Repository\SponsorRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
