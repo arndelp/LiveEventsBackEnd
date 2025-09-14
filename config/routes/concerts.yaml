@@ -1,3 +1,8 @@
+concert.list.filtered:
+  path: /concert/filtered
+  controller: App\Concerts\UI\Controller\ConcertController::indexFiltered
+  methods: [GET]
+
 concert.detail:
   path: /concert/{id}
   controller: App\Concerts\UI\Controller\ConcertController::detail
@@ -22,7 +27,3 @@ event_index:
   controller: App\Concerts\UI\Controller\EventController::listConcerts
   methods: [GET]
 
-concert.list.filtered:
-  path: /concert/filtered
-  controller: App\Concerts\UI\Controller\ConcertController::indexFiltered
-  methods: [GET]
