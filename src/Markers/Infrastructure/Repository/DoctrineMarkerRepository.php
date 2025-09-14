@@ -53,11 +53,7 @@ class DoctrineMarkerRepository extends ServiceEntityRepository implements Marker
         ];
     }  
 
-    public function countAll(): int
-    {
-        return $this->count([]);
-    }
-
+    
     public function findById(int $id): ?Marker
     {
         return $this->find($id);
