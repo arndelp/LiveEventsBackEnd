@@ -40,7 +40,7 @@ class SponsorController extends AbstractController
     public function indexFiltered(Request $request, GetFilteredSponsors $getFilteredSponsors): Response
 {
     $page = (int) $request->query->get('page', 1);
-    $limit = (int) $request->query->get('nbre', 1);
+    $limit = (int) $request->query->get('nbre', 10);
 
     // Récupération sécurisée des filtres
     $sponsorFilter = $request->query->all()['sponsor_filter'] ?? [];

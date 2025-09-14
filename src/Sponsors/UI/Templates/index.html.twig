@@ -5,6 +5,22 @@
 {% block body %}    
 {# affichage de toutes les personnes de la base de données #}
     <h1>Liste des partenaires</h1>
+    {# Affichage du filtre #}
+    <a href="#" id="openBtn" class="filter-toggle">
+        <p>Filtres +</p>
+    </a>
+    <a href="#" id="closeBtn" class="filter-toggle" style="display: none;">
+        <p>Filtres -</p>
+    </a>
+    {# Filtre #}
+    <div id="filter" style="margin-bottom: 2em">
+        {% if filterForm is defined %}
+            {{ form_start(filterForm, {'method': 'GET'}) }}
+                {{ form_row(filterForm.type) }}
+                <button type="submit" class="btn btn-primary">Filtrer</button>
+            {{ form_end(filterForm) }}
+        {% endif %}
+    </div>
     <div class="row">
         <table class="table table-striped">
             <thead>
@@ -68,8 +84,8 @@
 
                     {# Pages #}
 
-                    {% set start = max(page - 2, 1) %}
-                    {% set end = min(page + 2, nbrePage) %}
+                    {% set start = max(page - 1, 1) %}
+                    {% set end = min(page + 1, nbrePage) %}
 
                     {% for p in range(start, end) %}
                         {% set pageParams = queryParams | merge({'page': p, 'nbre': nbre}) %}
