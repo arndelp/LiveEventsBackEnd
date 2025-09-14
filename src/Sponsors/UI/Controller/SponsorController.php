@@ -16,6 +16,7 @@ use App\Sponsors\Application\UseCase\SaveSponsor;
 use App\Sponsors\Application\DTO\SponsorFilterDTO;
 use App\Sponsors\Application\Mapper\SponsorMapper;
 use App\Sponsors\Application\UseCase\DeleteSponsor;
+use App\Sponsors\Application\UseCase\GetDistinctTypes;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Sponsors\Application\UseCase\GetFilteredSponsors;
 use App\Sponsors\Domain\Repository\SponsorRepositoryInterface;
@@ -34,10 +35,9 @@ class SponsorController extends AbstractController
     }
 
 
-
     //liste des sponsors filtrés
 
-    public function indexFiltered(Request $request, GetFilteredSponsors $getFilteredSponsors): Response
+    public function indexFiltered(Request $request, GetFilteredSponsors $getFilteredSponsors, GetDistinctTypes $getDistinctTypes): Response
 {
     $page = (int) $request->query->get('page', 1);
     $limit = (int) $request->query->get('nbre', 10);
@@ -48,8 +48,15 @@ class SponsorController extends AbstractController
         'type' => $sponsorFilter['type'] ?? null
     ]);
 
+    // Récupération des Valeurs distincts pour les filtres dynamiques
+    $distinctTypes = $getDistinctTypes->execute();
+
     // Créer le formulaire en liant directement le DTO
-    $form = $this->createForm(SponsorFilteredType::class, $filter, ['method' => 'GET']);
+    $form = $this->createForm(SponsorFilteredType::class, $filter, [
+        'method' => 'GET',
+        'types' => $distinctTypes['types']
+        ]);
+
     $form->handleRequest($request);
     
     // Appeler le useCase de filtre

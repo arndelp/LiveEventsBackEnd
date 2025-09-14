@@ -18,12 +18,6 @@ class DoctrineSponsorRepository extends ServiceEntityRepository implements Spons
         parent::__construct($registry, Sponsor::class);
     }
     
-
-    public function countAll(): int
-    {
-        return $this->count([]);
-    }
-
     public function findById(int $id): ?Sponsor
     {
         return $this->find($id);
@@ -76,5 +70,17 @@ class DoctrineSponsorRepository extends ServiceEntityRepository implements Spons
             'nbrePage'  => (int) ceil($total / $limit),
             'currentPage' => $page
         ];
+    }
+
+    //récupération des horaires pour filtre dynamique
+    public function findDistinctTypes(): array
+    {
+        $qb = $this->createQueryBuilder('c') 
+            ->select('DISTINCT c.type')
+            ->orderBy('c.type', 'ASC');
+
+        $results = $qb->getQuery()->getArrayResult();
+
+        return array_map(fn($item) => $item['type'], $results);
     }
 }

@@ -7,8 +7,7 @@ use App\Concerts\Application\DTO\ConcertFilterDTO;
 
 interface ConcertRepositoryInterface
 {
-    public function findByFilters(ConcertFilterDTO $filter,int $page, int $limit  ) : array;    
-    public function countAll(): int;
+    public function findByFilters(ConcertFilterDTO $filter,int $page, int $limit  ) : array;       
     public function findById(int $id): ?Concert;
     public function saveConcert(Concert $concert): void;
     public function deleteConcert(int $id): void;

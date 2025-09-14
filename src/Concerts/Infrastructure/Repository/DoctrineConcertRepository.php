@@ -115,10 +115,7 @@ class DoctrineConcertRepository extends ServiceEntityRepository implements Conce
             ];
                 }  
 
-    public function countAll(): int
-    {
-        return $this->count([]);
-    }
+    
 
     public function findById(int $id): ?Concert
     {
