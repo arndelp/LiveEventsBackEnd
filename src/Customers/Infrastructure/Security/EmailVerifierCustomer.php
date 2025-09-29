@@ -37,11 +37,7 @@ class EmailVerifierCustomer
 
         $email->context($context);
 
-        try {
-    $this->mailer->send($email);
-} catch (\Throwable $e) {
-    dump('Erreur mailer : ' . $e->getMessage()); die;
-}
+        $this->mailer->send($email);
     }
 
     /**
