@@ -36,7 +36,7 @@ class ContactController extends AbstractController
         $limit = (int) $request->query->get('limit', 10);
         
         // Appeler le useCase de filtre
-        $result = $getPaginatedContact->execute($filter, $page, $limit);
+        $result = $getPaginatedContact->execute($page, $limit);
        
         return $this->render('@Contact/index.html.twig', [
             'contacts' => $result['contacts'], 
