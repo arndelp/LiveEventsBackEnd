@@ -85,7 +85,7 @@ class Customer implements  UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(name: 'is_verified',type: 'boolean')]
     #[Groups(['customers'])]
-    private bool $isVerified = true;
+    private bool $isVerified = false;
 
     public function getId(): ?int
     {
