@@ -15,12 +15,7 @@ class GetPaginatedContact
 //Appel au repositoryInterface pour utiliser les fonction findPaginated et countAll
     public function execute(int $page, int $limit): array
     {
-        return[
-            'contacts' => $contacts,
-            'total' => $total,
-            'nbrePage' => $nbrePage,
-            'currentPage' => $page,
-        ];
+        return $this->contactRepository->findPaginated($page, $limit);
     }
 }
 
