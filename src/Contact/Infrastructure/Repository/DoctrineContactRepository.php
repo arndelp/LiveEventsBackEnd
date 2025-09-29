@@ -49,7 +49,7 @@ class DoctrineContactRepository extends ServiceEntityRepository implements Conta
                 ->setFirstResult(($page - 1) * $limit)
                 ->setMaxResults($limit);
 
-        $markers = $query->getQuery()->getResult();
+        $contacts = $query->getQuery()->getResult();
 
         return [
             'contacts'   => $contacts,
