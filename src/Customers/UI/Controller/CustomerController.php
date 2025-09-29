@@ -123,6 +123,9 @@ class CustomerController extends AbstractController
         // On délègue au UseCase
         $customer = $saveCustomer->execute($dto);     
 
+        // Envoi email simple
+        $simpleVerifier->sendVerificationEmail($customer);
+
         return new JsonResponse([
             'success' => 'Customer créé avec succès',
             'id' => $customer->getId()
@@ -154,6 +157,23 @@ class CustomerController extends AbstractController
         } catch (VerifyEmailExceptionInterface $e) {
             return $this->redirect('https://arndelp.github.io/LiveEvents/VerificationFailed');
         }
+    }
+
+    public function simpleVerify(Request $request, DoctrineCustomerRepository $customerRepository, SimpleEmailVerifierCustomer $verifier): Response
+    {
+        $id = $request->query->get('id');
+        if (!$id) {
+            return $this->redirect('https://arndelp.github.io/LiveEvents/VerificationFailed');
+        }
+
+        $customer = $customerRepository->find($id);
+        if (!$customer) {
+            return $this->redirect('https://arndelp.github.io/LiveEvents/VerificationFailed');
+        }
+
+        $verifier->markAsVerified($customer);
+
+        return $this->redirect('https://arndelp.github.io/LiveEvents/Verified');
     }
 }
 
