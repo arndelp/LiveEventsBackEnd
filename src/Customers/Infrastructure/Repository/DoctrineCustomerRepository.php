@@ -49,7 +49,7 @@ class DoctrineCustomerRepository extends ServiceEntityRepository implements Cust
                 ->setFirstResult(($page - 1) * $limit)
                 ->setMaxResults($limit);
 
-        $customers = $query->getQuery()->getResult();
+        $customers = $query->getQuery()->getResult() ?? [];
 
         return [
             'customers'   => $customers,
