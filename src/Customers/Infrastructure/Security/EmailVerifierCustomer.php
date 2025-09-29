@@ -25,10 +25,9 @@ class EmailVerifierCustomer
     public function sendEmailConfirmation(string $verifyEmailRouteName, Customer $customer, TemplatedEmail $email): void
     {
         $signatureComponents = $this->verifyEmailHelper->generateSignature(
-            $verifyEmailRouteName,               // 'app_verify_email_customer'
+            $verifyEmailRouteName,
             $customer->getId(),
-            $customer->getEmail(),
-            ['id' => $customer->getId()]         
+            $customer->getEmail()
         );
 
         $context = $email->getContext();
@@ -54,7 +53,7 @@ class EmailVerifierCustomer
 
         $customer->setVerified(true);
 
-       // Si $customer est déjà géré par Doctrine, flush suffit
+        $this->entityManager->persist($customer);
         $this->entityManager->flush();
     }
 }
