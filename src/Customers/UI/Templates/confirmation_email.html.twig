@@ -2,7 +2,7 @@
 
 <p>
     Veuillez cliquer sur le lien suivant pour confirmer votre e-mail: <br><br>
-    <a href="{{ signedUrl|raw }}">Je confirme mon e-mail</a>.
+    <a href="{{ signedUrl|raw }}" data-skip-track="true">Je confirme mon e-mail</a>.
 </p>
 <p>
     Ce lien expirera dans {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
