@@ -25,9 +25,10 @@ class EmailVerifierCustomer
     public function sendEmailConfirmation(string $verifyEmailRouteName, Customer $customer, TemplatedEmail $email): void
     {
         $signatureComponents = $this->verifyEmailHelper->generateSignature(
-            $verifyEmailRouteName,
+            $verifyEmailRouteName,               // 'app_verify_email_customer'
             $customer->getId(),
-            $customer->getEmail()
+            $customer->getEmail(),
+            ['id' => $customer->getId()]         
         );
 
         $context = $email->getContext();

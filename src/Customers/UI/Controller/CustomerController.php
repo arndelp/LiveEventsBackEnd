@@ -143,32 +143,18 @@ class CustomerController extends AbstractController
 }
 
     public function verifyCustomerEmail(
-    Request $request,
-    EmailVerifierCustomer $emailVerifier,
-    DoctrineCustomerRepository $customerRepository
-): Response {
-    $id = $request->query->get('id');
+        Request $request,
+        Customer $customer,                // ParamConverter injecte l'entité via {id}
+        EmailVerifierCustomer $emailVerifier
+    ): Response {
+        try {
+            $emailVerifier->handleEmailConfirmation($request, $customer);
 
-    if (null === $id) {
-        return $this->redirect('https://arndelp.github.io/LiveEvents/VerificationFailed');
+            return $this->redirect('https://arndelp.github.io/LiveEvents/Verified');
+        } catch (VerifyEmailExceptionInterface $e) {
+            return $this->redirect('https://arndelp.github.io/LiveEvents/VerificationFailed');
+        }
     }
-
-    $customer = $customerRepository->find($id);
-
-    if (!$customer) {
-        return $this->redirect('https://arndelp.github.io/LiveEvents/VerificationFailed');
-    }
-
-    try {
-        $emailVerifier->handleEmailConfirmation($request, $customer);
-
-        // Redirection vers React après succès
-        return $this->redirect('https://arndelp.github.io/LiveEvents/Verified');
-    } catch (\SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface $e) {
-        return $this->redirect('https://arndelp.github.io/LiveEvents/VerificationFailed');
-    }
-}
-
 }
 
 
