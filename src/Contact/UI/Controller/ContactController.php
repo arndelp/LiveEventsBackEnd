@@ -42,7 +42,7 @@ class ContactController extends AbstractController
             'contacts' => $result['contacts'], 
             'isPaginated' => true,
             'nbrePage' => $result['nbrePage'],
-            'page' => $page,
+            'page' => $result['currentPage'],
             'nbre' => $limit
         ]);
     }

@@ -43,7 +43,7 @@ class CustomerController extends AbstractController
             'customers' => $result['customers'], 
             'isPaginated' => true,
             'nbrePage' => $result['nbrePage'],
-            'page' => $page,
+            'page' => $result['currentPage'],
             'nbre' => $limit
         ]);
     }
