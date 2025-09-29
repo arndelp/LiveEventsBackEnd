@@ -41,7 +41,7 @@ class ContactController extends AbstractController
         return $this->render('@Contact/index.html.twig', [
             'contacts' => $result['contacts'], 
             'isPaginated' => true,
-            'nbrePage' => $result['contacts'],
+            'nbrePage' => $result['nbrePage'],
             'page' => $page,
             'nbre' => $limit
         ]);
