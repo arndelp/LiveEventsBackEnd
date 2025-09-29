@@ -150,7 +150,7 @@ class CustomerController extends AbstractController
     $id = $request->query->get('id');
 
     if (null === $id) {
-        return $this->redirect('https://concertslives.store/LiveEvents/VerificationFailed');
+        return $this->redirect('https://arndelp.github.io/LiveEvents/VerificationFailed');
     }
 
     $customer = $customerRepository->find($id);
