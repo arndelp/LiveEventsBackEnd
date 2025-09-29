@@ -35,11 +35,28 @@ class DoctrineCustomerRepository extends ServiceEntityRepository implements Cust
         return $this->count([]);
     }
 
-    public function findPaginated(int $page,int $limit): array
+     public function findPaginated(int $page,int $limit): array
     {
-        $offset = ($page - 1) * $limit;
+        $query = $this -> createQueryBuilder('m');
 
-        return $this->findBy([], ['lastname' => 'ASC'], $limit, $offset);
+        $countQb = clone $query;               // on clone $query pour séparer le comptage des marker et la récupération des résultats
+        $total = (int) $countQb ->select('COUNT(m.id)')
+                                ->getQuery()
+                                ->getSingleScalarResult(); 
+        
+        // ----------- Pagination -----------
+        $query  ->orderBy('m.id', 'ASC')
+                ->setFirstResult(($page - 1) * $limit)
+                ->setMaxResults($limit);
+
+        $customers = $query->getQuery()->getResult();
+
+        return [
+            'customers'   => $customers,
+            'total'     => $total,
+            'nbrePage'  => (int) ceil($total / $limit),
+            'currentPage' => $page
+        ];
     }
 
      public function save(Customer $customer): void

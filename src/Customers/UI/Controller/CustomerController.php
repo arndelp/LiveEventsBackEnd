@@ -33,16 +33,18 @@ class CustomerController extends AbstractController
 {
     public function indexAlls(GetPaginatedCustomer $getPaginatedCustomer, int $page, int $nbre): Response
     {
-        //récupération des data paginées des customer
-       $data = $getPaginatedCustomer->execute($page, $nbre);
+        $page = (int) $request->query->get('page', 1);
+        $limit = (int) $request->query->get('limit', 10);
         
+        // Appeler le useCase de filtre
+        $result = $getPaginatedCustomer->execute($page, $limit);
        
-        return $this->render('@Customer/index.html.twig', [
-            'customers' => $data['customers'], 
+        return $this->render('@Contact/index.html.twig', [
+            'customers' => $result['customers'], 
             'isPaginated' => true,
-            'nbrePage' => $data['nbrePage'],
+            'nbrePage' => $result['nbrePage'],
             'page' => $page,
-            'nbre' => $nbre
+            'nbre' => $limit
         ]);
     }
         
