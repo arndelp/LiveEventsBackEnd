@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
-class EmailVerifier
+class EmailVerifierCustomer
 {
     public function __construct(
         private VerifyEmailHelperInterface $verifyEmailHelper,

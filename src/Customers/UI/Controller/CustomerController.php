@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use App\Customers\Application\UseCase\GetPaginatedCustomer;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use App\Customers\Infrastructure\Security\EmailVerifierCustomer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use App\Customers\Domain\Repository\EmailDuplicationCheckerInterface;
@@ -141,7 +142,7 @@ class CustomerController extends AbstractController
 
 public function verifyCustomerEmail(
     Request $request,
-    EmailVerifier $emailVerifier,
+    EmailVerifierCustomer $emailVerifier,
     DoctrineCustomerRepository $customerRepository
 ): JsonResponse {
     $id = $request->query->get('id');
