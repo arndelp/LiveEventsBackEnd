@@ -51,9 +51,9 @@ class EmailVerifierCustomer
             $customer->getEmail()
         );
 
-        $customer->setVerified(1);
+        $customer->setVerified(true);
 
-        $this->entityManager->persist($customer);
+       // Si $customer est déjà géré par Doctrine, flush suffit
         $this->entityManager->flush();
     }
 }

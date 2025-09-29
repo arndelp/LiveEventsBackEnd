@@ -142,48 +142,50 @@ class CustomerController extends AbstractController
     }
 }
 
-public function verifyCustomerEmail(
-    Request $request,
-    EmailVerifierCustomer $emailVerifier,
-    DoctrineCustomerRepository $customerRepository
-): JsonResponse {
-    $id = $request->query->get('id');
+    public function verifyCustomerEmail(
+        Request $request,
+        EmailVerifierCustomer $emailVerifier,
+        DoctrineCustomerRepository $customerRepository
+    ): JsonResponse {
+        $id = $request->query->get('id');
 
-    if (null === $id) {
-        return new JsonResponse([
-            'success' => false,
-            'message' => 'Aucun identifiant fourni.'
-        ], 400);
-    }
+        if (null === $id) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => 'Aucun identifiant fourni.'
+            ], 400);
+        }
 
-    $customer = $customerRepository->find($id);
+        $customer = $customerRepository->find($id);
 
-    if (!$customer) {
-        return new JsonResponse([
-            'success' => false,
-            'message' => 'Utilisateur introuvable.'
-        ], 404);
-    }
+        if (!$customer) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => 'Utilisateur introuvable.'
+            ], 404);
+        }
 
-    try {
-        $emailVerifier->handleEmailConfirmation($request, $customer);
+        try {
+            $emailVerifier->handleEmailConfirmation($request, $customer);
 
-        return new JsonResponse([
-            'success' => true,
-            'message' => 'Votre email a été vérifié avec succès !'
-        ]);
+            return new JsonResponse([
+                'success' => true,
+                'message' => 'Email vérifié avec succès !',
+                'customerId' => $customer->getId()
+            ], 200);
         } catch (\SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface $e) {
             return new JsonResponse([
                 'success' => false,
                 'message' => 'Le lien de confirmation est invalide ou expiré.'
             ], 400);
         }
-}
-
-
-
-
-
-
+    }
 
 }
+
+
+
+
+
+
+
