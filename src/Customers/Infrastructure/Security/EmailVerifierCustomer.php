@@ -51,7 +51,7 @@ class EmailVerifierCustomer
             $customer->getEmail()
         );
 
-        $customer->setVerified(true);
+        $customer->setVerified(1);
 
         $this->entityManager->persist($customer);
         $this->entityManager->flush();

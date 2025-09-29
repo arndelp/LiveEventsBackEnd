@@ -74,9 +74,9 @@ class CustomerController extends AbstractController
             //Récupération de l'id et envoi au useCase de suppression
             $deleteCustomer->execute($id);
 
-            $this->addFlash('success', "Les informations du client ont été supprimées avec succès");
+            $this->addFlash('success', "Le compte client a été supprimé avec succès");
         } else {
-            $this->addFlash('error', "Message inexistant");
+            $this->addFlash('error', "Compte inexistant");
            
         }
         return $this->redirectToRoute('customer.list.alls');
