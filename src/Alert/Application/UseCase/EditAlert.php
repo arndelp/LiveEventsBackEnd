@@ -22,10 +22,7 @@ class EditAlert
     }
 
     
-    /**
-     * AlertDTO $dto Les données de l'alerte (via le contrôleur)
-     * bool $new True si c'est une création, False si c'est une modification
-     */
+    
 
     //execute la méthose appelée par le contrôleur (avec les donné du concert (via $dto), la valeur de $new,
     public function execute(AlertDTO $dto, bool $new): void

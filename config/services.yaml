@@ -56,11 +56,19 @@ services:
             - '../src/Sponsors/Domain/Entity/'   # Pas besoin d'enregistrer les entités
             - '../src/Sponsors/UI/'              # Les contrôleurs sont gérés par routes.yaml
 
-    
+    App\Customers\:
+        resource: '../src/Customers/'
+        exclude:
+            - '../src/Customers/Domain/Entity/'
+            - '../src/Customers/UI/'
 
+    
     App\Users\Infrastructure\Repository\EmailDuplicationChecker:
+        autowire: true
+
+    App\Users\Infrastructure\Security\LoginAuthenticator:
         arguments:
-            $entityManager: '@doctrine.orm.entity_manager'
+            $urlGenerator: '@router.default'
 
     App\Contact\Infrastructure\Service\SymfonyMailerService:
         arguments:            
@@ -71,10 +79,7 @@ services:
             $toEmail: '%contact_receiver_email%'   
             $setContactMessage: '@App\Contact\Application\UseCase\SetContactMessage'
 
-    App\Users\Infrastructure\Security\LoginAuthenticator:
-        arguments:
-            $urlGenerator: '@router.default'
-
+   
     App\Contact\Application\UseCase\SetContactMessage:
         autowire: true
         autoconfigure: true
@@ -136,10 +141,33 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
-    App\Sponsors\Application\UseCase\GetPaginatedSponsors:
+    App\Sponsors\Application\UseCase\GetFilteredSponsors:
         autowire: true
         autoconfigure: true
-        public: true  # ou true si besoin
+        public: false  # ou true si besoin
+
+    App\Customers\UI\Controller\:
+        resource: '../src/Customers/UI/Controller'
+        tags: ['controller.service_arguments']
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    App\Customers\Application\UseCase\GetPaginatedCustomer:
+        autowire: true
+        autoconfigure: true
+        public: false  # ou true si besoin
+
+    App\Customers\Application\UseCase\SaveCustomer:
+        autowire: true
+        autoconfigure: true
+
+    App\Customers\Infrastructure\Repository\EmailDuplicationChecker:
+        autowire: true
+
+    App\Customers\Infrastructure\Security\EmailVerifier:
+        autowire: true
+
     
 
     # Liaison entre les interfaces de repository et les DoctrineRepository
@@ -169,6 +197,13 @@ services:
 
     App\Sponsors\Domain\Repository\SponsorRepositoryInterface: 
         alias: App\Sponsors\Infrastructure\Repository\DoctrineSponsorRepository
+
+    App\Customers\Domain\Repository\CustomerRepositoryInterface: 
+        alias: App\Customers\Infrastructure\Repository\DoctrineCustomerRepository
+
+    App\Customers\Domain\Repository\EmailDuplicationCheckerInterface:
+        alias: App\Customers\Infrastructure\Repository\EmailDuplicationChecker
+
 
     
 

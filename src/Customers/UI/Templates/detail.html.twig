@@ -1,0 +1,35 @@
+{% extends 'twig_heritage/template.html.twig'  %}
+
+{% block title %}
+    {{ customer.id }}
+{% endblock %}
+
+{% block body %}
+    <div class="card" style="width: 100%;">
+        <div class="card-body">               
+            
+            <h2 class="card-title">Prénom: {{ customer.firstname }} Nom: {{ customer.lastname }}</h2>
+            <h6 class="card-subtitle mb-2 text-muted">E:mail: {{ customer.email }} </h6>
+            <h6 class="card-text">Téléphone: {{ customer.phone }}</h6>
+            <h6 class="card-text">Style de musique préféré: {{ customer.style }}</h6>
+
+            <h6 class="card-text">Adresse postale: </h6>
+            <p class="card-text">Numéro: {{ customer.streetnumber }}</p>
+            <p class="card-text">Rue: {{ customer.street }}</p>
+            <p class="card-text">Code postal: {{ customer.postalcode }}</p>
+            <p class="card-text">Ville: {{ customer.city }}</p>
+            <p class="card-text">Pays: {{ customer.country }}</p>
+          
+
+            <div class='col'>
+                <form action="{{ path('customer.delete', {id: customer.id}) }}">
+                    <button type="submit"  class="btn btn-danger btn-sm" class="card-link">Supprimer</button>
+                </form>   
+            </div>      
+
+                 {# Lien vers la liste des concerts #}
+            <a href="{{ path('customer.list.alls') }}" class="card-link" id="retour" >Retour</a>
+               
+        </div>
+    </div>
+{% endblock %}

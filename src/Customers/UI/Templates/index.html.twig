@@ -1,0 +1,46 @@
+{# héritage du template de base #}
+{% extends 'twig_heritage/template.html.twig' %}
+
+{% block title %}Liste des clients{% endblock %}
+
+{% block body %}  
+<h1>Liste des clients</h1>
+    <div class="row">
+        <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col" class="tableauPoi">id</th>   
+                        <th scope="col" class="tableauPoi">Prénom</th> 
+                        <th scope="col" class="tableauPoi">Nom</th>                        
+                        <th scope="col" class="tableauPoi">e-mail</th>
+                        
+                    </tr>
+                </thead>
+            {% for customer in customers %}
+            <tbody>
+                <tr>
+                    <td class="tableauPoi" scope="row">{{ customer.id }}</td>
+                    <td class="tableauPoi" scope="row">{{ customer.firstname }}</td>
+                    <td class="tableauPoi" scope="row">{{ customer.lastname }}</td>
+                    <td class="tableauPoi" scope="row">{{ customer.email }}</td>
+                    <td>
+                        <div class='col'>
+                            <form action="{{ path('customer.detail', {id: customer.id}) }}">
+                                <button type="submit"  class="btn btn-secondary btn-sm" class="card-link">Voir</button>
+                            </form>   
+                            </div>    
+                        </td>   
+                        <td class="tableauPoi">
+                            <div class='col'>
+                                <form action="{{ path('customer.delete', {id: customer.id}) }}">
+                                    <button type="submit"  class="btn btn-danger btn-sm" class="card-link">Supprimer</button>
+                                </form>   
+                            </div>    
+                        </td>   
+                </tr>
+            </tbody>
+
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

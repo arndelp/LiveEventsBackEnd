@@ -1,7 +1,7 @@
 doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
-        server_version: '10.5.26-MariaDB'  # ← remplace avec la vraie version détectée
+        server_version: '10.5.26-MariaDB'  # 
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
         #server_version: '16'
@@ -60,6 +60,13 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Sponsors/Domain/Entity'
                 prefix: 'App\Sponsors\Domain\Entity'
                 alias: Sponsor
+
+            Customer:
+                is_bundle: false
+                type: attribute
+                dir: '%kernel.project_dir%/src/Customers/Domain/Entity'
+                prefix: 'App\Customers\Domain\Entity'
+                alias: Customer
             
          
 

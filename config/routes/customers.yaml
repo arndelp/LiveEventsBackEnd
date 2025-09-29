@@ -1,0 +1,33 @@
+customer.list.alls:
+  path: /customer/alls/{page}/{nbre}
+  controller: App\Customers\UI\Controller\CustomerController::indexAlls
+  defaults:
+      page: 1
+      nbre: 10
+  methods: [GET]
+
+customer.detail:
+  path: /customer/{id}
+  controller: App\Customers\UI\Controller\CustomerController::detail
+  requirements:
+    id: '\d+'    #entier positif
+  methods: [GET]
+
+customer.delete:
+  path: /customer/delete/{id}
+  controller: App\Customers\UI\Controller\CustomerController::deleteCustomer
+  methods: [GET, DELETE]
+
+customer.api.submit:
+  path: /api/customers   #route d'envoie des données de react
+  controller: App\Customers\UI\Controller\CustomerController::receiveNewCustomer
+  methods: [POST]
+
+api_login_check:
+  path: /api/custom_login_check
+  controller: App\Customers\UI\Controller\LoginController::__invoke
+  methods: [POST]
+
+app_verify_email:
+  path: /verify/email
+  controller: App\Customers\UI\Controller\CustomerController::verifyCustomerEmail

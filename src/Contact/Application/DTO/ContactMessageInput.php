@@ -29,12 +29,15 @@ final class ContactMessageInput
         string $email,
         string $message
     ) {
-        // les 4 paramètres sont utilisés pour initialiser les propriétés de l'objet. 
-        // Cela permet de créer un objet ContactMessageInput avec les valeurs spéfiées pour chaque champs,
-        //  qui sera ensuite utiliser pour les opération de validation et de traitement dans les cas d'utilisation
         $this->firstname = $firstname;
         $this->lastname = $lastname;
         $this->email = $email;
         $this->message = $message;
     }
+    /*
+        Dans un DTO, le constructeur sert à garantir :
+            la complétude des données,
+            un contrat clair (tous les champs obligatoires sont fournis dès le départ),
+            une meilleure robustesse (moins d’objets « incomplets » qui circulent dans ton appli).
+    */
 }

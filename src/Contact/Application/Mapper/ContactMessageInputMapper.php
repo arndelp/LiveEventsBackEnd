@@ -7,27 +7,27 @@ use App\Contact\Application\DTO\ContactMessageInput;
 
 class ContactMessageInputMapper
 {
-public function toEntity(ContactMessageInput $dto): Contact
-{
-    $contactMessage = new Contact();
-    $contactMessage->setFirstname($dto->firstname);
-    $contactMessage->setLastname($dto->lastname);
-    $contactMessage->setEmail($dto->email);
-    $contactMessage->setMessage($dto->message);
+    public function toEntity(ContactMessageInput $dto): Contact
+    {
+        $contactMessage = new Contact();
+        $contactMessage->setFirstname($dto->firstname);
+        $contactMessage->setLastname($dto->lastname);
+        $contactMessage->setEmail($dto->email);
+        $contactMessage->setMessage($dto->message);
 
-    return $contactMessage;
-}
+        return $contactMessage;
+    }
 
-public function toDTO(Contact $contact): ContactMessageInput
-{
-    $dto = new ContactMessageInput();    
-    $dto->firstname = $contact->getFirstname();
-    $dto->lastname = $contact->getLastname();
-    $dto->email = $contact->getEmail();
-    $dto->message = $contact->getMessage();
+    public function toDTO(Contact $contact): ContactMessageInput
+    {
+        $dto = new ContactMessageInput();    
+        $dto->firstname = $contact->getFirstname();
+        $dto->lastname = $contact->getLastname();
+        $dto->email = $contact->getEmail();
+        $dto->message = $contact->getMessage();
 
-    return $dto;
-}
+        return $dto;
+    }
 
 }
 
