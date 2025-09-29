@@ -31,7 +31,7 @@ use App\Customers\Domain\Repository\EmailDuplicationCheckerInterface;
 
 class CustomerController extends AbstractController
 {
-    public function indexAlls(GetPaginatedCustomer $getPaginatedCustomer, int $page, int $nbre): Response
+    public function indexAlls(Request $request,GetPaginatedCustomer $getPaginatedCustomer, int $page, int $nbre): Response
     {
         $page = (int) $request->query->get('page', 1);
         $limit = (int) $request->query->get('limit', 10);
