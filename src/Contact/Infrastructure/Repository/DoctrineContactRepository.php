@@ -37,9 +37,26 @@ class DoctrineContactRepository extends ServiceEntityRepository implements Conta
 
     public function findPaginated(int $page,int $limit): array
     {
-        $offset = ($page - 1) * $limit;
+        $query = $this -> createQueryBuilder('m');
 
-        return $this->findBy([], [], $limit, $offset);
+        $countQb = clone $query;               // on clone $query pour séparer le comptage des marker et la récupération des résultats
+        $total = (int) $countQb ->select('COUNT(m.id)')
+                                ->getQuery()
+                                ->getSingleScalarResult(); 
+        
+        // ----------- Pagination -----------
+        $query  ->orderBy('m.id', 'ASC')
+                ->setFirstResult(($page - 1) * $limit)
+                ->setMaxResults($limit);
+
+        $markers = $query->getQuery()->getResult();
+
+        return [
+            'contacts'   => $contacts,
+            'total'     => $total,
+            'nbrePage'  => (int) ceil($total / $limit),
+            'currentPage' => $page
+        ];
     }
 
      public function save(Contact $contact): void

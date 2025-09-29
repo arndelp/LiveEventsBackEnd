@@ -30,18 +30,20 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class ContactController extends AbstractController
 {
-    public function indexAlls(GetPaginatedContact $getPaginatedContact, int $page, int $nbre): Response
+    public function indexAlls(Request $request,GetPaginatedContact $getPaginatedContact): Response
     {
-        //récupération des data paginées des contact
-       $data = $getPaginatedContact->execute($page, $nbre);
+        $page = (int) $request->query->get('page', 1);
+        $limit = (int) $request->query->get('limit', 10);
         
+        // Appeler le useCase de filtre
+        $result = $getPaginatedContact->execute($filter, $page, $limit);
        
         return $this->render('@Contact/index.html.twig', [
-            'contacts' => $data['contacts'], 
+            'contacts' => $result['contacts'], 
             'isPaginated' => true,
-            'nbrePage' => $data['contacts'],
+            'nbrePage' => $result['contacts'],
             'page' => $page,
-            'nbre' => $nbre
+            'nbre' => $limit
         ]);
     }
         
