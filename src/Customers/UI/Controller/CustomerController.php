@@ -156,16 +156,16 @@ class CustomerController extends AbstractController
     $customer = $customerRepository->find($id);
 
     if (!$customer) {
-        return $this->redirect('https://arndelp.github.io/LiveEvents/Register');
+        return $this->redirect('https://arndelp.github.io/LiveEvents/VerificationFailed');
     }
 
     try {
         $emailVerifier->handleEmailConfirmation($request, $customer);
 
         // Redirection vers React après succès
-        return $this->redirect('https://arndelp.github.io/LiveEvents/Login');
+        return $this->redirect('https://arndelp.github.io/LiveEvents/Verified');
     } catch (\SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface $e) {
-        return $this->redirect('https://arndelp.github.io/LiveEvents/Register');
+        return $this->redirect('https://arndelp.github.io/LiveEvents/VerificationFailed');
     }
 }
 
