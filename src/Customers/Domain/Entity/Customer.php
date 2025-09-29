@@ -83,7 +83,7 @@ class Customer implements  UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['customers'])]
     private ?string $phone = null;
 
-    #[ORM\Column(name: 'isVerified',type: 'boolean')]
+    #[ORM\Column(name: 'is_Verified',type: 'boolean')]
     #[Groups(['customers'])]
     private bool $isVerified = false;
 
