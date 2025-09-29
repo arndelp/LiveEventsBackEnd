@@ -139,23 +139,43 @@ class CustomerController extends AbstractController
     }
 }
 
-public function verifyCustomerEmail(Request $request, EmailVerifier $emailVerifier, Customer $customer): JsonResponse
-    {
-        try {
-            $emailVerifier->handleEmailConfirmation($request, $customer);
+public function verifyCustomerEmail(
+    Request $request,
+    EmailVerifier $emailVerifier,
+    DoctrineCustomerRepository $customerRepository
+): JsonResponse {
+    $id = $request->query->get('id');
+
+    if (null === $id) {
+        return new JsonResponse([
+            'success' => false,
+            'message' => 'Aucun identifiant fourni.'
+        ], 400);
+    }
+
+    $customer = $customerRepository->find($id);
+
+    if (!$customer) {
+        return new JsonResponse([
+            'success' => false,
+            'message' => 'Utilisateur introuvable.'
+        ], 404);
+    }
+
+    try {
+        $emailVerifier->handleEmailConfirmation($request, $customer);
 
         return new JsonResponse([
             'success' => true,
             'message' => 'Votre email a été vérifié avec succès !'
         ]);
-
     } catch (\SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface $e) {
         return new JsonResponse([
             'success' => false,
             'message' => 'Le lien de confirmation est invalide ou expiré.'
         ], 400);
     }
-    }
+}
 
 
 
