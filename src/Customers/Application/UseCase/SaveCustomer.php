@@ -8,7 +8,7 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use App\Customers\Application\DTO\CustomerDTO;
 use App\Customers\Application\Mapper\CustomerMapper;
-use App\Customers\Infrastructure\Security\EmailVerifier;
+use App\Customers\Infrastructure\Security\EmailVerifierCustomer;
 use App\Customers\Domain\Repository\CustomerRepositoryInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Customers\Domain\Repository\EmailDuplicationCheckerInterface;
@@ -19,7 +19,7 @@ final class SaveCustomer
         private CustomerRepositoryInterface $customerRepository,
         private CustomerMapper $mapper,
         private UserPasswordHasherInterface $passwordHasher,
-        private EmailVerifier $emailVerifier,
+        private EmailVerifierCustomer $emailVerifier,
         private Security $security,
         private EmailDuplicationCheckerInterface $emailDuplicationChecker,
     ) {}

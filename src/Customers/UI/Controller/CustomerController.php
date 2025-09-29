@@ -172,12 +172,12 @@ public function verifyCustomerEmail(
             'success' => true,
             'message' => 'Votre email a été vérifié avec succès !'
         ]);
-    } catch (\SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface $e) {
-        return new JsonResponse([
-            'success' => false,
-            'message' => 'Le lien de confirmation est invalide ou expiré.'
-        ], 400);
-    }
+        } catch (\SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface $e) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => 'Le lien de confirmation est invalide ou expiré.'
+            ], 400);
+        }
 }
 
 
