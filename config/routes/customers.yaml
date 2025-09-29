@@ -32,6 +32,10 @@ app_verify_email:
   path: /verify/email
   controller: App\Customers\UI\Controller\CustomerController::verifyCustomerEmail
 
-verify_simple:
-  path: /verify/simple
+simple_email_verify:
+  path: /verify/simple/{id}
   controller: App\Customers\UI\Controller\CustomerController::simpleVerify
+
+send_simple_confirmation:
+  path: /api/customers/send-confirmation/{id}
+  controller: App\Customers\UI\Controller\CustomerController::sendSimpleConfirmationEmail
