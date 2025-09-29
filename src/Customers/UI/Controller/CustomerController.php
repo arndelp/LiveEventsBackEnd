@@ -39,7 +39,7 @@ class CustomerController extends AbstractController
         // Appeler le useCase de filtre
         $result = $getPaginatedCustomer->execute($page, $limit);
        
-        return $this->render('@Contact/index.html.twig', [
+        return $this->render('@Customer/index.html.twig', [
             'customers' => $result['customers'], 
             'isPaginated' => true,
             'nbrePage' => $result['nbrePage'],
