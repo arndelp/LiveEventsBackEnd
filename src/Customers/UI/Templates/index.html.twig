@@ -9,20 +9,17 @@
         <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col" class="tableauPoi">id</th>   
+                        <th scope="col" class="tableauPoi">e-mail</th> 
                         <th scope="col" class="tableauPoi">Prénom</th> 
-                        <th scope="col" class="tableauPoi">Nom</th>                        
-                        <th scope="col" class="tableauPoi">e-mail</th>
-                        
+                        <th scope="col" class="tableauPoi">Nom</th>                                           
                     </tr>
                 </thead>
             {% for customer in customers %}
             <tbody>
                 <tr>
-                    <td class="tableauPoi" scope="row">{{ customer.id }}</td>
-                    <td class="tableauPoi" scope="row">{{ customer.firstname }}</td>
-                    <td class="tableauPoi" scope="row">{{ customer.lastname }}</td>
-                    <td class="tableauPoi" scope="row">{{ customer.email }}</td>
+                    <td class="col tableauPoi">{{ customer.email }}</td>
+                    <td class="col">{{ customer.firstname }}</td>
+                    <td class="col">{{ customer.lastname }}</td>
                     <td>
                         <div class='col'>
                             <form action="{{ path('customer.detail', {id: customer.id}) }}">

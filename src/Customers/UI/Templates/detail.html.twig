@@ -8,24 +8,23 @@
     <div class="card" style="width: 100%;">
         <div class="card-body">               
             
-            <h2 class="card-title">Prénom: {{ customer.firstname }} Nom: {{ customer.lastname }}</h2>
-            <h6 class="card-subtitle mb-2 text-muted">E:mail: {{ customer.email }} </h6>
-            <p class="card-text">Téléphone: {{ customer.phone }}</p>
-            <p class="card-text">Style de musique préféré: {{ customer.style }}</p>
-
+            <h2 class="card-title"> {{ customer.lastname }}</h2>
+            <h2 class="card-title"> {{ customer.firstname }}</h2> 
+            <p class="card-subtitle mb-2 text-muted">{{ customer.email }} </p>
+            <p class="card-text">Tél: {{ customer.phone }}</p>
+            <p class="card-text">Musique: {{ customer.style }}</p>
             <p class="card-text">Adresse postale: </p>
-            <p class="card-text">Numéro: {{ customer.streetnumber }}</p>
-            <p class="card-text">Rue: {{ customer.street }}</p>
-            <p class="card-text">Code postal: {{ customer.postalcode }}</p>
-            <p class="card-text">Ville: {{ customer.city }}</p>
-            <p class="card-text">Pays: {{ customer.country }}</p>
+            <small class="card-text">{{ customer.streetnumber }}, {{ customer.street }}</small><br>            
+            <small class="card-text">{{ customer.postalcode }}</small><br>
+            <small class="card-text">{{ customer.city }}</small><br>
+            <small class="card-text"  >{{ customer.country }}</small>
           
 
-            <div class='col'>
+            <div class='col' style="margin-top:2em">
                 <form action="{{ path('customer.delete', {id: customer.id}) }}">
                     <button type="submit"  class="btn btn-danger btn-sm" class="card-link">Supprimer</button>
                 </form>   
-            </div>      
+            </div>       
 
                  {# Lien vers la liste des concerts #}
             <a href="{{ path('customer.list.alls') }}" class="card-link" id="retour" >Retour</a>
