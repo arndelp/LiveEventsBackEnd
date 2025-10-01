@@ -43,7 +43,7 @@ class Customer implements  UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['customers'])]
     private ?string $lastname = null;
 
-    #[ORM\Column(name: 'firstname',length: 50)]   
+    #[ORM\Column(name: 'firstname',length: 100)]   
     #[Groups(['customers'])]
     private ?string $firstname = null;
 
