@@ -28,7 +28,8 @@ class EmailVerifierCustomer
             $verifyEmailRouteName, // ex: "api_verify_email_customer"
             $customer->getId(),
             $customer->getEmail(),
-            ['id' => $customer->getId()] // important pour reconstruire l'URL
+            ['id' => $customer->getId()], // important pour reconstruire l'URL
+
         );
 
         $context = $email->getContext();
@@ -51,7 +52,7 @@ class EmailVerifierCustomer
             
         );
 
-        $customer->setVerified(true);
+        $customer->setIsVerified(true);
 
         $this->entityManager->persist($customer);
         $this->entityManager->flush();

@@ -225,7 +225,7 @@ class Customer implements  UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function isVerified(): bool
+    public function isIsVerified(): bool
     {
         return $this->isVerified;
     }
