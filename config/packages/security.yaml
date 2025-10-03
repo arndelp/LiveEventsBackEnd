@@ -53,8 +53,7 @@ security:
         main:
             lazy: true
             provider: app_user_provider
-            pattern: ^/
-            anonymous: true # Permet l'accès à /verify/... sans login
+            pattern: ^/            
             custom_authenticator: App\Users\Infrastructure\Security\LoginAuthenticator
             logout:
                 path: app_logout
@@ -74,6 +73,8 @@ security:
     - { path: ^/api/register, roles: PUBLIC_ACCESS }
     - { path: ^/api/customers, roles: PUBLIC_ACCESS }
     - { path: ^/api/verify/email, roles: PUBLIC_ACCESS }
+    - { path: ^/verify, roles: PUBLIC_ACCESS }
+
 
     # Routes API publiques
     - { path: ^/api/concerts, roles: PUBLIC_ACCESS }
