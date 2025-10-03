@@ -37,7 +37,7 @@ class EmailVerifierCustomer
         $context['expiresAtMessageKey'] = $signatureComponents->getExpirationMessageKey();
         $context['expiresAtMessageData'] = $signatureComponents->getExpirationMessageData();
         $context['customer'] = $customer;
-        
+
         $email->context($context);
 
         $this->mailer->send($email);
@@ -53,7 +53,7 @@ class EmailVerifierCustomer
             
         );
 
-        $customer->setIsVerified(true);
+        $customer->setVerified(true);
 
         $this->entityManager->persist($customer);
         $this->entityManager->flush();
