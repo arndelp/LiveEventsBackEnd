@@ -24,7 +24,7 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class CustomerController extends AbstractController
 {
-    
+    // Liste paginée
     public function indexAlls(Request $request, GetPaginatedCustomer $getPaginatedCustomer): Response
     {
         $page = (int) $request->query->get('page', 1);
@@ -41,7 +41,7 @@ class CustomerController extends AbstractController
         ]);
     }
 
-    
+    // Récupération d’un client
     public function detail(GetCustomer $getCustomer, int $id): Response
     {
         $customer = $getCustomer->execute($id);
@@ -54,7 +54,7 @@ class CustomerController extends AbstractController
         return $this->render('@Customer/detail.html.twig', ['customer' => $customer]);
     }
 
-  
+  // Suppression d’un client
     public function deleteCustomer(DeleteCustomer $deleteCustomer, GetCustomer $getCustomer, int $id): Response
     {
         $customer = $getCustomer->execute($id);
@@ -127,7 +127,7 @@ class CustomerController extends AbstractController
         return new JsonResponse(['error' => 'Erreur interne serveur.'], 500);
     }
 }
-
+ // Vérification de l’email depuis React
 public function verifyCustomerEmail(Request $request, Customer $customer, EmailVerifierCustomer $emailVerifier): JsonResponse
     {
         if (!$customer) {
@@ -140,10 +140,11 @@ public function verifyCustomerEmail(Request $request, Customer $customer, EmailV
         try {
             $emailVerifier->handleEmailConfirmation($request, $customer);
 
-        // Ici on renvoie l'URL front React pour la redirection
+        // Retour JSON pour que React fasse la redirection
         return new JsonResponse([
             'success' => true,
-            'redirect' => 'https://arndelp.github.io/LiveEvents/Login'
+            'redirect' => 'https://arndelp.github.io/LiveEvents/Login',
+            'message' => 'Email vérifié avec succès'
         ]);
 
         } catch (VerifyEmailExceptionInterface $e) {
