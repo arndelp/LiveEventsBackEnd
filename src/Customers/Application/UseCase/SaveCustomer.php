@@ -52,7 +52,7 @@ final class SaveCustomer
             ->subject('Veuillez confirmer votre e-mail')
             ->htmlTemplate('@Customer/confirmation_email_customer.html.twig');
 
-        $this->emailVerifier->sendEmailConfirmation( $customer, $email);
+        $this->emailVerifier->sendEmailConfirmation('api_verify_email_customer', $customer, $email);
 
 
         return $customer;
