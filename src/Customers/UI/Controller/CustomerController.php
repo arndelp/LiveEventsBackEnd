@@ -88,11 +88,11 @@ class CustomerController extends AbstractController
     }
     
     $dto = new CustomerDTO(
-        firstname: $data['firstname'] ?? 'Test',
+        firstname: $data['firstname'] ?? '',
         lastname: $data['lastname'] ?? '',
         email: $data['email'] ?? '',
         password: $data['password'] ?? '',
-        style: $data['style'] ?? '',
+        style: $data['style'] ?? 'Pop',
         streetnumber: $data['streetnumber'] ?? '',
         street: $data['street'] ?? '',
         postalcode: $data['postalcode'] ?? '',
