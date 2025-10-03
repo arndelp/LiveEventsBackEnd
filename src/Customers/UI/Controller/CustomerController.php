@@ -20,6 +20,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use App\Customers\Domain\Repository\DoctrineCustomerRepository;
 use App\Customers\Infrastructure\Security\EmailVerifierCustomer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class CustomerController extends AbstractController
 {
