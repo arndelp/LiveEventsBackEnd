@@ -37,7 +37,7 @@ class LoginController
         }
 
         // Vérification si l'email est confirmé
-        if (!$customer->isVerified()) {
+        if (!$customer->isIsVerified()) {
             return new JsonResponse(['error' => 'Email non vérifié. Veuillez vérifier votre boîte email.'], 403);  //403 Forbidden
         }
 
