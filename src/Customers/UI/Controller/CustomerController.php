@@ -24,9 +24,7 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class CustomerController extends AbstractController
 {
-    // -------------------
-    // UI : Liste paginée
-    // -------------------
+    
     public function indexAlls(Request $request, GetPaginatedCustomer $getPaginatedCustomer): Response
     {
         $page = (int) $request->query->get('page', 1);

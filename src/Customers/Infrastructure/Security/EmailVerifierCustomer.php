@@ -25,7 +25,7 @@ class EmailVerifierCustomer
     public function sendEmailConfirmation(string $verifyEmailRouteName, Customer $customer, TemplatedEmail $email): void
     {
         $signatureComponents = $this->verifyEmailHelper->generateSignature(
-            $verifyEmailRouteName, // ex: "api_verify_email_customer"
+            'api_verify_email_customer', // ex: "api_verify_email_customer"
             $customer->getId(),
             $customer->getEmail(),
             ['id' => $customer->getId()], // important pour reconstruire l'URL
