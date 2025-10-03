@@ -36,7 +36,8 @@ class EmailVerifierCustomer
         $context['signedUrl'] = $signatureComponents->getSignedUrl();
         $context['expiresAtMessageKey'] = $signatureComponents->getExpirationMessageKey();
         $context['expiresAtMessageData'] = $signatureComponents->getExpirationMessageData();
-
+        $context['customer'] = $customer;
+        
         $email->context($context);
 
         $this->mailer->send($email);
