@@ -130,8 +130,9 @@ class CustomerController extends AbstractController
     }
 }
 
-public function verifyCustomerEmail(Request $request, EmailVerifierCustomer $emailVerifier, Customer $customer): JsonResponse
+public function verifyCustomerEmail(Request $request, Customer $customer, EmailVerifierCustomer $emailVerifier): JsonResponse
     {
+        // Vérification de l'ID fourni
         if (null === $id) {
         return new JsonResponse([
             'success' => false,
@@ -139,6 +140,7 @@ public function verifyCustomerEmail(Request $request, EmailVerifierCustomer $ema
         ], 400);
         }
 
+        // Récupérer le client par son ID
         $customer = $customerRepository->find($id);
 
         if (!$customer) {
@@ -147,7 +149,7 @@ public function verifyCustomerEmail(Request $request, EmailVerifierCustomer $ema
                 'message' => 'Utilisateur introuvable.'
             ], 404);
         }
-
+        // Vérification du lien de confirmation
         try {
             $emailVerifier->handleEmailConfirmation($request, $customer);
 

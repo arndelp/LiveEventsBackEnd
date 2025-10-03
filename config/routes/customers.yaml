@@ -29,5 +29,5 @@ api_login_check:
   methods: [POST]
 
 app_verify_email_customer:
-  path: /verify/email
+  path: /verify/{id}/email
   controller: App\Customers\UI\Controller\CustomerController::verifyCustomerEmail

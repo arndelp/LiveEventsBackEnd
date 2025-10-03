@@ -28,7 +28,7 @@ class EmailVerifierCustomer
             $verifyEmailRouteName,
             $customer->getId(),
             $customer->getEmail(),
-            'id'->findBy("id"),
+            ['id' => $customer->getId()] // important pour reconstruire l'URL
         );
 
         $context = $email->getContext();
@@ -50,7 +50,7 @@ class EmailVerifierCustomer
             $request, 
             $customer->getId(), //identifiant de l'utilisateur
             $customer->getEmail(), //email de l'utilisateur   
-            [id => $customer->getId()] // tableau de paramètres pour reconstruire l'URL
+            
         );
 
         $customer->setVerified(true);
