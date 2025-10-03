@@ -132,17 +132,6 @@ class CustomerController extends AbstractController
 
 public function verifyCustomerEmail(Request $request, Customer $customer, EmailVerifierCustomer $emailVerifier): JsonResponse
     {
-        // Vérification de l'ID fourni
-        if (null === $id) {
-        return new JsonResponse([
-            'success' => false,
-            'message' => 'Aucun identifiant fourni.'
-        ], 400);
-        }
-
-        // Récupérer le client par son ID
-        $customer = $customerRepository->find($id);
-
         if (!$customer) {
             return new JsonResponse([
                 'success' => false,
@@ -153,15 +142,16 @@ public function verifyCustomerEmail(Request $request, Customer $customer, EmailV
         try {
             $emailVerifier->handleEmailConfirmation($request, $customer);
 
+        // Ici on renvoie l'URL front React pour la redirection
         return new JsonResponse([
             'success' => true,
-            'message' => 'Votre email a été vérifié avec succès !'
+            'redirect' => 'https://arndelp.github.io/LiveEvents/Login'
         ]);
 
         } catch (VerifyEmailExceptionInterface $e) {
             return new JsonResponse([
                 'success' => false,
-                'message' => 'Le lien de confirmation est invalide ou expiré.'
+                'message' => $e->getReason()
             ], 400);
         }
     }

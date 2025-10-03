@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
-use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
+
 
 class EmailVerifierCustomer
 {
@@ -19,13 +19,13 @@ class EmailVerifierCustomer
         private VerifyEmailHelperInterface $verifyEmailHelper,
         private MailerInterface $mailer,
         private EntityManagerInterface $entityManager
-    ) {
-    }
+    ) {}
 
+    // Envoie un email de confirmation à l'utilisateur.
     public function sendEmailConfirmation(string $verifyEmailRouteName, Customer $customer, TemplatedEmail $email): void
     {
         $signatureComponents = $this->verifyEmailHelper->generateSignature(
-            $verifyEmailRouteName,
+            $verifyEmailRouteName, // ex: "api_verify_email_customer"
             $customer->getId(),
             $customer->getEmail(),
             ['id' => $customer->getId()] // important pour reconstruire l'URL
@@ -41,9 +41,7 @@ class EmailVerifierCustomer
         $this->mailer->send($email);
     }
 
-    /**
-     * @throws VerifyEmailExceptionInterface
-     */
+    //Valide le lien de confirmation cliqué par l'utilisateur.
     public function handleEmailConfirmation(Request $request, Customer $customer): void
     {
         $this->verifyEmailHelper->validateEmailConfirmationFromRequest(
