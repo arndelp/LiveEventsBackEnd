@@ -50,7 +50,7 @@ final class SaveCustomer
             ->from(new Address('arndelp595@gmail.com', 'Live Events'))
             ->to($customer->getEmail())
             ->subject('Veuillez confirmer votre e-mail')
-            ->htmlTemplate('@Customer/confirmation_email.html.twig');
+            ->htmlTemplate('@Customer/confirmation_email_customer.html.twig');
 
         $this->emailVerifier->sendEmailConfirmation('app_verify_email', $customer, $email);
 

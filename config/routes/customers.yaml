@@ -28,6 +28,6 @@ api_login_check:
   controller: App\Customers\UI\Controller\LoginController::__invoke
   methods: [POST]
 
-app_verify_email:
+app_verify_email_customer:
   path: /verify/email
   controller: App\Customers\UI\Controller\CustomerController::verifyCustomerEmail
