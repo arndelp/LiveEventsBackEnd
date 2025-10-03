@@ -50,7 +50,7 @@ class EmailVerifierCustomer
             $request, 
             $customer->getId(), //identifiant de l'utilisateur
             $customer->getEmail(), //email de l'utilisateur   
-            ['id' => $customer->getId()] // tableau de paramètres pour reconstruire l'URL
+            [id => $customer->getId()] // tableau de paramètres pour reconstruire l'URL
         );
 
         $customer->setVerified(true);
