@@ -40,7 +40,12 @@ class EmailVerifierCustomer
 
         $email->context($context);
 
-        $this->mailer->send($email);
+        try {
+    $this->mailer->send($email);
+} catch (\Throwable $e) {
+    // Log l'erreur
+    dump($e->getMessage());
+}
     }
 
     //Valide le lien de confirmation cliqué par l'utilisateur.

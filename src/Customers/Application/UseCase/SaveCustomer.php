@@ -47,7 +47,7 @@ final class SaveCustomer
 
         // Envoyer l'e-mail de confirmation avec mailerVerifier
         $email = (new TemplatedEmail())
-            ->from('no-reply@liveevents.com')
+            ->from(new Address('arndelp595@gmail.com', 'Live Events'))
             ->to($customer->getEmail())
             ->subject('Veuillez confirmer votre e-mail')
             ->htmlTemplate('@Customer/confirmation_email_customer.html.twig');
