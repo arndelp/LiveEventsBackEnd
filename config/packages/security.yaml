@@ -32,7 +32,7 @@ security:
             pattern: ^/api/login_check
             stateless: true
             provider: app_customer_provider
-            user_checker: App\Users\Security\UserEmailVerifiedChecker
+            user_checker: App\Users\Infrastructure\Security\UserEmailVerifiedChecker
             json_login:
                 check_path: /api/login_check
                 username_path: email
