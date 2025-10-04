@@ -20,9 +20,9 @@ class LoginCustomer
 
     public function execute(LoginDTO $dto): array
     {
-        $customer = $this->customerRepository->findByEmail($dto->$email);
+        $customer = $this->customerRepository->findByEmail($dto->email);
 
-        if (!$customer || !$this->passwordHasher->isPasswordValid($customer, $dto->$password)) {
+        if (!$customer || !$this->passwordHasher->isPasswordValid($customer, $dto->password)) {
             throw new \RuntimeException('Identifiants invalides');
         }
 
