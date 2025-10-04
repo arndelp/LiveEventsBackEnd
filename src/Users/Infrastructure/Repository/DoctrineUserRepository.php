@@ -52,4 +52,6 @@ class DoctrineUserRepository extends ServiceEntityRepository implements UserRepo
         $em->persist($user);
         $em->flush();
     }
+
+    
 }
