@@ -20,17 +20,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
-    #[Assert\NotBlank(message: "Veuillez remplir ce champ")]
+    
     #[ORM\Column(length: 180)]
     private ?string $lastname = null;
-
-    #[Assert\NotBlank(message: "Veuillez remplir ce champ")]
+    
     #[ORM\Column(length: 180)]
     private ?string $firstname = null;
-
-    #[Assert\Email(message: "Ce n'est pas une adresse e-mail valide.",)]
-    #[Assert\NotBlank(message: "Veuillez remplir ce champ")]
+    
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
@@ -43,10 +39,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      */
-    #[ORM\Column]
+    #[ORM\Column(length: 255)]
     private ?string $password = null;
 
-    #[ORM\Column]
+    #[ORM\Column(name: 'is_verified',type: 'boolean')]
     private bool $isVerified = false;
 
     /**
@@ -182,7 +178,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function isVerified(): bool
+    public function isIsVerified(): bool
     {
         return $this->isVerified;
     }
