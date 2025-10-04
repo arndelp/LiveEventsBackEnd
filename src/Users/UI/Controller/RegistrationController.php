@@ -72,21 +72,32 @@ class RegistrationController extends AbstractController
     }
 
     
-    public function verifyUserEmail(Request $request): Response
+     public function verifyUserEmail(Request $request, EntityManagerInterface $em): Response
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $id = $request->get('id');
 
-        try {
-            $user = $this->getUser();
-            $this->emailVerifier->handleEmailConfirmation($request, $user);
-        } catch (VerifyEmailExceptionInterface $exception) {
-            $this->addFlash('verify_email_error', $exception->getReason());
-
+        if (null === $id) {
+            $this->addFlash('verify_email_error', 'Id utilisateur manquant.');
             return $this->redirectToRoute('app_register');
         }
 
-        $this->addFlash('success', 'Votre adresse e-mail a été vérifiée.');
+        $user = $em->getRepository(User::class)->find($id);
+
+        if (null === $user) {
+            $this->addFlash('verify_email_error', 'Utilisateur introuvable.');
+            return $this->redirectToRoute('app_register');
+        }
+
+        try {
+            $this->emailVerifier->handleEmailConfirmation($request, $user);
+        } catch (VerifyEmailExceptionInterface $exception) {
+            $this->addFlash('verify_email_error', $exception->getReason());
+            return $this->redirectToRoute('app_register');
+        }
+
+        $this->addFlash('success', 'Votre adresse e-mail a bien été vérifiée ✅');
 
         return $this->redirectToRoute('concert.list.filtered');
     }
 }
+
