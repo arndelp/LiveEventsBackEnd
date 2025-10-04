@@ -7,6 +7,7 @@ use App\Customers\Application\DTO\LoginDTO;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Customers\Application\UseCase\LoginCustomer;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 
 
