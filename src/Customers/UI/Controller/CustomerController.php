@@ -18,6 +18,7 @@ use App\Customers\Application\UseCase\DeleteCustomer;
 use App\Customers\Application\UseCase\GetPaginatedCustomer;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use App\Customers\Domain\Repository\DoctrineCustomerRepository;
+use App\Customers\Domain\Repository\CustomerRepositoryInterface;
 use App\Customers\Infrastructure\Security\EmailVerifierCustomer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
@@ -128,7 +129,7 @@ class CustomerController extends AbstractController
     }
 }
     // Vérification de l’email depuis React
-    public function verifyCustomerEmail(Request $request, Customer $customer, EmailVerifierCustomer $emailVerifier): JsonResponse
+    public function verifyCustomerEmail(CustomerRepositoryInterface $customerRepository ,Request $request, Customer $customer, EmailVerifierCustomer $emailVerifier): JsonResponse
         {
             // Récupérer l'ID depuis la route
         $id = (int) $request->get('id');
