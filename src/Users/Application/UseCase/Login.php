@@ -1,8 +1,9 @@
 <?php
 namespace App\Users\Application\UseCase;
 
-use App\Users\Domain\Repository\UserRepositoryInterface;
 use App\Users\Application\DTO\LoginResponse;
+use App\Users\Domain\Repository\UserRepositoryInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 
 class Login
