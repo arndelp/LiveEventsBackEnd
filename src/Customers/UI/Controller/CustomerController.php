@@ -127,25 +127,29 @@ class CustomerController extends AbstractController
         return new JsonResponse(['error' => 'Erreur interne serveur.'], 500);
     }
 }
- // Vérification de l’email depuis React
-public function verifyCustomerEmail(Request $request, Customer $customer, EmailVerifierCustomer $emailVerifier): JsonResponse
-    {
+    // Vérification de l’email depuis React
+    public function verifyCustomerEmail(Request $request, Customer $customer, EmailVerifierCustomer $emailVerifier): JsonResponse
+        {
+            // Récupérer l'ID depuis la route
+        $id = (int) $request->get('id');
+
+        $customer = $customerRepository->find($id);
+
         if (!$customer) {
             return new JsonResponse([
                 'success' => false,
                 'message' => 'Utilisateur introuvable.'
             ], 404);
         }
-        // Vérification du lien de confirmation
+
         try {
             $emailVerifier->handleEmailConfirmation($request, $customer);
 
-        // Retour JSON pour que React fasse la redirection
-        return new JsonResponse([
-            'success' => true,
-            'redirect' => 'https://arndelp.github.io/LiveEvents/Login',
-            'message' => 'Email vérifié avec succès'
-        ]);
+            return new JsonResponse([
+                'success' => true,
+                'redirect' => 'https://arndelp.github.io/LiveEvents/Login',
+                'message' => 'Email vérifié avec succès'
+            ]);
 
         } catch (VerifyEmailExceptionInterface $e) {
             return new JsonResponse([
