@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Customers\Application\UseCase\SaveCustomer;
 use App\Customers\Application\Mapper\CustomerMapper;
 use App\Customers\Application\UseCase\DeleteCustomer;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Customers\Application\UseCase\GetPaginatedCustomer;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use App\Customers\Domain\Repository\DoctrineCustomerRepository;
@@ -129,34 +130,29 @@ class CustomerController extends AbstractController
     }
 }
     // Vérification de l’email depuis React
-    public function verifyCustomerEmail(CustomerRepositoryInterface $customerRepository ,Request $request, Customer $customer, EmailVerifierCustomer $emailVerifier): JsonResponse
-        {
-            // Récupérer l'ID depuis la route
+    public function verifyCustomerEmail(
+        Request $request,
+        CustomerRepositoryInterface $customerRepository,
+        EmailVerifierCustomer $emailVerifier
+    ): RedirectResponse {
+        // Récupérer l'ID depuis la route (ex: /verify/{id}/verify)
         $id = (int) $request->get('id');
 
         $customer = $customerRepository->find($id);
 
         if (!$customer) {
-            return new JsonResponse([
-                'success' => false,
-                'message' => 'Utilisateur introuvable.'
-            ], 404);
+            return new RedirectResponse('https://arndelp.github.io/LiveEvents/Register');
         }
 
         try {
             $emailVerifier->handleEmailConfirmation($request, $customer);
 
-            return new JsonResponse([
-                'success' => true,
-                'redirect' => 'https://arndelp.github.io/LiveEvents/Login',
-                'message' => 'Email vérifié avec succès'
-            ]);
+            // Redirection vers React après vérification réussie
+            return new RedirectResponse('https://arndelp.github.io/LiveEvents/Login');
 
         } catch (VerifyEmailExceptionInterface $e) {
-            return new JsonResponse([
-                'success' => false,
-                'message' => $e->getReason()
-            ], 400);
+            // En cas d'erreur, redirection vers React avec param pour gérer l'erreur
+            return new RedirectResponse('https://arndelp.github.io/LiveEvents/Register?verified=0');
         }
     }
 }
