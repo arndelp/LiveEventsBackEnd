@@ -55,6 +55,7 @@ security:
             provider: app_user_provider
             pattern: ^/            
             custom_authenticator: App\Users\Infrastructure\Security\LoginAuthenticator
+            user_checker: App\Users\Infrastructure\Security\UserEmailVerifiedChecker
             logout:
                 path: app_logout
                 target: app_login
