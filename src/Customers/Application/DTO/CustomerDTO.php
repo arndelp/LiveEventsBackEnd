@@ -89,7 +89,7 @@ final class CustomerDTO
         Dans un DTO, le constructeur sert à garantir :
             la complétude des données,
             un contrat clair (tous les champs obligatoires sont fournis dès le départ),
-            une meilleure robustesse (moins d’objets « incomplets » qui circulent dans ton appli).
+            une meilleure robustesse (moins d’objets « incomplets » qui circulent dans l'appli).
        */
 
 

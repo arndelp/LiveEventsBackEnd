@@ -35,7 +35,7 @@ class DoctrineCustomerRepository extends ServiceEntityRepository implements Cust
         return $this->count([]);
     }
 
-     public function findPaginated(int $page,int $limit): array
+    public function findPaginated(int $page,int $limit): array
     {
         $query = $this -> createQueryBuilder('m');
 
@@ -44,7 +44,7 @@ class DoctrineCustomerRepository extends ServiceEntityRepository implements Cust
                                 ->getQuery()
                                 ->getSingleScalarResult(); 
         
-        // ----------- Pagination -----------
+        // Pagination
         $query  ->orderBy('m.id', 'ASC')
                 ->setFirstResult(($page - 1) * $limit)
                 ->setMaxResults($limit);
@@ -59,10 +59,15 @@ class DoctrineCustomerRepository extends ServiceEntityRepository implements Cust
         ];
     }
 
-     public function save(Customer $customer): void
+    public function save(Customer $customer): void
     {
         $em = $this->getEntityManager(); //hérité de ServiceEntiyRepository 
         $em->persist($customer);
         $em->flush();
+    }
+
+    public function findByEmail(string $email): ?Customer
+    {
+        return $this->findOneBy(['email' => $email]);
     }
 }

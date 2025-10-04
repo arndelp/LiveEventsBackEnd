@@ -11,4 +11,5 @@ interface CustomerRepositoryInterface
      public function findPaginated(int $page, int $limit): array;
      public function countAll(): int;
      public function save(Customer $customer): void;
+     public function findByEmail(string $email): ?Customer;
 }

@@ -2,56 +2,46 @@
 
 namespace App\Customers\UI\Controller;
 
-use App\Customers\Domain\Entity\Customer;
-use Doctrine\ORM\EntityManagerInterface;
-use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use RuntimeException;
+use App\Customers\Application\DTO\LoginDTO;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Customers\Application\UseCase\LoginCustomer;
+
+
+
 
 class LoginController
 {
-    public function __construct(
-        private EntityManagerInterface $em,
-        private UserPasswordHasherInterface $passwordHasher,
-        private JWTTokenManagerInterface $jwtManager,
-    ) {}
+    public function __construct(private LoginCustomer $loginCustomer, private ValidatorInterface $validator) {}
 
-   
     public function __invoke(Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
 
-        $email = $data['email'] ?? null;
-        $password = $data['password'] ?? null;
-
-        if (!$email || !$password) {
-            return new JsonResponse(['error' => 'Email ou mot de passe manquant'], 400);
+        //création d'un nouveau DTO
+        $loginDTO = new LoginDTO(
+            $data['email'] ?? '',
+            $data['password'] ?? ''
+        );
+        
+        //Validation du DTO
+        $errors = $this->validator->validate($loginDTO);
+            if (count($errors) > 0) {
+        $messages = [];
+        foreach ($errors as $error) {
+            $messages[] = $error->getMessage();
         }
+        return new JsonResponse(['errors' => $messages], 400);
+    }
 
-        $customer = $this->em->getRepository(Customer::class)->findOneBy(['email' => $email]);
-
-        if (!$customer || !$this->passwordHasher->isPasswordValid($customer, $password)) {
-            return new JsonResponse(['error' => 'Identifiants invalides'], 401);
+        //appel du useCase
+        try {
+            $result = $this->loginCustomer->execute($loginDTO);   
+        //Envoie de la réponse JSON au frontEnd         
+            return new JsonResponse($result);
+        } catch (RuntimeException $e) {
+            return new JsonResponse(['error' => $e->getMessage()], 401);
         }
-
-        // Vérification si l'email est confirmé
-        if (!$customer->isIsVerified()) {
-            return new JsonResponse(['error' => 'Email non vérifié. Veuillez vérifier votre boîte email.'], 403);  //403 Forbidden
-        }
-
-        $token = $this->jwtManager->create($customer);
-
-        return new JsonResponse([
-            'token' => $token,
-            'user' => [
-                'id' => $customer->getId(),
-                'email' => $customer->getEmail(),
-                'firstname' => $customer->getFirstname(),
-                'lastname'  => $customer->getLastname(),
-                'style' => $customer->getStyle(),
-            ],
-        ]);
     }
 }

@@ -204,6 +204,12 @@ services:
     App\Customers\Domain\Repository\EmailDuplicationCheckerInterface:
         alias: App\Customers\Infrastructure\Repository\EmailDuplicationChecker
 
+    App\Customers\Domain\Service\PasswordHasherInterface:
+        alias: App\Customers\Infrastructure\Service\SymfonyPasswordHasher
+
+    App\Customers\Domain\Service\JwtManagerInterface:
+        alias: App\Customers\Infrastructure\Service\LexikJwtManager
+
 
     
 
