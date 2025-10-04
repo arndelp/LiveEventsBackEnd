@@ -16,7 +16,7 @@ class UserEmailVerifiedChecker implements UserCheckerInterface
             return;
         }
 
-        if (!$user->isVerified()) {
+        if (!$user->isIsVerified()) {
             throw new CustomUserMessageAuthenticationException(
                 'Vous devez vérifier votre email avant de vous connecter.'
             );
