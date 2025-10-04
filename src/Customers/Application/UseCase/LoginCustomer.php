@@ -34,7 +34,7 @@ class LoginCustomer
 
         return [
             'token' => $token,
-            'customer' => [
+            'user' => [    //user : pour adapter avec le frontEnd
                 'id' => $customer->getId(),
                 'email' => $customer->getEmail(),
                 'firstname' => $customer->getFirstname(),
