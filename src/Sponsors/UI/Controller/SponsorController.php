@@ -1,8 +1,6 @@
 <?php
 namespace App\Sponsors\UI\Controller;
 
-
-
 use App\Sponsors\UI\Form\SponsorType;
 use App\Sponsors\Domain\Entity\Sponsor;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,8 +19,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Sponsors\Application\UseCase\GetFilteredSponsors;
 use App\Sponsors\Domain\Repository\SponsorRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
-
 
 class SponsorController extends AbstractController
 {
@@ -84,7 +80,7 @@ class SponsorController extends AbstractController
 
         if (!$sponsor) {
             $this->addFlash('error', "Le partenaire n'existe pas");
-            return $this->redirectToRoute('sponsor.list.alls');
+            return $this->redirectToRoute('sponsor.list.filtered');
         }
 
         return $this->render('@Sponsor/detail.html.twig', ['sponsor' => $sponsor]);
@@ -125,7 +121,7 @@ class SponsorController extends AbstractController
             }
             $this->addFlash(type: 'success', message: "Le partenaire". $message);
             //Redirection vers la liste des sponsors
-            return $this->redirectToRoute('sponsor.list.alls');
+            return $this->redirectToRoute('sponsor.list.filtered');
         } else {
             //Sinon on affiche le formulaire à corriger  (alias pour twig et l'architecture en couche)
             return $this->render('@Sponsor/edit.html.twig', [
@@ -145,7 +141,7 @@ public function delete(int $id, DeleteSponsor $deleteSponsor): Response
         $this->addFlash('error', "Partenaire inexistant");
     }
 
-    return $this->redirectToRoute('sponsor.list.alls');
+    return $this->redirectToRoute('sponsor.list.filtered');
 }
 
 
