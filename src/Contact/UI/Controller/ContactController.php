@@ -5,26 +5,18 @@ namespace App\Contact\UI\Controller;
 
 use Throwable;
 use Psr\Log\LoggerInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
 use App\Contact\Application\UseCase\GetContact;
 use App\Contact\Application\UseCase\DeleteContact;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Contact\Application\DTO\ContactMessageInput;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\String\Slugger\SluggerInterface;
 use App\Contact\Application\UseCase\SendContactMessage;
-use App\Contact\Application\UseCase\SentContactMessage;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use App\Contact\Application\UseCase\GetPaginatedContact;
 use App\Contact\Application\Mapper\ContactMessageInputMapper;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
+
 
 //Controller qui gère la réception , la suppression des message de contact
 
@@ -116,7 +108,7 @@ class ContactController extends AbstractController
         $entity = $mapper->toEntity($dto);
 
         // Exécution du UseCase pour envoyer le message
-        $sendContactMessage->execute($entity);
+        $sendContactMessage->execute( $entity);
 
         return new JsonResponse([
             'success' => true,

@@ -8,14 +8,12 @@ use App\Concerts\UI\Form\ConcertFilterType;
 use App\Concerts\Application\DTO\ConcertDTO;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use App\Concerts\Application\UseCase\GetConcert;
 use App\Concerts\Application\UseCase\SaveConcert;
 use App\Concerts\Application\DTO\ConcertFilterDTO;
 use App\Concerts\Application\Mapper\ConcertMapper;
 use App\Concerts\Application\UseCase\DeleteConcert;
 use App\Concerts\Application\UseCase\GetFilteredConcerts;
-use App\Concerts\Application\UseCase\GetPaginatedConcerts;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Concerts\Application\UseCase\GetDistinctFilterValues;
 

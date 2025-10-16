@@ -1,28 +1,21 @@
 <?php
+
 namespace App\Markers\UI\Controller;
-
-
 
 use App\Markers\UI\Form\MarkerType;
 use App\Markers\Domain\Entity\Marker;
-use Doctrine\ORM\EntityManagerInterface;
 use App\Markers\Application\DTO\MarkerDTO;
 use Symfony\Component\HttpFoundation\Request;
 use App\Markers\Application\UseCase\GetMarker;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
 use App\Markers\Application\UseCase\SaveMarker;
 use App\Markers\Application\Mapper\MarkerMapper;
 use App\Markers\Application\UseCase\DeleteMarker;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use App\Markers\Application\UseCase\GetPaginatedMarkers;
 use App\Markers\Domain\Repository\MarkerRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Markers\Application\UseCase\GetFilteredMarkers;
 use App\Markers\Application\DTO\MarkerFilterDTO;
 use App\Markers\UI\Form\MarkerFilterType;
-
-
 
 class MarkerController extends AbstractController
 {
@@ -33,7 +26,6 @@ class MarkerController extends AbstractController
     {
         $this->markerRepository = $markerRepository;
     }
-
 
     //liste de tout les markers filtrés
 
@@ -68,7 +60,6 @@ class MarkerController extends AbstractController
             'selectedType' => $filter->type, // pour twig si besoin
         ]);
     }
-
     
     //Recherche des détails pour un seul marker         
         //Méthode  avec le param converter (convertisseur de paramètre)
@@ -82,8 +73,7 @@ class MarkerController extends AbstractController
         }
 
         return $this->render('@Marker/detail.html.twig', ['marker' => $marker]);
-    }
-       
+    }       
     
     //ajout/édition d'un marker
    
@@ -128,20 +118,17 @@ class MarkerController extends AbstractController
         }
     }
 
-public function delete(int $id, DeleteMarker $deleteMarker): Response
-{
-   
-    if ($id) {       
-        $deleteMarker->execute($id);
+    public function delete(int $id, DeleteMarker $deleteMarker): Response
+    {
+    
+        if ($id) {       
+            $deleteMarker->execute($id);
 
-        $this->addFlash('success', "Le POI a été supprimé avec succès");
-    } else {
-        $this->addFlash('error', "POI inexistant");
+            $this->addFlash('success', "Le POI a été supprimé avec succès");
+        } else {
+            $this->addFlash('error', "POI inexistant");
+        }
+
+        return $this->redirectToRoute('marker.list.filtered');
     }
-
-    return $this->redirectToRoute('marker.list.filtered');
-}
-
-
-
 }

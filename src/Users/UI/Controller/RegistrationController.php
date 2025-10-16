@@ -2,14 +2,11 @@
 
 namespace App\Users\UI\Controller;
 
-
-
 use App\Users\Domain\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Users\UI\Form\RegistrationFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
 use App\Users\Application\UseCase\RegisterUser;
 use App\Users\Application\DTO\RegisterUserInputDto;
 use App\Users\Infrastructure\Security\EmailVerifier;
@@ -48,8 +45,6 @@ class RegistrationController extends AbstractController
                 return $this->redirectToRoute('app_register');
             }    
 
-
-
  // Si l'email est unique, créer le DTO et exécuter l'enregistrement
             $dto = new RegisterUserInputDto(
                 $data->getEmail(),
@@ -72,7 +67,6 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form ->createView(),
         ]);
     }
-
     
      public function verifyUserEmail(Request $request, EntityManagerInterface $em): Response
     {

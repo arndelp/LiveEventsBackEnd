@@ -2,23 +2,18 @@
 
 namespace App\Customers\UI\Controller;
 
+use Throwable;
 use Psr\Log\LoggerInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use App\Customers\Domain\Entity\Customer;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Mailer\MailerInterface;
 use App\Customers\Application\DTO\CustomerDTO;
 use Symfony\Component\HttpFoundation\Response;
 use App\Customers\Application\UseCase\GetCustomer;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Customers\Application\UseCase\SaveCustomer;
-use App\Customers\Application\Mapper\CustomerMapper;
 use App\Customers\Application\UseCase\DeleteCustomer;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Customers\Application\UseCase\GetPaginatedCustomer;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use App\Customers\Domain\Repository\DoctrineCustomerRepository;
 use App\Customers\Domain\Repository\CustomerRepositoryInterface;
 use App\Customers\Infrastructure\Security\EmailVerifierCustomer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

@@ -2,11 +2,8 @@
 
 namespace App\Users\UI\Controller;
 
-
 use App\Users\Application\UseCase\Login;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use App\Security\Application\Service\SecurityService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SecurityController extends AbstractController
@@ -26,7 +23,6 @@ class SecurityController extends AbstractController
             'error' => $loginResponse->error,
         ]);
     }
-
     
     public function logout(): void
     {

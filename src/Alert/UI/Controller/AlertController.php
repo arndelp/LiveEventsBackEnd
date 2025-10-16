@@ -7,13 +7,11 @@ namespace App\Alert\UI\Controller;
 use App\Alert\UI\Form\AlertType;
 use App\Alert\Domain\Entity\Alert;
 use App\Alert\Application\DTO\AlertDTO;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Alert\Application\UseCase\EditAlert;
 use Symfony\Component\HttpFoundation\Request;
 use App\Alert\Application\Mapper\AlertMapper;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
 use App\Alert\Application\UseCase\DeleteAlert;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 

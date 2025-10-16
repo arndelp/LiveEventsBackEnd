@@ -2,6 +2,8 @@
 namespace App\Contact\Application\UseCase;
 
 
+use Throwable;
+use InvalidArgumentException;
 use App\Contact\Application\DTO\ContactMessageInput;
 use App\Contact\Application\UseCase\SetContactMessage;
 use App\Contact\Domain\Service\MailerServiceInterface;

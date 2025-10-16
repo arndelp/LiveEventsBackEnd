@@ -3,19 +3,16 @@ namespace App\Sponsors\UI\Controller;
 
 use App\Sponsors\UI\Form\SponsorType;
 use App\Sponsors\Domain\Entity\Sponsor;
-use Doctrine\ORM\EntityManagerInterface;
 use App\Sponsors\Application\DTO\SponsorDTO;
 use App\Sponsors\UI\Form\SponsorFilteredType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
 use App\Sponsors\Application\UseCase\GetSponsor;
 use App\Sponsors\Application\UseCase\SaveSponsor;
 use App\Sponsors\Application\DTO\SponsorFilterDTO;
 use App\Sponsors\Application\Mapper\SponsorMapper;
 use App\Sponsors\Application\UseCase\DeleteSponsor;
 use App\Sponsors\Application\UseCase\GetDistinctTypes;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Sponsors\Application\UseCase\GetFilteredSponsors;
 use App\Sponsors\Domain\Repository\SponsorRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,7 +26,6 @@ class SponsorController extends AbstractController
     {
         $this->sponsorRepository = $sponsorRepository;
     }
-
 
     //liste des sponsors filtrés
 
@@ -70,7 +66,6 @@ class SponsorController extends AbstractController
         'selectedType' => $filter->type, // pour twig si besoin
     ]);
 }
-
     
     //Recherche des détails pour un seul sponsor         
         //Méthode  avec le param converter (convertisseur de paramètre)
@@ -84,8 +79,7 @@ class SponsorController extends AbstractController
         }
 
         return $this->render('@Sponsor/detail.html.twig', ['sponsor' => $sponsor]);
-    }
-       
+    }       
     
     //ajout/édition d'un sponsor
    
@@ -130,20 +124,18 @@ class SponsorController extends AbstractController
         }
     }
 
-public function delete(int $id, DeleteSponsor $deleteSponsor): Response
-{
-   
-    if ($id) {       
-        $deleteSponsor->execute($id);
+    public function delete(int $id, DeleteSponsor $deleteSponsor): Response
+    {
+    
+        if ($id) {       
+            $deleteSponsor->execute($id);
 
-        $this->addFlash('success', "Le partenaire a été supprimé avec succès");
-    } else {
-        $this->addFlash('error', "Partenaire inexistant");
+            $this->addFlash('success', "Le partenaire a été supprimé avec succès");
+        } else {
+            $this->addFlash('error', "Partenaire inexistant");
+        }
+
+        return $this->redirectToRoute('sponsor.list.filtered');
     }
-
-    return $this->redirectToRoute('sponsor.list.filtered');
-}
-
-
 
 }
