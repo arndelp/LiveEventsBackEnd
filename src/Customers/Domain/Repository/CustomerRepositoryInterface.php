@@ -12,5 +12,5 @@ interface CustomerRepositoryInterface
      public function countAll(): int;
      public function save(Customer $customer): void;
      public function findByEmail(string $email): ?Customer;
-     public function find(int $id): ?Customer;
+     
 }
