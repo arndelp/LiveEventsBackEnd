@@ -45,7 +45,7 @@ class DoctrineContactRepository extends ServiceEntityRepository implements Conta
                                 ->getSingleScalarResult(); 
         
         // ----------- Pagination -----------
-        $query  ->orderBy('m.id', 'ASC')
+        $query  ->orderBy('m.id', 'DESC')
                 ->setFirstResult(($page - 1) * $limit)
                 ->setMaxResults($limit);
 
