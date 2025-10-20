@@ -81,16 +81,20 @@ class DoctrineConcertRepository extends ServiceEntityRepository implements Conce
             $query = $this -> createQueryBuilder('m');   //Création d'un queryBuilder avec la table "m"
 
             if ($filter->day) {                        //  Application du filtre si présent
-                $query  ->andWhere('m.day = :day')    // Ajout d'une condition WHERE dans la requête, m:alias de la table,  
-                        ->setParameter('day', $filter->day);  /*L’utilisation de :day au lieu d’insérer directement la valeur $filter->day dans la requête a deux avantages :
-                                                            Sécurité (prévention des injections SQL)
-                                                            Performance (Doctrine prépare la requête une fois et peut la réutiliser avec différentes valeurs)*/      
-                          //2 paramètres: le nom du paramètre , puis la valeur
+                $query  ->andWhere('m.day = :day')    
+                        ->setParameter('day', $filter->day);  
             }
+        // Ajout d'une condition WHERE dans la requête, m:alias de la table,  
+        /*L’utilisation de :day au lieu   d’insérer directement la valeur $filter->day dans la requête a deux avantages :
+        - Sécurité (prévention des injections SQL)
+        - Performance (Doctrine prépare la requête une fois et peut la réutiliser avec différentes valeurs)*/      
+        //2 paramètres: le nom du paramètre , puis la valeur
+            
 
             if ($filter->schedule) {                       
                 $query  ->andWhere('m.schedule = :schedule')                                     
-                        ->setParameter('schedule', $filter->schedule);   //2 paramètres: le nom du paramètre , puis la valeur                                    
+                        ->setParameter('schedule', $filter->schedule);   
+        //2 paramètres: le nom du paramètre , puis la valeur                                    
                         
             }
 

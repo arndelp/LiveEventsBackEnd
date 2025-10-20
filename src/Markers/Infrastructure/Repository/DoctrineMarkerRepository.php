@@ -25,15 +25,20 @@ class DoctrineMarkerRepository extends ServiceEntityRepository implements Marker
         $query = $this -> createQueryBuilder('m');   //Création d'un queryBuilder avec la table "m"
 
         if ($filter->type) {                        //  Application du filtre si présent
-            $query  ->andWhere('m.type = :type')    // Ajout d'une condition WHERE dans la requête, m:alias de la table,  
-                                                    /*L’utilisation de :type au lieu d’insérer directement la valeur $filter->type dans la requête a deux avantages :
-                                                        Sécurité (prévention des injections SQL)
-                                                        Performance (Doctrine prépare la requête une fois et peut la réutiliser avec différentes valeurs)*/      
-                    ->setParameter('type', $filter->type);   //2 paramètres: le nom du paramètre , puis la valeur
-        }
+            $query  ->andWhere('m.type = :type')    
+                    ->setParameter('type', $filter->type);
+            }
+            // Ajout d'une condition WHERE dans la requête, m:alias de la table,  
+            /*L’utilisation de :type au lieu d’insérer directement la valeur $filter->type dans la requête a deux avantages :
+                - Sécurité (prévention des injections SQL)
+                - Performance (Doctrine prépare la requête une fois et peut la réutiliser avec différentes valeurs)*/      
+            //2 paramètres: le nom du paramètre , puis la valeur
+        
 
         // ----------- Comptage total avant pagination -----------
-        $countQb = clone $query;               // on clone $query pour séparer le comptage des marker et la récupération des résultats
+        
+        // on clone $query pour séparer le comptage des marker et la récupération des résultats
+        $countQb = clone $query;  
         $total = (int) $countQb ->select('COUNT(m.id)')
                                 ->getQuery()
                                 ->getSingleScalarResult(); 
