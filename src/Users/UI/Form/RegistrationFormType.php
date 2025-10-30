@@ -3,11 +3,11 @@
 namespace App\Users\UI\Form;
 
 
+use ReCaptcha\ReCaptcha;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use VictorPrdh\RecaptchaBundle\Form\ReCaptchaType;
 use App\Users\Application\DTO\RegisterUserInputDto;
-use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -52,11 +52,11 @@ class RegistrationFormType extends AbstractType
             ->add('recaptcha', ReCaptchaType::class, [
                
                 'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'Veuillez valider le captcha.',
-                    ]),
-                ],
+                 'constraints' => [
+                new ReCaptcha([
+                    'message' => 'Veuillez valider le captcha.',
+                ]),
+            ],
             ])
         ;
     }
