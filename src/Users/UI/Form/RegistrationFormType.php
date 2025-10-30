@@ -51,10 +51,6 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('recaptcha', ReCaptchaType::class, [
                
-                'mapped' => false,
-                 'constraints' => [
-                new ReCaptcha('register'),
-            ],
             ])
         ;
     }
