@@ -53,9 +53,7 @@ class RegistrationFormType extends AbstractType
                
                 'mapped' => false,
                  'constraints' => [
-                new ReCaptcha([
-                    'message' => 'Veuillez valider le captcha.',
-                ]),
+                new ReCaptcha('register'),
             ],
             ])
         ;
