@@ -3,7 +3,7 @@
 namespace App\Users\UI\Form;
 
 
-use ReCaptcha\ReCaptcha;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use VictorPrdh\RecaptchaBundle\Form\ReCaptchaType;
