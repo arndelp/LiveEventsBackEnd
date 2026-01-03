@@ -23,7 +23,12 @@ class SponsorDTO
     )]    
     public ?string $link = null;
 
-    #[Assert\Image]
+    #[Assert\Image(
+        maxSize: '1M', // taille maximale 1 Mo
+        mimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/avif'],
+        mimeTypesMessage: 'Les formats autorisés sont : JPEG, PNG, WEBP, AVIF',
+        maxSizeMessage: 'La taille maximale autorisée est de 1 Mo'
+    )]
     public ?File $logoSponsor = null;
 
     #[Assert\NotBlank(message: "Veuillez remplir ce champ")]
