@@ -50,5 +50,6 @@ class ConcertDTO
         maxSizeMessage: 'La taille maximale autorisée est de 1 Mo'
     )]
     public ?UploadedFile $photo = null;
+    
        
 }
