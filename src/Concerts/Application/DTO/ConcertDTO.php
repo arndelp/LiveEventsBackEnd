@@ -44,12 +44,12 @@ class ConcertDTO
     public ?string $schedule = null;
 
     #[Assert\Image(
-        maxSize: '1M', 
-        mimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/avif'],
+        maxSize: '1M',   //limite la taille du fichier à 1 Mo
+        mimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/avif'],  //types de fichiers autorisés
         mimeTypesMessage: 'Les formats autorisés sont : JPEG, PNG, WEBP, AVIF',
         maxSizeMessage: 'La taille maximale autorisée est de 1 Mo'
     )]
     public ?UploadedFile $photo = null;
-    
+
        
 }
