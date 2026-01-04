@@ -2,7 +2,7 @@
 
 namespace App\Sponsors\Application\DTO;
 
-use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class SponsorDTO
@@ -29,7 +29,7 @@ class SponsorDTO
         mimeTypesMessage: 'Les formats autorisés sont : JPEG, PNG, WEBP, AVIF',
         maxSizeMessage: 'La taille maximale autorisée est de 500 Ko'
     )]
-    public ?File $logoSponsor = null;
+    public ?UploadedFile $logoSponsor = null;
 
     #[Assert\NotBlank(message: "Veuillez remplir ce champ")]
     #[Assert\Length(max: 25)]

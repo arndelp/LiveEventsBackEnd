@@ -2,7 +2,7 @@
 
 namespace App\Concerts\Application\DTO;
 
-use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class ConcertDTO
@@ -49,6 +49,6 @@ class ConcertDTO
         mimeTypesMessage: 'Les formats autorisés sont : JPEG, PNG, WEBP, AVIF',
         maxSizeMessage: 'La taille maximale autorisée est de 500 Ko'
     )]
-    public ?File $photo = null;
+    public ?UploadedFile $photo = null;
        
 }
