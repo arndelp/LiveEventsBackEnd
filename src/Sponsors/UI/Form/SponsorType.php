@@ -24,7 +24,7 @@ class SponsorType extends AbstractType
             ])
                         
             ->add('logoSponsor', FileType::class, [               
-                
+                'required' => false,
              ]) 
              
             ->add('type', ChoiceType::class, [            
