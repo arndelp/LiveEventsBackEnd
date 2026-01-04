@@ -44,7 +44,7 @@ class ConcertDTO
     public ?string $schedule = null;
 
     #[Assert\Image(
-        maxSize: '500k', // taille maximale NGINX de 1 Mo
+        maxSize: '500k', 
         mimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/avif'],
         mimeTypesMessage: 'Les formats autorisés sont : JPEG, PNG, WEBP, AVIF',
         maxSizeMessage: 'La taille maximale autorisée est de 500 Ko'
