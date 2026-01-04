@@ -24,8 +24,8 @@ class SponsorDTO
     public ?string $link = null;
 
     #[Assert\Image(
-        maxSize: '1M',   //limitation de la taille du fichier
-        mimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/avif'],   //types de fichiers autorisés
+        maxSize: '1M',   
+        mimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/avif'],  
         mimeTypesMessage: 'Les formats autorisés sont : JPEG, PNG, WEBP, AVIF',
         maxSizeMessage: 'La taille maximale autorisée est de 1 Mo'
     )]
