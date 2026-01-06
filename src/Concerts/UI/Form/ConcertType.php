@@ -22,7 +22,7 @@ class ConcertType extends AbstractType
             ->add('style', ChoiceType::class, [
                 'expanded' => false,
                 'multiple' => false,
-                'label'=> 'style',
+                'label'=> 'Style',
                 'choices' => ["Électro"=>"Électro",
                             "Pop"=>"Pop",
                             "Rock"=>"Rock",
@@ -33,7 +33,7 @@ class ConcertType extends AbstractType
             ->add('location', ChoiceType::class, [
                 'expanded' => false,
                 'multiple' => false,                
-                'label'=> 'location',
+                'label'=> 'Lieu',
                 'choices' => ["Scène CHÂTEAU"=>"Scène CHÂTEAU",
                             "Scène GWERNIG"=>"Scène GWERNIG",
                             "Scène GLENMOR"=>"Scène GLENMOR",
